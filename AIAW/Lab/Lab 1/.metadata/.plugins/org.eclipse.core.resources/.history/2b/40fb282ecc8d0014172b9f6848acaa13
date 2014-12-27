@@ -1,0 +1,45 @@
+package eightPuzzle;
+
+import java.util.List;
+
+public class PuzzleSolver {
+	private Board init_;
+	private Board goal_;
+	private List<Board> solution_;
+	
+	public PuzzleSolver(Board initState, Board goalState) {
+		if (null == initState || null == goalState || initState.getSize() != goalState.getSize()) {
+			throw new IllegalArgumentException();
+		}
+		init_ = initState;
+		goal_ = goalState;
+		
+		solve();
+	}
+	
+	public boolean     isSolvable()  {return null != solution_;}      
+	public List<Board> getSolution() {return solution_;}
+
+	private void solve() {
+		
+		
+	}
+	
+	private class Pair implements Comparable<Pair> {
+		Board b;
+		int cost;
+		int numberOfSteps;
+		
+		public Pair(Board b, int cost, int numberOfSteps) {
+			this.b = b;
+			this.cost = cost;
+			this.numberOfSteps = numberOfSteps;
+		}
+
+		@Override
+		public int compareTo(Pair o) {
+			return o.cost - cost;
+		}
+	}
+
+}

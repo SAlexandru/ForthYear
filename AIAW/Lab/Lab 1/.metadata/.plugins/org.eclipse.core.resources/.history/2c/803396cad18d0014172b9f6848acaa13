@@ -1,0 +1,66 @@
+package Main;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.util.List;
+
+import eightPuzzle.Board;
+import eightPuzzle.PuzzleSolver;
+
+public class Main {
+	public static void main(String[] args) {
+		BufferedReader input = null;
+		PrintStream output = null;
+		try {
+			input = new BufferedReader(new FileReader("input.in"));
+			int[][] board = new int[8][8];
+			
+			for (int i = 0; i < 8; ++i) {
+				for (int j = 0; j < 8; ++j) {
+					board[i][j] = input.read();
+				}
+			}
+			
+			int[][] goal = new int[][] {{1, 2, 3},
+									    {8, 0, 4},
+									    {7, 6, 5}
+									   };
+			
+			List<Board> sol = new PuzzleSolver(new Board(board), new Board(goal)).getSolution();
+			
+			output = new PrintStream(new File("output.out"));
+			output.println("isSolvable: " + (sol.size() == 0));
+			output.println(sol.size());
+			
+			
+			
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		finally {
+			if (null != input) {
+				try {
+					input.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			if (null != output) {
+				try {
+					output.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+	}
+}

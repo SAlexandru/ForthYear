@@ -1,0 +1,20 @@
+package eightPuzzle;
+
+import java.util.Arrays;
+
+public class Board {
+	private byte[][] board_;
+	
+	public Board(byte[][] board) {
+		if (null == board || 8 != board.length) {
+			throw new IllegalArgumentException();
+		}
+		
+		board_ = new byte[8][8];
+		
+		for (byte[] b: board) {
+			board_ = Arrays.copyOf(board, board.length);
+		}
+	}
+
+}

@@ -1,0 +1,23 @@
+package eightPuzzle;
+
+import java.util.Arrays;
+
+public class Board {
+	private byte[] board_;
+	
+	private byte[] arrayFlatten(byte[][] board) {
+		byte[] b = new byte[board.length * board[0].length];
+		
+		for (int i = 0, k = 0; i < board.length; ++i) {
+			for (int j = 0; j < board[i].length; ++j) {
+				b[k] = board[i][j];
+			}
+		}
+		
+		
+		return null;
+	}
+	
+	
+
+}

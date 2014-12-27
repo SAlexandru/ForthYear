@@ -1,0 +1,61 @@
+package eightPuzzle;
+
+import java.util.Arrays;
+
+public class Board {
+	private int N_;
+	private int[][] board_;
+
+	
+	private int[][] copyOfBoard(int[][] board) {
+		int[][] b = new int[board.length][];
+		
+		for (int i = 0; i < board.length; ++i) {
+			b = Arrays.copyOf(row, row.length);
+		}
+		
+		return b;
+	}
+	
+	public Board(int[][] board) {
+		if (null == board || 0 == board.length) {
+			throw new IllegalArgumentException();
+		}
+		for (int[] row: board) {
+			if (board.length != row.length) {
+				throw new IllegalArgumentException();
+			}
+		}
+		N_ = board.length;
+		board_ = copyOfBoard(board);
+	}
+
+	public int[][] getMatrixBoard()  {return copyOfBoard(board_);}
+	
+	/*
+	 *  the number of misplaced tiles w.r.t goal
+	 */
+	public int manhattanDistance(Board goal) {
+		if (null == goal || N_ != goal.N_) {
+			throw new IllegalArgumentException();
+		}
+		
+		int count = 0;
+		for (int i = 0; i < N_; ++i) {
+			for (int j = 0; j < N_; ++j) {
+				if (board_[i][j] != goal.board_[i][j]) {
+					++count;
+				}
+			}
+		}
+		
+		return count;
+	}
+	
+	@Override
+	public boolean equals(Object board) {
+		return null != board &&
+				board instanceof Board &&
+				Arrays.deepEquals(board_, ((Board)board).board_);
+	}
+}

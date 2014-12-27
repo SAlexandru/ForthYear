@@ -1,0 +1,84 @@
+package eightPuzzle;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.PriorityQueue;
+
+public class PuzzleSolver {
+	private Board init_;
+	private Board goal_;
+	private List<Board> solution_;
+	
+	public PuzzleSolver(Board initState, Board goalState) {
+		if (null == initState || null == goalState || initState.getSize() != goalState.getSize()) {
+			throw new IllegalArgumentException();
+		}
+		init_ = initState;
+		goal_ = goalState;
+		solution_ = new ArrayList<>();
+		solve();
+	}
+	
+	public boolean     isSolvable()  {return solution_.size() > 0;}      
+	public List<Board> getSolution() {return solution_;}
+
+	private void solve() {
+		if(init_.equals(goal_)) {
+			solution_.add(init_);
+			return;
+		}
+		PriorityQueue<Pair> pQ = new PriorityQueue<>();
+		
+		pQ.add(new Pair(init_));
+		while(!pQ.isEmpty()) {
+			Pair current = pQ.remove();
+			
+			if (current.equals(goal_)) {
+				getPath(current);
+				return;
+			}
+			
+			for (Board b: current.b.getNeighbors()) {
+				if (b.equals(current.prev.b)) {
+					continue;
+				}
+				pQ.add(new Pair(b, current));
+			}
+		}
+		
+	}
+	
+	private void getPath(Pair current) {
+		while (null != current) {
+			solution_.add(current.b);
+			current = current.prev;
+		}
+		solution_ = Collections.reverse(solution_);
+		
+	}
+
+	private class Pair implements Comparable<Pair> {
+		Board b;
+		Pair prev;
+		int cost;
+		int numberOfSteps;
+		
+		public Pair(Board b) {
+			this.b = b;
+		}
+		
+		public Pair(Board b, Pair prev) {
+			this.b = b;
+			this.prev = prev;
+			numberOfSteps += 1;
+			cost = numberOfSteps + b.manhattanDistance(goal_);
+		}
+
+		@Override
+		public int compareTo(Pair o) {
+			return o.cost - cost;
+		}
+	}
+
+}

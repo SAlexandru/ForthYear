@@ -1,0 +1,18 @@
+package eightPuzzle;
+
+public class PuzzleSolver {
+	private Board init_;
+	private Board goal_;
+	private List<Board> solution;
+	
+	public PuzzleSolver(Board initState, Board goalState) {
+		if (null == initState || null == goalState || initState.getSize() != goalState.getSize()) {
+			throw new IllegalArgumentException();
+		}
+		init_ = initState;
+		goal_ = goalState;
+		
+		i
+	}
+
+}
