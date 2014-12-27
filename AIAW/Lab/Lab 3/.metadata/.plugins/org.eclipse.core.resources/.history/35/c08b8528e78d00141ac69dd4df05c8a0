@@ -1,0 +1,82 @@
+package main;
+
+import java.io.File;
+import java.util.List;
+
+import exceptions.TestFailedException;
+
+import stripsLanguage.Task;
+
+import stripsPlanner.DataStorage;
+import stripsPlanner.PartialOrderPlanner;
+import tests.*;
+
+/**
+ * class that starts the programm
+ * @author Lukasz Karbowski WEiTI PW
+ */
+
+public class Application {
+
+	public static void main(String[] args) {
+		
+			System.out.println("POP in Hanoi");
+			/*
+			try
+			{
+				String s = "";
+				s += new BuildLinearizationTest().test();
+				s += new ChooseOperatorTest().test();
+				s += new ResolveThreatsTest().test();
+				s += new SelectSubgoalTest().test();
+				s += new PartialOrderPlannerTest().test();
+				System.out.println(s);
+			} catch(TestFailedException e)
+			{
+				System.out.println(e.getMessage().toString());
+				return;
+			}
+			*/
+			try{
+				// task constains all data necessary to start planning
+				Task task = new TaskFromXML().createTaskFromXmlFile(
+						new File("C:\\Users\\Lukasz\\Documents\\programy\\"
+								+ "eclipse-jee-galileo-SR1-win32\\workspace\\msiSTRIPS\\"
+				//				+ "doc\\xml\\1DiskPredicates.xml"));
+				//				+ "doc\\xml\\2DisksPredicates.xml"));
+				//				+ "doc\\xml\\2DisksPredicatesClear.xml"));
+				//				+ "doc\\xml\\3DisksPredicates.xml"));
+				//				+ "doc\\xml\\3DisksPredicatesClear.xml"));
+				//			+ "doc\\xml\\BananaJuiceOnlyBanana.xml"));
+				//			+ "doc\\xml\\BananaJuiceBananaAndHome.xml"));
+				//			+ "doc\\xml\\BananaJuiceBananaAndMilk.xml"));
+				//			+ "doc\\xml\\BananaJuiceBHM.xml"));
+				//			+ "doc\\xml\\BananaJuiceBD.xml"));
+				//			+ "doc\\xml\\BananaJuiceBHMD.xml"));								
+								+ "doc\\xml\\4DisksGenerate.xml"));
+								
+				//System.out.println(task.toString());
+				
+				long startTime = System.currentTimeMillis();
+				
+				List<DataStorage> plans = new PartialOrderPlanner().POP(
+					task.getFirstPlan(),
+					task.getOperators());						
+				
+				long endTime = System.currentTimeMillis();								
+				
+				System.out.println("Wszystko razem: " + (endTime - startTime));
+				// pokaz rezultat jako kolejne kroki
+				System.out.println(new ResultsPrinter().showLinearization(plans.get(plans.size()-1).getPlan()));
+				
+				//if(PathToOutput.getInstance().getPath() != null)
+				//	new ResultsPrinter().printAll(task, plans, endTime-startTime, PathToOutput.getInstance().getPath());
+		
+			} catch(Exception e)
+			{
+				System.out.println("Application: Exception");			
+				System.out.println(e.getMessage().toString());			
+			}
+	}
+
+}

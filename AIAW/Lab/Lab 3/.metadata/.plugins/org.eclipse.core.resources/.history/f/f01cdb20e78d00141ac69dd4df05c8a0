@@ -1,0 +1,502 @@
+package tests;
+
+
+import exceptions.NoSubgoalException;
+import exceptions.TestFailedException;
+
+import stripsLanguage.Instance;
+import stripsLanguage.Plan;
+import stripsLanguage.Step;
+import stripsPlanner.PartialOrderPlanner;
+import stripsPlanner.Subgoal;
+
+/**
+ * Do przetestowania
+ * 
+ * failureNoOperator
+ * 
+ * @author Lukasz
+ *
+ */
+public class PartialOrderPlannerTest extends PartialOrderPlanner{
+
+	public PartialOrderPlannerTest() {}
+	
+	public static final int AT = 10;
+	public static final int WAS = 20;
+
+	public static final int START = 1;
+	public static final int KONIEC = 2;
+	public static final int SKLEP_SM = 3;
+	public static final int SKLEP_HWS = 4;
+
+	public static final int StepInterval = 1000;
+	
+	public String test() throws TestFailedException
+	{
+		String s = "";
+		s += getSameSubgoal();
+		//s += failureResolveThreats();
+		//s += failureNoProgress();
+		//s += failureNoOperator();
+		//s += insertDataStorage();
+		return s;
+	}
+
+	/*
+	private String failureNoOperator() throws TestFailedException
+	{
+		String s = "";
+		
+		Plan planDS2 = new TestData().createPlanDS2(AT,WAS);
+		Plan planDS3 = new TestData().createPlan3(AT,WAS);
+		Plan planDS4 = new TestData().createPlan4(AT,WAS);
+		Plan planDS5 = new TestData().createPlan5(AT,WAS);
+
+		// po spelnieniu Was(SM) w Koniec -> dodanie Go(x,SM)
+		List<Integer> list = new ArrayList<Integer>();
+		list.add(1); // operator go
+		
+		StoredChoosing sc = new StoredChoosing(list,2,0);
+		Step step = planDS2.getSteps().get(KONIEC-1);
+		Subgoal subgoal = new Subgoal(
+			step,
+			step.getPreconditions().get(0));
+		
+		DataStorage poSubgoal2 = new DataStorage(planDS3,sc,subgoal,2,1);
+		
+		// po spelnieniu Was(HWS) w Koniec -> dodanie Go(x,HWS)
+		sc = new StoredChoosing(list,0,0);
+		step = planDS3.getSteps().get(KONIEC-1);
+		subgoal = new Subgoal(
+			step,
+			step.getPreconditions().get(1));
+		DataStorage poSubgoal3 = new DataStorage(planDS3,sc,subgoal,3,2);
+		
+		// po spelnieniu At(H) w Go(H,SM)
+		list = new ArrayList<Integer>();
+		list.add(StepInterval + START);
+		list.add(StepInterval + KONIEC);
+		list.add(StepInterval + SKLEP_SM);
+		list.add(StepInterval + SKLEP_HWS);
+		list.add(1); // operator go
+		sc = new StoredChoosing(list,0,0);
+		step = planDS4.getSteps().get(SKLEP_SM-1);
+		subgoal = new Subgoal(
+			step,
+			step.getPreconditions().get(0));
+		DataStorage poSubgoal4 = new DataStorage(planDS4,sc,subgoal,4,3);
+		
+		// po spelnieniu At(H) w Go(H,HWS)
+		sc = new StoredChoosing(list,0,0);
+		step = planDS5.getSteps().get(SKLEP_HWS-1);
+		subgoal = new Subgoal(
+			step,
+			step.getPreconditions().get(0));
+		DataStorage poSubgoal5 = new DataStorage(planDS5,sc,subgoal,5,4);
+	
+		List<DataStorage> ds = new ArrayList<DataStorage>();
+		ds.add(poSubgoal2);
+		ds.add(poSubgoal3);
+		ds.add(poSubgoal4);
+		ds.add(poSubgoal5);
+
+		List<Operator> operators = new TestData().createDSOperators(AT, WAS);
+		
+		ResultsFailure rs
+			= failureNoOperator(
+				ds,
+				poSubgoal5.getIdOfDataStorage(),
+				poSubgoal5.getIdOfPreviousDataStorage(),
+				poSubgoal5.getIdOfDataStorage(),
+				subgoal,
+				operators);
+		
+		
+		//scenariusz, ze nie ma tam zadnych wyjatkow
+		if(rs.getIdOfLastDS() != 6)
+			throw new TestFailedException("error: failureNoOperator (1)");
+		if(rs.getIdOfPreviousDS() != 4)
+			throw new TestFailedException("error: failureNoOperator (2)");
+		if(rs.getSubgoal().getPredicateOfSubgoal().getArguments().get(0).getId() != -1)
+			throw new TestFailedException("error: failureNoOperator (3)");		
+		if(rs.getStoredChoosing().getListOfPicksIds().size() != 5)
+			throw new TestFailedException("error: failureNoOperator (4)");
+		
+		// proba, czy to sa faktycznie rozne kopie - zmiana powinna byc widoczna tylko w planie
+		rs.getPlan().getSteps().get(3).setInstance(1, new Instance("Tosia",23));
+		if(rs.getSubgoal().getPredicateOfSubgoal().getArguments().get(0).getId() != 23)
+			throw new TestFailedException("error: failureNoOperator (5)");
+		if(ds.size() != 5)
+			throw new TestFailedException("error: failureNoOperator (6)");		
+		if(ds.get(4).getSubgoal().getPredicateOfSubgoal().getArguments().get(0).getId() == 23)
+			throw new TestFailedException("error: failureNoOperator (7)");	
+		
+		//
+		
+		// po spelnieniu Was(SM) w Koniec -> dodanie Go(x,SM)
+		list = new ArrayList<Integer>();
+		list.add(1); // operator go
+		
+		sc = new StoredChoosing(list,2,0);
+		step = planDS2.getSteps().get(KONIEC-1);
+		subgoal = new Subgoal(
+			step,
+			step.getPreconditions().get(0));
+		
+		poSubgoal2 = new DataStorage(planDS3,sc,subgoal,2,1);
+		
+		// po spelnieniu Was(HWS) w Koniec -> dodanie Go(x,HWS)
+		sc = new StoredChoosing(list,0,0);
+		step = planDS3.getSteps().get(KONIEC-1);
+		subgoal = new Subgoal(
+			step,
+			step.getPreconditions().get(1));
+		poSubgoal3 = new DataStorage(planDS3,sc,subgoal,3,2);
+		
+		// po spelnieniu At(H) w Go(H,SM)
+		list = new ArrayList<Integer>();
+		list.add(StepInterval + START);
+		list.add(StepInterval + KONIEC);
+		list.add(StepInterval + SKLEP_SM);
+		list.add(StepInterval + SKLEP_HWS);
+		list.add(1); // operator go
+		sc = new StoredChoosing(list,0,0);
+		step = planDS4.getSteps().get(SKLEP_SM-1);
+		subgoal = new Subgoal(
+			step,
+			step.getPreconditions().get(0));
+		poSubgoal4 = new DataStorage(planDS4,sc,subgoal,4,3);
+		
+		// po spelnieniu At(H) w Go(H,HWS)
+		sc = new StoredChoosing(list,0,0);
+		step = planDS5.getSteps().get(SKLEP_HWS-1);
+		subgoal = new Subgoal(
+			step,
+			step.getPreconditions().get(0));
+		poSubgoal5 = new DataStorage(planDS5,sc,subgoal,5,4);
+	
+		ds = new ArrayList<DataStorage>();
+		ds.add(poSubgoal2);
+		ds.add(poSubgoal3);
+		ds.add(poSubgoal4);
+		ds.add(poSubgoal5);
+		
+		// scenariusz z wyjatkami
+		subgoal = new Subgoal(
+			new Step(100,100,"100",null,null),
+			null);
+		
+		rs
+		= failureNoOperator(
+			ds,
+			poSubgoal5.getIdOfDataStorage(),
+			poSubgoal5.getIdOfPreviousDataStorage(),
+			poSubgoal5.getIdOfDataStorage(),
+			subgoal,
+			operators);
+
+		if(rs.getIdOfLastDS() != 6)
+			throw new TestFailedException("error: failureNoOperator (8)");
+		if(rs.getIdOfPreviousDS() != 3)
+			throw new TestFailedException("error: failureNoOperator (9)");
+		if(rs.getSubgoal().getStepOfSubgoal().getId() != 3)
+			throw new TestFailedException("error: failureNoOperator (10)");
+		
+		s += "failureNoOperator (all) OK\n";
+		return s;
+	}	
+	
+	
+	private String failureNoProgress() throws TestFailedException
+	{
+		String s = "";
+		
+		Plan planDS2 = new TestData().createPlanDS2(AT,WAS);
+		Plan planDS3 = new TestData().createPlan3(AT,WAS);
+		Plan planDS4 = new TestData().createPlan4(AT,WAS);
+		Plan planDS5 = new TestData().createPlan5(AT,WAS);
+
+		// po spelnieniu Was(SM) w Koniec -> dodanie Go(x,SM)
+		List<Integer> list = new ArrayList<Integer>();
+		list.add(1); // operator go
+		
+		StoredChoosing sc = new StoredChoosing(list,2,0);
+		Step step = planDS2.getSteps().get(KONIEC-1);
+		Subgoal subgoal = new Subgoal(
+			step,
+			step.getPreconditions().get(0));
+		
+		DataStorage poSubgoal2 = new DataStorage(planDS3,sc,subgoal,2,1);
+		
+		// po spelnieniu Was(HWS) w Koniec -> dodanie Go(x,HWS)
+		sc = new StoredChoosing(list,2,1); 	// zmiana
+		step = planDS3.getSteps().get(KONIEC-1);
+		subgoal = new Subgoal(
+			step,
+			step.getPreconditions().get(1));
+		DataStorage poSubgoal3 = new DataStorage(planDS3,sc,subgoal,3,2);
+		
+		// po spelnieniu At(H) w Go(H,SM)
+		list = new ArrayList<Integer>();
+		list.add(StepInterval + START);
+		list.add(StepInterval + KONIEC);
+		list.add(StepInterval + SKLEP_SM);
+		list.add(StepInterval + SKLEP_HWS);
+		list.add(1); // operator go
+		sc = new StoredChoosing(list,0,0);
+		step = planDS4.getSteps().get(SKLEP_SM-1);
+		subgoal = new Subgoal(
+			step,
+			step.getPreconditions().get(0));
+		DataStorage poSubgoal4 = new DataStorage(planDS4,sc,subgoal,4,3);
+		
+		// po spelnieniu At(H) w Go(H,HWS)
+		sc = new StoredChoosing(list,1,0); // ZMIANA !
+		step = planDS5.getSteps().get(SKLEP_SM-1);
+		subgoal = new Subgoal(
+			step,
+			step.getPreconditions().get(0));
+		DataStorage poSubgoal5 = new DataStorage(planDS5,sc,subgoal,5,4);
+	
+		List<DataStorage> ds = new ArrayList<DataStorage>();
+		ds.add(poSubgoal2);
+		ds.add(poSubgoal3);
+		ds.add(poSubgoal4);
+		ds.add(poSubgoal5);
+
+		List<Operator> operators = new TestData().createDSOperators(AT, WAS);
+		
+		ResultsFailure rs
+			= failureNoProgress(
+				ds,
+				poSubgoal5.getIdOfDataStorage(),
+				poSubgoal5.getIdOfPreviousDataStorage(),
+				poSubgoal5.getIdOfDataStorage(),
+				subgoal,
+				operators);
+		
+		// scenariusz 1: cofa sie do DS(2), tworzy DS(6) i rozwiazuje problem zapisany w DS(3)
+		// zaczyna od starego momentu
+		if(rs.getIdOfPreviousDS() != 2)
+			throw new TestFailedException("error: failureNoProgress (1)");
+		if(rs.getIdOfLastDS() != 6)
+			throw new TestFailedException("error: failureNoProgress (2)");
+		if(rs.getSubgoal().getStepOfSubgoal().getId()
+			!= ds.get(4).getSubgoal().getStepOfSubgoal().getId())
+			throw new TestFailedException("error: failureNoProgress (3)");
+		if(rs.getStoredChoosing().getNrOfPredicateInSubgoalProver() != 2)
+			throw new TestFailedException("error: failureNoProgress (4)");
+		if(rs.getStoredChoosing().getIndexInList() != 1)
+			throw new TestFailedException("error: failureNoProgress (5)");
+		
+		
+		// scenariusz 2: juz w DS(4) jest inny cel
+	
+		// po spelnieniu Was(SM) w Koniec -> dodanie Go(x,SM)
+		list = new ArrayList<Integer>();
+		list.add(1); // operator go
+		
+		sc = new StoredChoosing(list,2,0);
+		step = planDS2.getSteps().get(KONIEC-1);
+		subgoal = new Subgoal(
+			step,
+			step.getPreconditions().get(0));
+		
+		poSubgoal2 = new DataStorage(planDS3,sc,subgoal,2,1);
+		
+		// po spelnieniu Was(HWS) w Koniec -> dodanie Go(x,HWS)
+		sc = new StoredChoosing(list,2,1); 	// zmiana
+		step = planDS3.getSteps().get(KONIEC-1);
+		subgoal = new Subgoal(
+			step,
+			step.getPreconditions().get(1));
+		poSubgoal3 = new DataStorage(planDS3,sc,subgoal,3,2);
+		
+		// po spelnieniu At(H) w Go(H,SM)
+		list = new ArrayList<Integer>();
+		list.add(StepInterval + START);
+		list.add(StepInterval + KONIEC);
+		list.add(StepInterval + SKLEP_SM);
+		list.add(StepInterval + SKLEP_HWS);
+		list.add(1); // operator go
+		sc = new StoredChoosing(list,0,0);
+		step = planDS4.getSteps().get(SKLEP_SM-1);
+		subgoal = new Subgoal(
+			step,
+			step.getPreconditions().get(0));
+		poSubgoal4 = new DataStorage(planDS4,sc,subgoal,4,3);
+		
+		// po spelnieniu At(H) w Go(H,HWS)
+		sc = new StoredChoosing(list,1,0); // ZMIANA !
+		step = planDS5.getSteps().get(SKLEP_HWS-1);
+		subgoal = new Subgoal(
+			step,
+			step.getPreconditions().get(0));
+		poSubgoal5 = new DataStorage(planDS5,sc,subgoal,5,4);
+	
+		ds = new ArrayList<DataStorage>();
+		ds.add(poSubgoal2);
+		ds.add(poSubgoal3);
+		ds.add(poSubgoal4);
+		ds.add(poSubgoal5);
+		
+		rs = failureNoProgress(
+			ds,
+			poSubgoal5.getIdOfDataStorage(),
+			poSubgoal5.getIdOfPreviousDataStorage(),
+			poSubgoal5.getIdOfDataStorage(),
+			subgoal,
+			operators);
+
+		// cofa sie do DS(4), tworzy DS(6) i rozwiazuje problem zapisany w DS(5)
+		if(rs.getIdOfPreviousDS() != 3)
+			throw new TestFailedException("error: failureNoProgress (6)");
+		if(rs.getIdOfLastDS() != 6)
+			throw new TestFailedException("error: failureNoProgress (7)");
+		if(rs.getSubgoal().getStepOfSubgoal().getId()
+			!= ds.get(4).getSubgoal().getStepOfSubgoal().getId())
+			throw new TestFailedException("error: failureNoProgress (8)");
+		if(rs.getStoredChoosing().getNrOfPredicateInSubgoalProver() != 0)
+			throw new TestFailedException("error: failureNoProgress (9)");
+		if(rs.getStoredChoosing().getIndexInList() != 0)
+			throw new TestFailedException("error: failureNoProgress (10)");
+		
+		s += "failureNoProgress (all) OK\n";
+		return s;
+	}
+	
+	private String failureResolveThreats() throws TestFailedException
+	{
+		String s = "";
+		
+		Plan planDS2 = new TestData().createPlanDS2(AT,WAS);
+		Plan planDS3 = new TestData().createPlan3(AT,WAS);
+		Plan planDS4 = new TestData().createPlan4(AT,WAS);
+		Plan planDS5 = new TestData().createPlan5(AT,WAS);
+
+		// po spelnieniu Was(SM) w Koniec -> dodanie Go(x,SM)
+		List<Integer> list = new ArrayList<Integer>();
+		list.add(1); // operator go
+		
+		StoredChoosing sc = new StoredChoosing(list,2,0);
+		Step step = planDS2.getSteps().get(KONIEC-1);
+		Subgoal subgoal = new Subgoal(
+			step,
+			step.getPreconditions().get(0));
+		
+		DataStorage poSubgoal2 = new DataStorage(planDS3,sc,subgoal,2,1);
+		
+		// po spelnieniu Was(HWS) w Koniec -> dodanie Go(x,HWS)
+		sc = new StoredChoosing(list,0,0);
+		step = planDS3.getSteps().get(KONIEC-1);
+		subgoal = new Subgoal(
+			step,
+			step.getPreconditions().get(1));
+		DataStorage poSubgoal3 = new DataStorage(planDS3,sc,subgoal,3,2);
+		
+		// po spelnieniu At(H) w Go(H,SM)
+		list = new ArrayList<Integer>();
+		list.add(StepInterval + START);
+		list.add(StepInterval + KONIEC);
+		list.add(StepInterval + SKLEP_SM);
+		list.add(StepInterval + SKLEP_HWS);
+		list.add(1); // operator go
+		sc = new StoredChoosing(list,0,0);
+		step = planDS4.getSteps().get(SKLEP_SM-1);
+		subgoal = new Subgoal(
+			step,
+			step.getPreconditions().get(0));
+		DataStorage poSubgoal4 = new DataStorage(planDS4,sc,subgoal,4,3);
+		
+		// po spelnieniu At(H) w Go(H,HWS)
+		sc = new StoredChoosing(list,0,0);
+		step = planDS5.getSteps().get(SKLEP_HWS-1);
+		subgoal = new Subgoal(
+			step,
+			step.getPreconditions().get(0));
+		DataStorage poSubgoal5 = new DataStorage(planDS5,sc,subgoal,5,4);
+	
+		List<DataStorage> ds = new ArrayList<DataStorage>();
+		ds.add(poSubgoal2);
+		ds.add(poSubgoal3);
+		ds.add(poSubgoal4);
+		ds.add(poSubgoal5);
+
+		List<Operator> operators = new TestData().createDSOperators(AT, WAS);
+		
+		ResultsFailure rs
+			= failureResolveThreats(
+				ds,
+				poSubgoal5.getIdOfDataStorage(),
+				poSubgoal5.getIdOfPreviousDataStorage(),
+				poSubgoal5.getIdOfDataStorage(),
+				subgoal,
+				operators);
+		
+		if(rs.getIdOfLastDS() != 6)
+			throw new TestFailedException("error: failureResolveThreats (1)");
+		if(rs.getIdOfPreviousDS() != 4)
+			throw new TestFailedException("error: failureResolveThreats (2)");
+		if(rs.getSubgoal().getPredicateOfSubgoal().getArguments().get(0).getId() != -1)
+			throw new TestFailedException("error: failureResolveThreats (3)");		
+		if(rs.getStoredChoosing().getListOfPicksIds().size() != 5)
+			throw new TestFailedException("error: failureResolveThreats (4)");
+		
+		// proba, czy to sa faktycznie rozne kopie - zmiana powinna byc widoczna tylko w planie
+		rs.getPlan().getSteps().get(3).setInstance(1, new Instance("Tosia",23));
+		if(rs.getSubgoal().getPredicateOfSubgoal().getArguments().get(0).getId() != 23)
+			throw new TestFailedException("error: failureResolveThreats (5)");
+		if(ds.size() != 5)
+			throw new TestFailedException("error: failureResolveThreats (6)");		
+		if(ds.get(4).getSubgoal().getPredicateOfSubgoal().getArguments().get(0).getId() == 23)
+			throw new TestFailedException("error: failureResolveThreats (7)");		
+		
+		s += "failureResolveThreats (all) OK\n"; 
+		return s;
+	}
+	**/
+	
+	private String getSameSubgoal() throws TestFailedException
+	{
+		String s = "";
+
+		Plan planDS4 = new TestData().createPlan4(AT,WAS);
+		Plan planDS5 = new TestData().createPlan5(AT,WAS);
+
+		Step step = planDS5.getSteps().get(SKLEP_HWS-1);
+		Subgoal subgoal = new Subgoal(
+			step,
+			step.getPreconditions().get(0));
+		
+		try {
+			subgoal = getSameSubgoal(subgoal, planDS4.getSteps());
+		} catch(NoSubgoalException e)
+		{
+			;
+		}
+		
+		if(subgoal.getStepOfSubgoal().getInstances().get(0).getId() > 0)
+			throw new TestFailedException("error: getSameSubgoal (1)");
+		
+		subgoal.getStepOfSubgoal().setInstance(1,new Instance("Ola",10));
+		if(subgoal.getPredicateOfSubgoal().getArguments().get(0).getId() != 10)
+			throw new TestFailedException("error: getSameSubgoal (2)");
+		
+		s += "getSameSubgoal (all) OK\n";
+		return s;
+	}
+	
+	/**
+	private String insertDataStorage() throws TestFailedException
+	{
+		String s = "";	
+		
+		if(subgoal.getPredicateOfSubgoal().getArguments().get(0).getId() != 10)
+			throw new TestFailedException("error: insertDataStorage (1)");
+		
+		s += "insertDataStorage (all) OK\n";
+		return s;	
+	}
+	**/
+}

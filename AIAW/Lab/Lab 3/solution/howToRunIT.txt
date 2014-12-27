@@ -1,0 +1,2 @@
+go into jplan folder (a se intra in folderul jplan)
+to execute (a se rula comanda): java JPlan blocks.txt blockfacts.txt

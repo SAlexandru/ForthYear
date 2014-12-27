@@ -1,0 +1,98 @@
+package tests;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import exceptions.TestFailedException;
+
+import stripsLanguage.Ordering;
+import stripsLanguage.Plan;
+import stripsLanguage.Step;
+import stripsPlanner.BuildLinearizations;
+
+public class BuildLinearizationTest extends BuildLinearizations{
+
+	public BuildLinearizationTest() {}
+	
+	public String test() throws TestFailedException
+	{
+		String s = "";
+		s += test1();
+		s += test2();
+		
+		return s;
+	}
+	
+	private String test1()  throws TestFailedException
+	{
+		
+		String s = "";
+		
+		List<List<Integer>> matrix = new ArrayList<List<Integer>>();
+		List<Integer> firstList = new ArrayList<Integer>();
+		
+		Plan plan = new TestData().createPlan1();
+		List<Ordering> os = new TestData().getOrderings1(); 
+
+		List<Ordering> ors = new ArrayList<Ordering>();
+		for(Ordering o: os)
+			if(o.getFirstStep().getId() != 1
+				&& o.getLastStep().getId() != 2)
+				ors.add(o);
+		List<Step> steps = new ArrayList<Step>();
+		for(int i = 2; i < plan.getSteps().size(); ++i)		
+			steps.add(plan.getSteps().get(i));
+		firstList.add(1);
+
+		//step1 = START, step2 = FINISH
+
+		buildLinearizations(			
+			matrix,
+			firstList,		
+			steps,
+			ors);
+		
+		if(matrix.size() != 3)
+			throw new TestFailedException("BuildLinearizationTest (1)");
+		if(matrix.get(0).size() != 5)
+			throw new TestFailedException("BuildLinearizationTest (2)");
+		
+		s = "BuildLinearizationTest (all) OK\n";
+		return s;
+	}
+	
+	private String test2()  throws TestFailedException
+	{
+		String s = "";
+		
+		//Step s3 = new Step(3,1,"1",null,null);
+		Step s4 = new Step(4,1,"1",null,null);
+		Step s5 = new Step(5,1,"1",null,null);
+		Step s6 = new Step(6,1,"1",null,null);
+		Step s7 = new Step(7,1,"1",null,null);
+		List<Step> steps = new ArrayList<Step>();
+		for(int i = 3; i <= 7; ++i)
+			steps.add(new Step(i,i,"nic",null,null));
+		List<List<Integer>> matrix = new ArrayList<List<Integer>>();
+		List<Integer> firstList = new ArrayList<Integer>();
+		firstList.add(1);
+		
+		List<Ordering> ors = new ArrayList<Ordering>();
+		ors.add(new Ordering(s4,s6));
+		ors.add(new Ordering(s5,s7));
+		
+		buildLinearizations(			
+			matrix,
+			firstList,		
+			steps,
+			ors);
+		
+		if(matrix.size() != 30)
+			throw new TestFailedException("BuildLinearizationTest2 (1)");
+		if(matrix.get(0).size() != 7)
+			throw new TestFailedException("BuildLinearizationTest2 (2)");
+
+		s = "BuildLinearizationTest2 (all) OK\n";
+		return s;
+	}
+}

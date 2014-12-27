@@ -1,0 +1,1072 @@
+package tests;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import stripsLanguage.Binding;
+import stripsLanguage.Instance;
+import stripsLanguage.Link;
+import stripsLanguage.Operator;
+import stripsLanguage.Ordering;
+import stripsLanguage.Plan;
+import stripsLanguage.Predicate;
+import stripsLanguage.Step;
+
+public class TestData {
+
+	public TestData() {}
+	
+	public Plan createPlan1()
+	{
+		List<Predicate> prec1 = new ArrayList<Predicate>();
+		List<Predicate> eff1 = new ArrayList<Predicate>();
+		
+		Predicate p = new Predicate(1,1,"Predykat1",3);
+		p.addArgument(1,"");
+		p.addArgument(2,"");
+		p.addArgument(3,"");
+		prec1.add(p);
+		
+		p = new Predicate(2,2,"Predykat2",3);
+		p.addArgument(1,"");
+		p.addArgument(2,"");
+		p.addArgument(3,"");
+		prec1.add(p);
+		
+		p = new Predicate(3,3,"Predykat3",3);
+		p.addArgument(1,"");
+		p.addArgument(2,"");
+		p.addArgument(3,"");
+		eff1.add(p);
+		
+		p = new Predicate(4,4,"Predykat4",3);
+		p.addArgument(1,"");
+		p.addArgument(2,"");
+		p.addArgument(3,"");
+		eff1.add(p);		
+		
+		Step s1 = new Step(1,1,"Operator1",prec1,eff1);
+		s1.unifyInstances();
+		
+		List<Predicate> prec2 = new ArrayList<Predicate>();
+		List<Predicate> eff2 = new ArrayList<Predicate>();
+		
+		p = new Predicate(5,5,"Predykat5",3);
+		p.addArgument(1,null);
+		p.addArgument(2,null);
+		p.addArgument(3,null);
+		prec2.add(p);
+		
+		p = new Predicate(6,6,"Predykat6",3);
+		p.addArgument(1,null);
+		p.addArgument(2,null);
+		p.addArgument(3,null);
+		prec2.add(p);
+		
+		p = new Predicate(7,7,"Predykat7",3);
+		p.addArgument(1,null);
+		p.addArgument(2,null);
+		p.addArgument(3,null);
+		eff2.add(p);
+		
+		p = new Predicate(8,8,"Predykat8",3);
+		p.addArgument(1,null);
+		p.addArgument(2,null);
+		p.addArgument(3,null);
+		eff2.add(p);
+
+		p = new Predicate(9,9,"Predykat9",1);
+		p.addArgument(2,null);
+		eff2.add(p);
+		
+		Step s2 = new Step(2,2,"Operator2",prec2,eff2);
+		s2.unifyInstances();
+		
+		List<Predicate> prec3 = new ArrayList<Predicate>();
+		List<Predicate> eff3 = new ArrayList<Predicate>();
+
+		p = new Predicate(10,10,"Predykat10",3);
+		p.addArgument(1,null);
+		p.addArgument(2,null);
+		p.addArgument(3,null);
+		prec3.add(p);
+
+		p = new Predicate(12,12,"Predykat12",1);
+		p.addArgument(2,null);
+		prec3.add(p);
+		
+		p = new Predicate(11,11,"Predykat11",3);
+		p.addArgument(1,null);
+		p.addArgument(2,null);
+		p.addArgument(3,null);
+		eff3.add(p);
+		
+		Step s3 = new Step(3,3,"Operator3",prec3,eff3);
+		s3.unifyInstances();
+
+		List<Predicate> prec4 = new ArrayList<Predicate>();
+		List<Predicate> eff4 = new ArrayList<Predicate>();
+		Step s4 = new Step(4,4,"Operator4",prec4,eff4);
+
+		List<Predicate> prec5 = new ArrayList<Predicate>();
+		List<Predicate> eff5 = new ArrayList<Predicate>();
+		Step s5 = new Step(5,5,"Operator5",prec5,eff5);
+		
+		List<Step> steps = new ArrayList<Step>();
+		steps.add(s1);
+		steps.add(s2);
+		steps.add(s3);
+		steps.add(s4);
+		steps.add(s5);
+		
+		List<Link> links = new ArrayList<Link>();
+		List<Ordering> orderings = new ArrayList<Ordering>();
+		List<Binding> bindings = new ArrayList<Binding>();
+
+		return new Plan(
+			steps,
+			links,
+			orderings,
+			bindings);
+	}
+
+	/** dla ResolveThreat - threat **/
+	public Plan createPlan2()
+	{
+		int typeOfThreat = -1;
+		
+		List<Predicate> prec = new ArrayList<Predicate>();
+		List<Predicate> eff = new ArrayList<Predicate>();
+		
+		Predicate p = new Predicate(1,1,"Predykat1",1);
+		p.addArgument(1,"");
+		eff.add(p);		
+		
+		Step s1 = new Step(1,1,"Operator1",prec,eff);
+		s1.unifyInstances();
+		
+		prec = new ArrayList<Predicate>();
+		eff = new ArrayList<Predicate>();
+		
+		// lewy gorny  - slajd 23
+		p = new Predicate(2,2,"Predykat2",1);
+		p.addArgument(1,null);
+		prec.add(p);
+		
+		p = new Predicate(3,typeOfThreat,"Predykat3",1);
+		p.addArgument(1,null);
+		eff.add(p);
+		
+		Step s2 = new Step(2,2,"Operator2",prec,eff);
+		s2.unifyInstances();
+		
+		// lewy dolny
+		prec = new ArrayList<Predicate>();
+		eff = new ArrayList<Predicate>();
+
+		p = new Predicate(4,typeOfThreat,"Predykat4",1);
+		p.addArgument(1,null);
+		prec.add(p);
+		
+		p = new Predicate(5,5,"Predykat5",1);
+		p.addArgument(1,null);
+		eff.add(p);
+		
+		Step s3 = new Step(3,3,"Operator3",prec,eff);
+		s3.unifyInstances();
+
+		// prawy - zagrozenie
+		prec = new ArrayList<Predicate>();
+		eff = new ArrayList<Predicate>();
+		p = new Predicate(6,6,"Predykat6",1);
+		p.addArgument(1,null);
+		prec.add(p);
+		p = new Predicate(7,typeOfThreat,"Predykat7",1);
+		p.addArgument(1,null);
+		eff.add(p);
+		Step s4 = new Step(4,4,"Operator4",prec,eff);
+		s4.unifyInstances();
+		s4.getEffects().get(0).setNegation();
+		
+		// ostatni - finish
+		prec = new ArrayList<Predicate>();
+		eff = new ArrayList<Predicate>();
+		p = new Predicate(8,8,"Predykat8",1);
+		p.addArgument(1,null);
+		prec.add(p);
+		Step s5 = new Step(5,5,"Operator5",prec,eff);
+		
+		List<Step> steps = new ArrayList<Step>();
+		steps.add(s1);
+		steps.add(s2);
+		steps.add(s3);
+		steps.add(s4);
+		steps.add(s5);
+		
+		// dodaje instancje
+		Instance ins = new Instance("Ola",1);
+		s2.getEffects().get(0).setInstance(0,ins);
+		s3.getPreconditions().get(0).setInstance(0,ins);
+		s4.getEffects().get(0).setInstance(0,ins);
+		
+		List<Link> links = new ArrayList<Link>();
+		links.add(new Link(s2,s3,s3.getPreconditions().get(0)));
+		
+		List<Ordering> orderings = new ArrayList<Ordering>();
+		List<Binding> bindings = new ArrayList<Binding>();
+
+		return new Plan(
+			steps,
+			links,
+			orderings,
+			bindings);
+	}
+
+	public Plan createPlanDS2(int AT, int WAS)
+	{
+		// 4 kroki
+		List<Predicate> prec = new ArrayList<Predicate>();
+		List<Predicate> eff = new ArrayList<Predicate>();	
+		
+		/// Start
+		Predicate p = new Predicate(1,AT,"At",1);
+		p.addArgument(1,null);
+		eff.add(p);
+		
+		Step s1 = new Step(1,2,"Start",prec,eff);
+		s1.unifyInstances();
+		s1.setInstance(-1,new Instance("Home",1));
+		
+		// Koniec
+		prec = new ArrayList<Predicate>();
+		eff = new ArrayList<Predicate>();
+		p = new Predicate(10,WAS,"Was",1);
+		p.addArgument(1,null);
+		prec.add(p);
+
+		p = new Predicate(11,WAS,"Was",1);
+		p.addArgument(2,null);
+		prec.add(p);
+		
+		Step s4 = new Step(2,3,"Koniec",prec,eff);
+		s4.unifyInstances();
+		s4.setInstance(-1,new Instance("SM",2));
+		s4.setInstance(-2,new Instance("HWS",3));
+		
+		// Go(Home, SM)
+		prec = new ArrayList<Predicate>();
+		eff = new ArrayList<Predicate>();
+		
+		p = new Predicate(2,AT,"At",1);
+		p.addArgument(1,null);
+		prec.add(p);
+		
+		p = new Predicate(3,AT,"At",1);
+		p.addArgument(1,null);
+		eff.add(p);
+		eff.get(0).setNegation();
+		
+		p = new Predicate(4,AT,"At",1);
+		p.addArgument(2,null);
+		eff.add(p);
+
+		p = new Predicate(5,WAS,"Was",1);
+		p.addArgument(2,null);
+		eff.add(p);
+		
+		Step s2 = new Step(3,1,"Go",prec,eff);
+		s2.unifyInstances();
+		//s2.setInstance(-1,new Instance("Home",1));
+		s2.setInstance(-2,new Instance("SM",2));		
+		
+		List<Step> steps = new ArrayList<Step>();
+		steps.add(s1);
+		steps.add(s4);
+		steps.add(s2);
+		//steps.add(s3);
+		
+		List<Link> links = new ArrayList<Link>();
+		//links.add(new Link(s1,s2,s2.getPreconditions().get(0)));
+		//links.add(new Link(s1,s3,s3.getPreconditions().get(0)));
+		links.add(new Link(s2,s4,s4.getPreconditions().get(0)));
+	//	links.add(new Link(s3,s4,s4.getPreconditions().get(1)));		
+		
+		List<Ordering> orderings = new ArrayList<Ordering>();
+		orderings.add(new Ordering(s1,s2));
+		//orderings.add(new Ordering(s1,s3));
+		orderings.add(new Ordering(s1,s4));
+		orderings.add(new Ordering(s2,s4));
+		//orderings.add(new Ordering(s3,s4));
+		
+		List<Binding> bindings = new ArrayList<Binding>();
+		/*bindings.add(new Binding(
+			s1.getEffects().get(0),
+			s2.getPreconditions().get(0),
+			s1.getId(),
+			s2.getId()));
+		*//*bindings.add(new Binding(
+			s1.getEffects().get(0),
+			s3.getPreconditions().get(0),
+			s1.getId(),
+			s3.getId()));
+		*/bindings.add(new Binding(
+			s2.getEffects().get(2),
+			s4.getPreconditions().get(0),
+			s2.getId(),
+			s4.getId()));
+		/*bindings.add(new Binding(
+			s3.getEffects().get(2),
+			s4.getPreconditions().get(1),
+			s3.getId(),
+			s4.getId()));	
+		*/
+		return new Plan(
+			steps,
+			links,
+			orderings,
+			bindings);
+	}
+	
+	public Plan createPlan3(int AT, int WAS)
+	{
+		// 4 kroki
+		List<Predicate> prec = new ArrayList<Predicate>();
+		List<Predicate> eff = new ArrayList<Predicate>();	;
+		
+		/// Start
+		Predicate p = new Predicate(1,AT,"At",1);
+		p.addArgument(1,null);
+		eff.add(p);
+		
+		Step s1 = new Step(1,2,"Start",prec,eff);
+		s1.unifyInstances();
+		s1.setInstance(-1,new Instance("Home",1));
+		
+		// Koniec
+		prec = new ArrayList<Predicate>();
+		eff = new ArrayList<Predicate>();
+		p = new Predicate(10,WAS,"Was",1);
+		p.addArgument(1,null);
+		prec.add(p);
+
+		p = new Predicate(11,WAS,"Was",1);
+		p.addArgument(2,null);
+		prec.add(p);
+		
+		Step s4 = new Step(2,3,"Koniec",prec,eff);
+		s4.unifyInstances();
+		s4.setInstance(-1,new Instance("SM",2));
+		s4.setInstance(-2,new Instance("HWS",3));
+		
+		// Go(Home, SM)
+		prec = new ArrayList<Predicate>();
+		eff = new ArrayList<Predicate>();
+		
+		p = new Predicate(2,AT,"At",1);
+		p.addArgument(1,null);
+		prec.add(p);
+		
+		p = new Predicate(3,AT,"At",1);
+		p.addArgument(1,null);
+		eff.add(p);
+		eff.get(0).setNegation();
+		
+		p = new Predicate(4,AT,"At",1);
+		p.addArgument(2,null);
+		eff.add(p);
+
+		p = new Predicate(5,WAS,"Was",1);
+		p.addArgument(2,null);
+		eff.add(p);
+		
+		Step s2 = new Step(3,1,"Go",prec,eff);
+		s2.unifyInstances();
+		//s2.setInstance(-1,new Instance("Home",1));
+		s2.setInstance(-2,new Instance("SM",2));
+		
+		// Go(Home,HWS)
+		prec = new ArrayList<Predicate>();
+		eff = new ArrayList<Predicate>();
+		
+		p = new Predicate(6,AT,"At",1);
+		p.addArgument(1,null);
+		prec.add(p);
+		
+		p = new Predicate(7,AT,"At",1);
+		p.addArgument(1,null);
+		eff.add(p);
+		eff.get(0).setNegation();
+		
+		p = new Predicate(8,AT,"At",1);
+		p.addArgument(2,null);
+		eff.add(p);
+
+		p = new Predicate(9,WAS,"Was",1);
+		p.addArgument(2,null);
+		eff.add(p);
+		
+		Step s3 = new Step(4,1,"Go",prec,eff);
+		s3.unifyInstances();
+		//s3.setInstance(-1,new Instance("Home",1));
+		s3.setInstance(-2,new Instance("HWS",3));		
+		
+		List<Step> steps = new ArrayList<Step>();
+		steps.add(s1);
+		steps.add(s4);
+		steps.add(s2);
+		steps.add(s3);
+		
+		List<Link> links = new ArrayList<Link>();
+		//links.add(new Link(s1,s2,s2.getPreconditions().get(0)));
+		//links.add(new Link(s1,s3,s3.getPreconditions().get(0)));
+		links.add(new Link(s2,s4,s4.getPreconditions().get(0)));
+		links.add(new Link(s3,s4,s4.getPreconditions().get(1)));		
+		
+		List<Ordering> orderings = new ArrayList<Ordering>();
+		orderings.add(new Ordering(s1,s2));
+		orderings.add(new Ordering(s1,s3));
+		orderings.add(new Ordering(s1,s4));
+		orderings.add(new Ordering(s2,s4));
+		orderings.add(new Ordering(s3,s4));
+		
+		List<Binding> bindings = new ArrayList<Binding>();
+		/*bindings.add(new Binding(
+			s1.getEffects().get(0),
+			s2.getPreconditions().get(0),
+			s1.getId(),
+			s2.getId()));
+		*//*bindings.add(new Binding(
+			s1.getEffects().get(0),
+			s3.getPreconditions().get(0),
+			s1.getId(),
+			s3.getId()));
+		*/bindings.add(new Binding(
+			s2.getEffects().get(2),
+			s4.getPreconditions().get(0),
+			s2.getId(),
+			s4.getId()));
+		bindings.add(new Binding(
+			s3.getEffects().get(2),
+			s4.getPreconditions().get(1),
+			s3.getId(),
+			s4.getId()));	
+		
+		return new Plan(
+			steps,
+			links,
+			orderings,
+			bindings);
+	}
+	
+	public Plan createPlan4(int AT, int WAS)
+	{
+		// 4 kroki
+		List<Predicate> prec = new ArrayList<Predicate>();
+		List<Predicate> eff = new ArrayList<Predicate>();
+		
+		/// Start
+		Predicate p = new Predicate(1,AT,"At",1);
+		p.addArgument(1,null);
+		eff.add(p);
+		
+		Step s1 = new Step(1,2,"Start",prec,eff);
+		s1.unifyInstances();
+		s1.setInstance(-1,new Instance("Home",1));
+		
+		// Koniec
+		prec = new ArrayList<Predicate>();
+		eff = new ArrayList<Predicate>();
+		p = new Predicate(10,WAS,"Was",1);
+		p.addArgument(1,null);
+		prec.add(p);
+
+		p = new Predicate(11,WAS,"Was",1);
+		p.addArgument(2,null);
+		prec.add(p);
+		
+		Step s4 = new Step(2,3,"Koniec",prec,eff);
+		s4.unifyInstances();
+		s4.setInstance(-1,new Instance("SM",2));
+		s4.setInstance(-2,new Instance("HWS",3));
+		
+		// Go(Home, SM)
+		prec = new ArrayList<Predicate>();
+		eff = new ArrayList<Predicate>();
+		
+		p = new Predicate(2,AT,"At",1);
+		p.addArgument(1,null);
+		prec.add(p);
+		
+		p = new Predicate(3,AT,"At",1);
+		p.addArgument(1,null);
+		eff.add(p);
+		eff.get(0).setNegation();
+		
+		p = new Predicate(4,AT,"At",1);
+		p.addArgument(2,null);
+		eff.add(p);
+
+		p = new Predicate(5,WAS,"Was",1);
+		p.addArgument(2,null);
+		eff.add(p);
+		
+		Step s2 = new Step(3,1,"Go",prec,eff);
+		s2.unifyInstances();
+		s2.setInstance(-1,new Instance("Home",1));
+		s2.setInstance(-2,new Instance("SM",2));
+		
+		// Go(Home,HWS)
+		prec = new ArrayList<Predicate>();
+		eff = new ArrayList<Predicate>();
+		
+		p = new Predicate(6,AT,"At",1);
+		p.addArgument(1,null);
+		prec.add(p);
+		
+		p = new Predicate(7,AT,"At",1);
+		p.addArgument(1,null);
+		eff.add(p);
+		eff.get(0).setNegation();
+		
+		p = new Predicate(8,AT,"At",1);
+		p.addArgument(2,null);
+		eff.add(p);
+
+		p = new Predicate(9,WAS,"Was",1);
+		p.addArgument(2,null);
+		eff.add(p);
+		
+		Step s3 = new Step(4,1,"Go",prec,eff);
+		s3.unifyInstances();
+		//s3.setInstance(-1,new Instance("Home",1));
+		s3.setInstance(-2,new Instance("HWS",3));		
+		
+		List<Step> steps = new ArrayList<Step>();
+		steps.add(s1);
+		steps.add(s4);
+		steps.add(s2);
+		steps.add(s3);
+		
+		List<Link> links = new ArrayList<Link>();
+		links.add(new Link(s1,s2,s2.getPreconditions().get(0)));
+		//links.add(new Link(s1,s3,s3.getPreconditions().get(0)));
+		links.add(new Link(s2,s4,s4.getPreconditions().get(0)));
+		links.add(new Link(s3,s4,s4.getPreconditions().get(1)));		
+		
+		List<Ordering> orderings = new ArrayList<Ordering>();
+		orderings.add(new Ordering(s1,s2));
+		orderings.add(new Ordering(s1,s3));
+		orderings.add(new Ordering(s1,s4));
+		orderings.add(new Ordering(s2,s4));
+		orderings.add(new Ordering(s3,s4));
+		
+		List<Binding> bindings = new ArrayList<Binding>();
+		bindings.add(new Binding(
+			s1.getEffects().get(0),
+			s2.getPreconditions().get(0),
+			s1.getId(),
+			s2.getId()));
+		/*bindings.add(new Binding(
+			s1.getEffects().get(0),
+			s3.getPreconditions().get(0),
+			s1.getId(),
+			s3.getId()));
+		*/bindings.add(new Binding(
+			s2.getEffects().get(2),
+			s4.getPreconditions().get(0),
+			s2.getId(),
+			s4.getId()));
+		bindings.add(new Binding(
+			s3.getEffects().get(2),
+			s4.getPreconditions().get(1),
+			s3.getId(),
+			s4.getId()));	
+		
+		return new Plan(
+			steps,
+			links,
+			orderings,
+			bindings);
+	}
+	
+	public Plan createPlan5(int AT,int WAS)
+	{
+		// 4 kroki
+		List<Predicate> prec = new ArrayList<Predicate>();
+		List<Predicate> eff = new ArrayList<Predicate>();
+		
+		/// Start
+		Predicate p = new Predicate(1,AT,"At",1);
+		p.addArgument(1,null);
+		eff.add(p);
+		
+		Step s1 = new Step(1,2,"Start",prec,eff);
+		s1.unifyInstances();
+		s1.setInstance(-1,new Instance("Home",1));
+		
+		// Koniec
+		prec = new ArrayList<Predicate>();
+		eff = new ArrayList<Predicate>();
+		p = new Predicate(10,WAS,"Was",1);
+		p.addArgument(1,null);
+		prec.add(p);
+
+		p = new Predicate(11,WAS,"Was",1);
+		p.addArgument(2,null);
+		prec.add(p);
+		
+		Step s4 = new Step(2,3,"Koniec",prec,eff);
+		s4.unifyInstances();
+		s4.setInstance(-1,new Instance("SM",2));
+		s4.setInstance(-2,new Instance("HWS",3));	
+		
+		// Go(Home, SM)
+		prec = new ArrayList<Predicate>();
+		eff = new ArrayList<Predicate>();
+		
+		p = new Predicate(2,AT,"At",1);
+		p.addArgument(1,null);
+		prec.add(p);
+		
+		p = new Predicate(3,AT,"At",1);
+		p.addArgument(1,null);
+		eff.add(p);
+		eff.get(0).setNegation();
+		
+		p = new Predicate(4,AT,"At",1);
+		p.addArgument(2,null);
+		eff.add(p);
+
+		p = new Predicate(5,WAS,"Was",1);
+		p.addArgument(2,null);
+		eff.add(p);
+		
+		Step s2 = new Step(3,1,"Go",prec,eff);
+		s2.unifyInstances();
+		s2.setInstance(-1,new Instance("Home",1));
+		s2.setInstance(-2,new Instance("SM",2));
+		
+		// Go(Home,HWS)
+		prec = new ArrayList<Predicate>();
+		eff = new ArrayList<Predicate>();
+		
+		p = new Predicate(6,AT,"At",1);
+		p.addArgument(1,null);
+		prec.add(p);
+		
+		p = new Predicate(7,AT,"At",1);
+		p.addArgument(1,null);
+		eff.add(p);
+		eff.get(0).setNegation();
+		
+		p = new Predicate(8,AT,"At",1);
+		p.addArgument(2,null);
+		eff.add(p);
+
+		p = new Predicate(9,WAS,"Was",1);
+		p.addArgument(2,null);
+		eff.add(p);
+		
+		Step s3 = new Step(4,1,"Go",prec,eff);
+		s3.unifyInstances();
+		s3.setInstance(-1,new Instance("Home",1));
+		s3.setInstance(-2,new Instance("HWS",3));	
+		
+		List<Step> steps = new ArrayList<Step>();
+		steps.add(s1);
+		steps.add(s4);
+		steps.add(s2);
+		steps.add(s3);
+		
+		List<Link> links = new ArrayList<Link>();
+		links.add(new Link(s1,s2,s2.getPreconditions().get(0)));
+		links.add(new Link(s1,s3,s3.getPreconditions().get(0)));
+		links.add(new Link(s2,s4,s4.getPreconditions().get(0)));
+		links.add(new Link(s3,s4,s4.getPreconditions().get(1)));		
+		
+		List<Ordering> orderings = new ArrayList<Ordering>();
+		orderings.add(new Ordering(s1,s2));
+		orderings.add(new Ordering(s1,s3));
+		orderings.add(new Ordering(s1,s4));
+		orderings.add(new Ordering(s2,s4));
+		orderings.add(new Ordering(s3,s4));
+		
+		List<Binding> bindings = new ArrayList<Binding>();
+		bindings.add(new Binding(
+			s1.getEffects().get(0),
+			s2.getPreconditions().get(0),
+			s1.getId(),
+			s2.getId()));
+		bindings.add(new Binding(
+			s1.getEffects().get(0),
+			s3.getPreconditions().get(0),
+			s1.getId(),
+			s3.getId()));
+		bindings.add(new Binding(
+			s2.getEffects().get(2),
+			s4.getPreconditions().get(0),
+			s2.getId(),
+			s4.getId()));
+		bindings.add(new Binding(
+				s3.getEffects().get(2),
+				s4.getPreconditions().get(1),
+				s3.getId(),
+				s4.getId()));		
+		
+		return new Plan(
+			steps,
+			links,
+			orderings,
+			bindings);
+	}
+
+	public List<Operator> createDSOperators(int AT, int WAS)
+	{
+		List<Operator> operators = new ArrayList<Operator>();
+		
+		// Go(x,y)
+		List<Predicate> precs = new ArrayList<Predicate>();
+		List<Predicate> effects = new ArrayList<Predicate>();
+		// precondition
+		precs.add(new Predicate(0,AT,"At",1));
+		precs.get(0).addArgument(1,null);
+		///effect 1
+		effects.add(new Predicate(0,AT,"At",1));
+		effects.get(0).addArgument(2,null);
+		// effect 2
+		effects.add(new Predicate(0,AT,"At",1));
+		effects.get(1).addArgument(1,null);
+		effects.get(1).setNegation();
+		//effect 3
+		effects.add(new Predicate(0,WAS,"Was",1));
+		effects.get(2).addArgument(2,null);
+		operators.add(new Operator(1,"Go",precs,effects));
+		
+		// Start
+		precs = new ArrayList<Predicate>();
+		effects = new ArrayList<Predicate>();
+		///effect 1
+		effects.add(new Predicate(0,AT,"At",1));
+		effects.get(0).addArgument(1,null);
+		operators.add(new Operator(2,"Start",precs,effects));
+
+		// Koniec
+		precs = new ArrayList<Predicate>();
+		effects = new ArrayList<Predicate>();
+		///prec 1
+		precs.add(new Predicate(0,AT,"At",1));
+		precs.get(0).addArgument(1,null);
+		///prec 2
+		precs.add(new Predicate(0,AT,"At",1));
+		precs.get(0).addArgument(2,null);
+		operators.add(new Operator(3,"Koniec",precs,effects));
+		
+		return operators;
+	}
+	
+	/** dla ResolveThreat - threat **/
+	public Plan createPlanSymmetry()
+	{
+		int typeOfThreat = -1;
+		
+		List<Predicate> prec = new ArrayList<Predicate>();
+		List<Predicate> eff = new ArrayList<Predicate>();
+		
+		// At(Home)
+		Predicate p = new Predicate(1,typeOfThreat,"Predykat1",1);
+		p.addArgument(1,"");
+		eff.add(p);
+		
+		Step s1 = new Step(1,1,"Operator1",prec,eff);
+		s1.unifyInstances();
+		
+		prec = new ArrayList<Predicate>();
+		eff = new ArrayList<Predicate>();
+		
+		/** Go(Home,HWS) **/
+		// At(Home)
+		p = new Predicate(2,typeOfThreat,"Predykat2",1);
+		p.addArgument(1,null);
+		prec.add(p);
+
+		//At(HWS)
+		p = new Predicate(3,typeOfThreat,"Predykat3",1);
+		p.addArgument(2,null);
+		eff.add(p);
+		
+		// \At(Home)
+		p = new Predicate(4,typeOfThreat,"Predykat4",1);
+		p.addArgument(1,null);
+		eff.add(p);
+		
+		Step s2 = new Step(2,2,"Operator2",prec,eff);
+		s2.unifyInstances();
+		s2.getEffects().get(1).setNegation();
+		
+		/** Go(Home,SM) **/
+		prec = new ArrayList<Predicate>();
+		eff = new ArrayList<Predicate>();
+
+		// At(Home)
+		p = new Predicate(5,typeOfThreat,"Predykat5",1);
+		p.addArgument(1,null);
+		prec.add(p);
+
+		// At(SM)
+		p = new Predicate(6,typeOfThreat,"Predykat6",1);
+		p.addArgument(2,null);
+		eff.add(p);
+		
+		// \At(Home
+		p = new Predicate(7,typeOfThreat,"Predykat7",1);
+		p.addArgument(1,null);
+		eff.add(p);
+		
+		Step s3 = new Step(3,3,"Operator3",prec,eff);
+		s3.unifyInstances();
+		s3.getEffects().get(1).setNegation();
+		// ostatni - finish
+		prec = new ArrayList<Predicate>();
+		eff = new ArrayList<Predicate>();
+		p = new Predicate(8,8,"Predykat8",1);
+		p.addArgument(1,null);
+		prec.add(p);
+		Step s4 = new Step(4,4,"Operator4",prec,eff);
+		
+		List<Step> steps = new ArrayList<Step>();
+		steps.add(s1);
+		steps.add(s2);
+		steps.add(s3);
+		steps.add(s4);
+		
+		// dodaje instancje
+		Instance ins = new Instance("Ola",1);
+		s1.getEffects().get(0).setInstance(0,ins);
+		s2.getPreconditions().get(0).setInstance(0,ins);
+		s3.getPreconditions().get(0).setInstance(0,ins);
+		s2.getEffects().get(1).setInstance(0,ins);
+		s3.getEffects().get(1).setInstance(0,ins);
+		
+		List<Link> links = new ArrayList<Link>();
+		links.add(new Link(s1,s2,s2.getPreconditions().get(0)));
+		links.add(new Link(s1,s3,s3.getPreconditions().get(0)));
+		
+		List<Ordering> orderings = new ArrayList<Ordering>();
+		List<Binding> bindings = new ArrayList<Binding>();
+
+		return new Plan(
+			steps,
+			links,
+			orderings,
+			bindings);
+	}
+	
+	public List<Ordering> getOrderings1()
+	{
+		List<Ordering> os = new ArrayList<Ordering>();
+
+		Plan plan = createPlan1(); 
+		
+		// ze step 1
+		os.add(new Ordering(plan.getSteps().get(0), plan.getSteps().get(1)));
+		os.add(new Ordering(plan.getSteps().get(0), plan.getSteps().get(2)));
+		os.add(new Ordering(plan.getSteps().get(0), plan.getSteps().get(3)));
+		os.add(new Ordering(plan.getSteps().get(0), plan.getSteps().get(4)));
+		
+		//ze step 2 - ostatni
+		os.add(new Ordering(plan.getSteps().get(2), plan.getSteps().get(1)));
+		os.add(new Ordering(plan.getSteps().get(3), plan.getSteps().get(1)));
+		os.add(new Ordering(plan.getSteps().get(4), plan.getSteps().get(1)));
+		
+		//step3->step4
+		os.add(new Ordering(plan.getSteps().get(2), plan.getSteps().get(3)));
+
+		
+		//1->2,3,4,5
+		//3,4,5->2
+		// 3->4 
+		
+		// 1 3 4 5 2
+		// 1 3 5 4 2
+		// 1 5 3 4 2
+		
+		return os;
+	}
+	
+	public List<List<Integer>> createMatrix()
+	{
+		List<List<Integer>> matrix = new ArrayList<List<Integer>>();
+		//list 1
+		List<Integer> l = new ArrayList<Integer>();
+		l.add(1);
+		l.add(2);
+		l.add(3);
+		l.add(4);
+		l.add(5);
+		matrix.add(l);
+		
+		//list 2
+		l = new ArrayList<Integer>();
+		l.add(1);
+		l.add(3);
+		l.add(2);
+		l.add(4);
+		l.add(5);
+		matrix.add(l);
+		
+		//list 3
+		l = new ArrayList<Integer>();
+		l.add(1);
+		l.add(2);
+		l.add(4);
+		l.add(3);
+		l.add(5);
+		matrix.add(l);
+		
+		/**
+		 * 12345
+		 * 12435
+		 * 14235
+		 */
+		return matrix;
+	}
+	
+	// for findThreats & solveThreats - degradation, promotion,failure
+	public List<List<List<Integer>>> createCubeForThreats()
+	{
+		List<List<List<Integer>>> cube = new ArrayList<List<List<Integer>>>();
+		//dla start
+		cube.add(new ArrayList<List<Integer>>());
+		// dla lewego gornego - 2
+		List<List<Integer>> matrix = new ArrayList<List<Integer>>();
+		List<Integer> list = new ArrayList<Integer>();
+		list.add(2);
+		list.add(1);
+		list.add(4);
+		list.add(3);		
+		matrix.add(list);
+		list = new ArrayList<Integer>();
+		list.add(2);
+		list.add(4);
+		list.add(3);		
+		list.add(1);		
+		matrix.add(list);
+		cube.add(matrix);
+		// dla lewego dolnego - 3
+		matrix = new ArrayList<List<Integer>>();
+		list = new ArrayList<Integer>();
+		list.add(3);
+		list.add(2);
+		list.add(1);
+		matrix.add(list);
+		list = new ArrayList<Integer>();
+		list.add(3);
+		list.add(2);
+		list.add(4);
+		list.add(1);
+		matrix.add(list);
+		list = new ArrayList<Integer>();
+		list.add(3);
+		list.add(4);
+		list.add(2);
+		list.add(1);
+		matrix.add(list);
+		cube.add(matrix);		
+		// dla prawego - 4
+		matrix = new ArrayList<List<Integer>>();
+		list = new ArrayList<Integer>();
+		list.add(4);
+		list.add(1);		
+		matrix.add(list);
+		list = new ArrayList<Integer>();
+		list.add(4);
+		list.add(2);
+		list.add(1);
+		matrix.add(list);
+		list = new ArrayList<Integer>();
+		list.add(4);
+		list.add(3);
+		list.add(2);
+		list.add(1);
+		matrix.add(list);
+		cube.add(matrix);
+		// dla finish - 5
+		matrix = new ArrayList<List<Integer>>();
+		list = new ArrayList<Integer>();
+		list.add(5);
+		list.add(4);
+		list.add(3);
+		list.add(2);		
+		list.add(1);		
+		matrix.add(list);
+		list = new ArrayList<Integer>();
+		list.add(5);
+		list.add(3);
+		list.add(2);
+		list.add(4);		
+		list.add(1);	
+		matrix.add(list);
+		list = new ArrayList<Integer>();
+		list.add(5);
+		list.add(3);
+		list.add(4);
+		list.add(2);		
+		list.add(1);	
+		matrix.add(list);
+		cube.add(matrix);
+		
+		return cube;
+	}
+	
+	// for findThreats & solveThreats - degradation, promotion,failure
+	public List<List<List<Integer>>> createCubeForThreatsSymmetry()
+	{
+		List<List<List<Integer>>> cube = new ArrayList<List<List<Integer>>>();
+		//dla start
+		cube.add(new ArrayList<List<Integer>>());
+		// Go(Home,HWS)
+		List<List<Integer>> matrix = new ArrayList<List<Integer>>();
+		List<Integer> list = new ArrayList<Integer>();
+		list.add(2);
+		list.add(1);
+		matrix.add(list);
+		list = new ArrayList<Integer>();
+		list.add(2);
+		list.add(3);
+		list.add(1);		
+		matrix.add(list);
+		cube.add(matrix);
+		// Go(Home,SM)
+		matrix = new ArrayList<List<Integer>>();
+		list = new ArrayList<Integer>();
+		list.add(3);
+		list.add(1);
+		matrix.add(list);
+		list = new ArrayList<Integer>();
+		list.add(3);
+		list.add(2);
+		list.add(1);
+		matrix.add(list);
+		cube.add(matrix);		
+		// finish
+		matrix = new ArrayList<List<Integer>>();
+		list = new ArrayList<Integer>();
+		list.add(4);
+		list.add(3);	
+		list.add(2);
+		list.add(1);		
+		matrix.add(list);
+		list = new ArrayList<Integer>();
+		list.add(4);
+		list.add(2);
+		list.add(3);
+		list.add(1);
+		matrix.add(list);
+		cube.add(matrix);
+		
+		return cube;
+	}
+	
+	
+	
+}

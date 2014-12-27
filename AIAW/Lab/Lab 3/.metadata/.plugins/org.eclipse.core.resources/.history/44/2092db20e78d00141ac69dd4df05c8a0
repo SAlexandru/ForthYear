@@ -1,0 +1,455 @@
+package tests;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import exceptions.TestFailedException;
+
+import stripsLanguage.Binding;
+import stripsLanguage.Instance;
+import stripsLanguage.Operator;
+import stripsLanguage.Ordering;
+import stripsLanguage.Plan;
+import stripsLanguage.Predicate;
+import stripsLanguage.Step;
+import stripsPlanner.ChooseOperator;
+
+/****
+ * do przetestowania:
+ * 
+ * powiedzmy, ze wszystko
+ * 
+ * @author Lukasz
+ *
+ */
+
+public class ChooseOperatorTest extends ChooseOperator {
+
+	public ChooseOperatorTest() {}
+	
+	public String test() throws TestFailedException
+	{
+		String s = "";
+		s += isAlwaysAnytimeAfter();
+		s += unifyVariables();
+		s += createListOfPicksIds();
+		s += countUknowns();
+		s += secondTimeThisInstance();
+		s += differentInstances();
+		s += setInstances();
+		s += isThereSenseInIt();
+		s += makeDecisionAboutStep();
+		return s;
+	}
+	
+	public String isAlwaysAnytimeAfter() throws TestFailedException
+	{
+		String s = "";
+		
+		List<List<Integer>> matrix = new TestData().createMatrix();
+		
+		/**
+		 * 12345
+		 * 12434
+		 * 14235
+		 */
+		boolean b1 = isAlwaysAfter(matrix,2,1);
+		if(b1 == true)
+			s += "isAlwaysAfter (1) OK\n";
+		else
+			throw new TestFailedException("error: isAlwaysAfter (1)");
+
+		b1 = isAlwaysAfter(matrix,3,2);
+		if(b1 == false)
+			s += "isAlwaysAfter (11) OK\n";
+		else
+			throw new TestFailedException("error: isAlwaysAfter (11)");
+		
+		boolean b2 = isOnceAfter(matrix,2,1);
+		if(b2 == true)
+			s += "isAlwaysAfter (2) OK\n";
+		else
+			throw new TestFailedException("error: isAlwaysAfter (2)");
+
+		boolean b3 = isOnceAfter(matrix,4,2);
+		if(b3 == true)
+			s += "isAlwaysAfter (3) OK\n";
+		else
+			throw new TestFailedException("error: isAlwaysAfter (3)");
+
+		boolean b4 = isOnceAfter(matrix,1,5);
+		if(b4 == false)
+			s += "isAlwaysAfter (4) OK\n";
+		else
+			throw new TestFailedException("error: isAlwaysAfter (4)");
+		
+		return s;
+	}
+
+	private String countUknowns() throws TestFailedException
+	{
+		String s = "";
+		
+		List<Instance> instances = new ArrayList<Instance>();
+		instances.add(new Instance(null, 1));
+		instances.add(new Instance(null, -1));
+		instances.add(new Instance(null, -3));
+
+		if(countUnknowns(instances) != 2)
+			throw new TestFailedException("error: countUknowns (1)");
+		
+		s += "countUknowns (all) OK\n";
+		return s;
+	}	
+	
+	private String createListOfPicksIds() throws TestFailedException
+	{
+		String s = "";
+		
+		Plan plan = new TestData().createPlan1();
+		List<Operator> opers = new ArrayList<Operator>();
+		opers.add(new Operator(1,"start", null, null));
+		opers.add(new Operator(2,"finish", null, null));
+		opers.add(new Operator(3,"c", null, null));
+		opers.add(new Operator(4,"d", null, null));
+		
+		List<Integer> list = createListOfPicksIds(plan.getSteps(),opers);
+		
+		if(list.size() != (plan.getSteps().size() - 1 + opers.size() - 2))
+			throw new TestFailedException("error: createListOfPicksIds (1)");
+		if(list.get(0) != 1001)
+			throw new TestFailedException("error: createListOfPicksIds (2)");
+		if(list.get(list.size()-1) != 2)
+			throw new TestFailedException("error: createListOfPicksIds (3)");
+		
+		s += "createListOfPicksIds (all) OK\n";
+		return s;
+	}
+	
+	private String differentInstances() throws TestFailedException
+	{
+		String s = "";
+
+		List<Instance> list1 = new ArrayList<Instance>();
+		List<Instance> list2 = new ArrayList<Instance>();		
+		
+		list1.add(new Instance(null,-1));
+		list1.add(new Instance("Ola",1));
+
+		list2.add(new Instance("Tola",2));
+		list2.add(new Instance(null,-1));
+		
+		if(differentInstances(list1,list2))
+			throw new TestFailedException("error: differentInstances (1)");
+		
+		list1.set(0, new Instance("Tosia",3));
+		if(!differentInstances(list1,list2))
+			throw new TestFailedException("error: differentInstances (2)");
+
+		list2.set(0, new Instance("Tosia",3));
+		if(differentInstances(list1,list2))
+			throw new TestFailedException("error: differentInstances (3)");
+		
+		s += "differentInstances (all) OK\n";
+		return s;
+	}	
+		
+	private String isThereSenseInIt() throws TestFailedException
+	{
+		String s = "";
+		
+		if(isThereSenseInIt(3,2,4,4))
+			throw new TestFailedException("error: isThereSenseInIt (1)");
+		if(!isThereSenseInIt(3,3,4,4))
+			throw new TestFailedException("error: isThereSenseInIt (2)");
+		if(!isThereSenseInIt(3,2,4,5))
+			throw new TestFailedException("error: isThereSenseInIt (3)");
+		
+		s = "isThereSenseInIt (all) OK\n";
+		return s;
+	}		
+		
+	private String makeDecisionAboutStep() throws TestFailedException
+	{
+		String s = "";
+		
+		if(makeDecisionAboutStep(
+			null,
+			null,
+			false,
+			1,
+			1) != 4)
+			throw new TestFailedException("error: makeDecisionAboutStep (1)");
+
+		if(makeDecisionAboutStep(
+			null,
+			null,
+			true,
+			3,
+			3) != 1)
+			throw new TestFailedException("error: makeDecisionAboutStep (2)");
+		
+		Plan plan = new TestData().createPlan1();
+		List<Ordering> ors = new TestData().getOrderings1();
+		
+		
+		
+		if(makeDecisionAboutStep(
+			plan.getSteps(),
+			ors,
+			true,
+			4,
+			3) != 3)
+			throw new TestFailedException("error: makeDecisionAboutStep (3)");
+
+		// 1 3 4 5 2
+		// 1 3 5 4 2
+		// 1 5 3 4 2
+		
+		if(makeDecisionAboutStep(
+			plan.getSteps(),
+			ors,
+			true,
+			5,
+			3) == 3)
+			throw new TestFailedException("error: makeDecisionAboutStep (4)");
+		
+		s = "makeDecisionAboutStep (all) OK\n";
+		return s;
+	}		
+	
+	/**
+	 * 		List<Step> steps,
+		List<Ordering> ors,
+		boolean aStep,
+		int idOfStep,
+		int idOfSubgoalStep)
+		
+		**/
+	
+	/***
+	 * @return
+	 * @throws TestFailedException
+	 */
+	private String unifyVariables() throws TestFailedException
+	{
+		String s = "";
+		
+		Plan plan = new TestData().createPlan1();
+		Step s1 = plan.getSteps().get(0);
+		Step s2 = plan.getSteps().get(1);
+		Step s3 = plan.getSteps().get(2);
+		
+		plan.getBindings().add(
+			new Binding(
+				s1.getEffects().get(1),
+				s2.getPreconditions().get(1),
+				s1.getId(),
+				s2.getId()));
+		
+		s1.setInstance(-1, new Instance("Ola",1));
+		if(s1.getInstance(1).getName() != "Ola")
+			throw new TestFailedException("error: unifyVariables (1)");
+		if(s2.getInstance(1).getName() != null)
+			throw new TestFailedException("error: unifyVariables (2)");
+		
+		unifyVariables(plan.getSteps(),plan.getBindings(),1);
+		if(s2.getInstance(1).getName() != "Ola")
+			throw new TestFailedException("error: unifyVariables (3)");
+		
+		plan.getBindings().add(
+			new Binding(
+				s2.getEffects().get(2),
+				s3.getPreconditions().get(1),
+				s2.getId(),
+				s3.getId()));
+		unifyVariables(plan.getSteps(),plan.getBindings(),2);
+		
+		plan.getSteps().get(1).setInstance(-2, new Instance("Tola",2));
+		unifyVariables(plan.getSteps(),plan.getBindings(),2);
+		if(s3.getInstance(2).getName() != "Tola")
+			throw new TestFailedException("error: unifyVariables (4)");
+		if(s2.getInstance(2).getName() != "Tola")
+			throw new TestFailedException("error: unifyVariables (5)");
+		
+		plan.getBindings().add(
+			new Binding(
+				plan.getSteps().get(1).getEffects().get(1),
+				plan.getSteps().get(2).getPreconditions().get(0),
+				plan.getSteps().get(1).getId(),
+				plan.getSteps().get(2).getId()));
+			
+		plan.getSteps().get(2).setInstance(-3, new Instance("Tosia",3));
+		unifyVariables(plan.getSteps(),plan.getBindings(),3);
+		if(s1.getInstance(3).getName() != "Tosia")
+			throw new TestFailedException("error: unifyVariables (6)");
+	
+		s = "unifyVariables (all) OK\n";
+		return s;
+	}
+	
+	private String secondTimeThisInstance() throws TestFailedException
+	{
+		String s = "";
+		
+		Plan plan = new TestData().createPlan1();
+		Step s1 = plan.getSteps().get(0);
+		Step s2 = plan.getSteps().get(1);
+		Step s3 = plan.getSteps().get(2);
+		
+		List<Step> steps = new ArrayList<Step>();
+		steps.add(s1);
+		steps.add(s2);
+		steps.add(s3);
+		
+		/** predicates in steps
+		 * 1: (1,2,3)
+  		 * 2: (1,2,3)
+  		 * 3: (1,2,3)
+		 ***/
+		
+		List<Binding> bindings = new ArrayList<Binding>();
+		bindings.add(new Binding(
+			s1.getEffects().get(0),
+			s2.getPreconditions().get(0),
+			s1.getId(),
+			s2.getId()));
+		bindings.add(new Binding(
+			s1.getEffects().get(0),
+			s3.getPreconditions().get(0),
+			s1.getId(),
+			s3.getId()));
+		
+		/** bindings
+		 * s1 - s2
+		 * s2 - s3
+		 */
+		
+		s1.setInstance(1,new Instance("Ola",1));
+		s2.setInstance(1,new Instance("Ola",1));
+		s2.setInstance(2,new Instance("Tola",2));
+		
+		Predicate predicateToBeFilled = s1.getPreconditions().get(0);
+		Predicate predicateThatFills = s2.getPreconditions().get(0);
+		
+		List<Boolean> checked = createCheckList(3,2);
+		
+		boolean b = secondTimeThisInstance(
+			1,
+			steps,
+			bindings,
+			checked,
+			predicateToBeFilled,
+			predicateThatFills);
+		
+		if(b)
+			throw new TestFailedException("error: secondTimeThisInstance (1)");
+		
+		s1.setInstance(3,new Instance("Tola",2));
+		//predicateToBeFilled.setInstance(1, new Instance("Tosia",3));
+		checked = createCheckList(3,2);
+		
+		b = secondTimeThisInstance(
+			1,
+			steps,
+			bindings,
+			checked,
+			predicateToBeFilled,
+			predicateThatFills);
+
+		if(!b)
+			throw new TestFailedException("error: secondTimeThisInstance (2)");
+		
+		s1.setInstance(3,new Instance(null,-3));
+		s3.setInstance(1,new Instance("Tola",2));
+
+		checked = createCheckList(3,2);
+		
+		b = secondTimeThisInstance(
+			1,
+			steps,
+			bindings,
+			checked,
+			predicateToBeFilled,
+			predicateThatFills);
+
+		if(!b)
+			throw new TestFailedException("error: secondTimeThisInstance (3)");
+		
+		s = "secondTimeThisInstance (all) OK\n";		
+		return s;
+	}
+
+	private String setInstances() throws TestFailedException
+	{
+		String s = "";
+
+		List<Predicate> prec = new ArrayList<Predicate>();
+		List<Predicate> eff = new ArrayList<Predicate>();
+		
+		Predicate p = new Predicate(1,1,"Predykat1",1);
+		p.addArgument(1,null);
+		prec.add(p);
+		
+		p = new Predicate(2,2,"Predykat2",2);
+		p.addArgument(1,null);
+		p.addArgument(2,null);
+		prec.add(p);
+		
+		p = new Predicate(3,3,"Predykat3",3);
+		p.addArgument(1,null);
+		p.addArgument(2,null);
+		p.addArgument(3,null);		
+		eff.add(p);
+		
+		Step s1 = new Step(1,1,"Operator1",prec,eff);
+		s1.unifyInstances();
+		
+		List<Instance> instances = new ArrayList<Instance>();
+		instances.add(new Instance("Ola",1));
+		instances.add(new Instance("Tola",2));
+		
+		setInstances(
+			s1,
+			s1.getPreconditions().get(1).getArguments(),
+			instances);
+		
+		if(s1.getInstances().get(0).getId() != 1)
+			throw new TestFailedException("error: setInstances (1)");		
+		if(s1.getInstances().get(1).getId() != 2)
+			throw new TestFailedException("error: setInstances (2)");	
+		if(s1.getInstances().get(2).getId() != -3)
+			throw new TestFailedException("error: setInstances (3)");	
+		
+		// test 2
+		
+		prec = new ArrayList<Predicate>();
+		eff = new ArrayList<Predicate>();
+		
+		p = new Predicate(1,1,"Predykat1",1);
+		p.addArgument(1,null);
+		prec.add(p);
+		
+		p = new Predicate(2,2,"Predykat2",2);
+		p.addArgument(1,null);
+		p.addArgument(2,null);
+		prec.add(p);
+		
+		p = new Predicate(3,3,"Predykat3",3);
+		p.addArgument(1,null);
+		p.addArgument(2,null);
+		p.addArgument(3,null);		
+		eff.add(p);
+		
+		Step s2 = new Step(1,1,"Operator1",prec,eff);
+		s2.unifyInstances();
+		
+		s2.setInstance(1, new Instance("Tosia",4));
+		
+		if(s2.getInstances().get(0).getId() != 4)
+			throw new TestFailedException("error: setInstances (4)");
+		
+		s = "setInstances (all) OK\n";		
+		return s;
+	}
+}

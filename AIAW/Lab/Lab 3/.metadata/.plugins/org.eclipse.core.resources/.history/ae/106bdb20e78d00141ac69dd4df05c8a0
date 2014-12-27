@@ -1,0 +1,248 @@
+package tests;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import exceptions.NoResolveException;
+import exceptions.TestFailedException;
+
+import stripsLanguage.Ordering;
+import stripsLanguage.Plan;
+import stripsLanguage.Step;
+import stripsPlanner.ResolveThreats;
+
+/****
+ * do przetestowania:
+ * 
+ * resolveThreats - ale nie trzeba, bo tam tylko wywolania funkcji przetestowanych
+ * 
+ * @author Lukasz
+ *
+ */
+
+public class ResolveThreatsTest extends ResolveThreats{
+
+	public ResolveThreatsTest() {}
+	
+	public String test() throws TestFailedException
+	{
+		String s = "";
+		s += findThreats();
+		//s += solveThreats();
+		return s;
+	}
+	
+	private String findThreats() throws TestFailedException
+	{
+		String s = "";
+		
+		Plan plan = new TestData().createPlan2();		
+		List<List<Integer>> matrix = new TestData().createMatrix();
+		
+		InnerClass ic = findThreats(
+			plan.getSteps(),
+			plan.getLinks(),
+			matrix);
+		
+		if(ic.getThreatedLinks().size() != 1)
+			throw new TestFailedException("error: findThreats (1)");
+		if(ic.getThreatSteps().get(0).getId() != 4)
+			throw new TestFailedException("error: findThreats (2)");
+		if(ic.getThreatedLinks().get(0).getLastStep().getId() != 3)
+			throw new TestFailedException("error: findThreats (3)");
+		
+		// a teraz zmiana - prawy jest zawsze przed lewymi
+		matrix = new ArrayList<List<Integer>>();
+		// lista 1
+		List<Integer> list = new ArrayList<Integer>();
+		list.add(1);
+		list.add(4);
+		list.add(2);
+		list.add(3);
+		list.add(5);
+		matrix.add(list);
+
+		ic = findThreats(
+			plan.getSteps(),
+			plan.getLinks(),
+			matrix);
+			
+		if(ic.getThreatedLinks().size() != 0)
+			throw new TestFailedException("error: findThreats (4)");
+		
+		// przyklad z Go(Home,SM || HWS)
+		plan = new TestData().createPlanSymmetry();
+		matrix = new ArrayList<List<Integer>>();
+		// lista 1
+		list = new ArrayList<Integer>();
+		list.add(1);
+		list.add(2);
+		list.add(3);
+		list.add(4);
+		matrix.add(list);
+		// lista 2
+		list = new ArrayList<Integer>();
+		list.add(1);
+		list.add(3);
+		list.add(2);
+		list.add(4);
+		matrix.add(list);
+		
+		ic = findThreats(
+				plan.getSteps(),
+				plan.getLinks(),
+				matrix);
+		
+		if(ic.getThreatedLinks().size() != 2)
+			throw new TestFailedException("error: findThreats (5)");
+		
+		s += "findThreats (all) OK\n";
+		return s;
+	}
+	
+	private String solveThreats() throws TestFailedException
+	{
+		String s = "";
+		
+		Plan plan = new TestData().createPlan2();
+		List<List<Integer>> matrix = new TestData().createMatrix();
+
+		InnerClass ic = findThreats(
+			plan.getSteps(),
+			plan.getLinks(),
+			matrix);
+		
+		Step s1 = plan.getSteps().get(0);
+		Step s2 = plan.getSteps().get(1);
+		Step s3 = plan.getSteps().get(2);
+		Step s4 = plan.getSteps().get(3);
+		Step s5 = plan.getSteps().get(4);
+
+		// degradacja
+		List<Ordering> ors = new ArrayList<Ordering>();
+		ors.add(new Ordering(s1,s2));
+		ors.add(new Ordering(s1,s3));
+		ors.add(new Ordering(s1,s4));
+		ors.add(new Ordering(s1,s5));		
+	
+		ors.add(new Ordering(s2,s3));
+		
+		ors.add(new Ordering(s2,s5));
+		ors.add(new Ordering(s3,s5));
+		ors.add(new Ordering(s4,s5));
+		
+		try {
+			solveThreats(
+				ic,
+				plan.getSteps(),
+				ors);
+		} catch(NoResolveException e)
+		{
+			;
+		}
+		
+		if(ors.size() != 9) // nie wykonal degradacji 4 -> 2
+			throw new TestFailedException("error: solveThreats (1)");
+		if(ors.get(8).getFirstStep().getId() != 3)
+			throw new TestFailedException("error: solveThreats (2)");
+		if(ors.get(8).getLastStep().getId() != 4)
+			throw new TestFailedException("error: solveThreats (3)");
+		
+		// promocja
+		ors = new ArrayList<Ordering>();
+		ors.add(new Ordering(s1,s2));
+		ors.add(new Ordering(s1,s3));
+		ors.add(new Ordering(s1,s4));
+		ors.add(new Ordering(s1,s5));		
+	
+		ors.add(new Ordering(s2,s3));
+		ors.add(new Ordering(s2,s4));
+		
+		ors.add(new Ordering(s2,s5));
+		ors.add(new Ordering(s3,s5));
+		ors.add(new Ordering(s4,s5));
+		
+		try {
+			solveThreats(
+				ic,
+				plan.getSteps(),
+				ors);
+		} catch(NoResolveException e)
+		{
+			;
+		}
+		
+		if(ors.size() != 10) // nie wykonal degradacji 3 -> 4
+			throw new TestFailedException("error: solveThreats (4)");
+		if(ors.get(9).getFirstStep().getId() != 3)
+			throw new TestFailedException("error: solveThreats (5)");
+		if(ors.get(9).getLastStep().getId() != 4)
+			throw new TestFailedException("error: solveThreats (6)");
+		
+		// wyjatek - nawrot
+		matrix = new ArrayList<List<Integer>>();
+		//lista 1
+		List<Integer> list = new ArrayList<Integer>();
+		list.add(1);
+		list.add(2);
+		list.add(4);
+		list.add(3);
+		list.add(5);
+		matrix.add(list);
+		
+		ors = new ArrayList<Ordering>();
+		ors.add(new Ordering(s1,s2));
+		ors.add(new Ordering(s1,s3));
+		ors.add(new Ordering(s1,s4));
+		
+		try {
+			solveThreats(
+				ic,
+				plan.getSteps(),
+				ors);
+		} catch(NoResolveException e)
+		{
+			;
+		}
+
+		if(ors.size() != 3) // nawrot
+			throw new TestFailedException("error: solveThreats (7)");
+
+		/*
+		//przypadek z symetria
+		plan = new TestData().createPlanSymmetry();
+		cube = new TestData().createCubeForThreatsSymmetry();
+		
+		ic = findThreats(
+			plan.getSteps(),
+			plan.getLinks(),
+			cube);
+		
+		s1 = plan.getSteps().get(0);
+		s2 = plan.getSteps().get(1);
+		s3 = plan.getSteps().get(2);
+		s4 = plan.getSteps().get(3);
+		
+		ors = new ArrayList<Ordering>();
+		ors.add(new Ordering(s1,s2));
+		ors.add(new Ordering(s1,s3));
+		ors.add(new Ordering(s1,s4));		
+	
+		ors.add(new Ordering(s2,s4));
+		ors.add(new Ordering(s3,s4));
+		
+		boolean exception = false;
+		try {
+			solveThreats(ic,cube,ors);
+		} catch(NoResolveException e)
+		{
+			exception = true;
+		}
+		
+		if(!exception)
+			throw new TestFailedException("error: solveThreats (8)");
+		*/
+		s += "solveThreats (all) OK\n";
+		return s;
+	}
+}

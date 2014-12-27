@@ -1,0 +1,161 @@
+package tests;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import exceptions.NoPredicateFoundException;
+import exceptions.TestFailedException;
+
+import stripsLanguage.Instance;
+import stripsLanguage.Link;
+import stripsLanguage.Plan;
+import stripsLanguage.Predicate;
+import stripsLanguage.Step;
+import stripsPlanner.SelectSubgoal;
+import stripsPlanner.Subgoal;
+
+/****
+ * do przetestowania:
+ * 
+ * nic
+ * 
+ * @author Lukasz
+ *
+ */
+
+public class SelectSubgoalTest extends SelectSubgoal{
+
+	public SelectSubgoalTest() {}
+	
+	public String test() throws TestFailedException
+	{
+		String s = "";
+		s += countMinMax();
+		s += pickCandidates();
+		s += selectSubgoal();
+		return s;
+	}
+	
+	private String countMinMax() throws TestFailedException
+	{
+		String s ="";
+		
+		Plan plan = new TestData().createPlan1();
+
+		Step s1 = plan.getSteps().get(0);
+		Step s2 = plan.getSteps().get(1);
+		Step s3 = plan.getSteps().get(2);
+		Predicate p1=null;
+		Predicate p2=null;
+		Predicate p3=null;	
+		try {
+			p1 = s1.getPredicateById(1);
+			p2 = s2.getPredicateById(5);
+			p3 = s3.getPredicateById(10);	
+		} catch (NoPredicateFoundException e) {
+			e.printStackTrace();
+		}
+	
+		p1.setInstance(0, new Instance(null,1));
+		p2.setInstance(0, new Instance(null,1));		
+		p2.setInstance(1, new Instance(null,2));
+		
+		List<Predicate> list = new ArrayList<Predicate>();
+		list.add(p1);
+		list.add(p2);
+		list.add(p3);
+		
+		InnerMinMaxClass icmm = countMinMax(list);
+
+		if(icmm.getMin() != 1)
+			throw new TestFailedException("error: countMinMax (1)");
+		if(icmm.getMax() != 3)
+			throw new TestFailedException("error: countMinMax (2)");
+		if(icmm.getSizes().size() != 3)
+			throw new TestFailedException("error: countMinMax (3)");
+		if(icmm.getSizes().get(0) != 3)
+			throw new TestFailedException("error: countMinMax (4)");
+		if(icmm.getUnknowns().get(0) != 2)
+			throw new TestFailedException("error: countMinMax (5)");
+		
+		s += "countMinMax (all) OK\n";
+		return s;
+	}
+	
+	private String pickCandidates() throws TestFailedException
+	{
+		String s = "";
+		
+		Plan plan = new TestData().createPlan1();
+		
+		
+		List<Link> links = plan.getLinks();
+		Step s1 = plan.getSteps().get(0);
+		Step s2 = plan.getSteps().get(1);
+		Step s3 = plan.getSteps().get(2);
+		
+		try{
+			links.add(new Link(s1,s2,s2.getPredicateById(5)));
+			links.add(new Link(s2,s3,s3.getPredicateById(10)));
+		} catch(Exception e)
+		{
+			;
+		}
+		
+		InnerClass ic = pickCandidates(plan.getSteps(), links);
+		
+		if(ic.getUnachievedPreconditions().size() != 4)
+			throw new TestFailedException("error: pickCandidates (1)");
+
+		if(ic.getUnachievedPreconditionsStep().get(0).getId() != 1)
+			throw new TestFailedException("error: pickCandidates (2)");
+
+		if(ic.getUnachievedPreconditions().get(1).getIdOfPredicate() != 2)
+			throw new TestFailedException("error: pickCandidates (3)");
+		
+		s += "pickCandidates (all) OK\n";
+		return s;
+	}
+	
+	private String selectSubgoal() throws TestFailedException
+	{
+		String s = "";
+
+		Plan plan = new TestData().createPlan1();
+		List<Link> links = plan.getLinks();
+		Step s1 = plan.getSteps().get(0);
+		Step s2 = plan.getSteps().get(1);
+		Step s3 = plan.getSteps().get(2);
+		
+		try{
+			links.add(new Link(s1,s2,s2.getPredicateById(6)));
+			links.add(new Link(s2,s3,s3.getPredicateById(10)));
+		} catch(Exception e)
+		{
+			;
+		}
+
+		Predicate p1=null;
+		Predicate p2=null;	
+		try {
+			p1 = s1.getPredicateById(1);
+			p2 = s2.getPredicateById(5);	
+		} catch (NoPredicateFoundException e) {		
+			e.printStackTrace();
+		}
+	
+		p1.setInstance(0, new Instance(null,1));
+		p2.setInstance(0, new Instance(null,1));		
+		p2.setInstance(1, new Instance(null,2));
+		
+		Subgoal subgoal = selectSubgoal(plan.getSteps(),links);
+		
+		if(subgoal.getStepOfSubgoal().getId() != 2)
+			throw new TestFailedException("error: selectSubgoal (1)");			
+		if(subgoal.getPredicateOfSubgoal().getIdOfPredicate() != 5)
+			throw new TestFailedException("error: selectSubgoal (2)");		
+		
+		s += "selectSubgoal (all) OK\n";		
+		return s;
+	}
+}
