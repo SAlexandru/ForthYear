@@ -1,7 +1,0 @@
-package eightPuzzle;
-
-public class PuzzleSolver {
-	private Board init;
-	private Board goal;
-
-}
