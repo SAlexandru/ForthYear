@@ -1,0 +1,16 @@
+CUSTOMER NOTE: PLEASE READ THE FOLLOWING BEFORE USING THE SOFTWARE.
+
+By opening the package, you are agreeing to be bound by the following agreement:
+
+This software product is protected by copyright and all rights are reserved by the author,  
+John Wiley & Sons, Inc., or their licensors.  You are licensed to use this software on a 
+single computer. Copying the software to another medium or format for use on a single 
+computer does not violate the U.S. Copyright Law.  Copying the software for any other 
+purpose is a violation of the U.S. Copyright Law.
+
+This software product is sold as is without warranty of any kind, either express or 
+implied, including but not limited to the implied warranty of merchantability and fitness 
+for a particular purpose.  Neither Wiley nor its dealers or distributors assumes any 
+liability for any alleged or actual damages arising from the use of or the inability to use 
+this software. (Some states do not allow the exclusion of implied warranties, so the 
+exclusion may not apply to you.)
