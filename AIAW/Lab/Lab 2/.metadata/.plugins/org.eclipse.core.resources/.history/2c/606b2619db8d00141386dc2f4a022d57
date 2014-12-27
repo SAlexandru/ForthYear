@@ -1,0 +1,26 @@
+package alexandru.stefanica;
+
+import vacworld.VacPercept;
+import agent.Action;
+import agent.Agent;
+import agent.Percept;
+
+public class VacAgent extends Agent {
+	private VacPercept vp;
+
+	@Override
+	public void see(Percept p) {
+		vp = (VacPercept)p;
+	}
+
+	@Override
+	public Action selectAction() {
+		
+	}
+
+	@Override
+	public String getId() {
+		return "VacAgent";
+	}
+
+}
