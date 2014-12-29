@@ -1,0 +1,24 @@
+What worked:
+A good part of the code was good but it had to be updated a lot even the working code because of the 800+ warnings that I encountered.
+Warnings on the matter of deprecated methods that suggest the fact that they were at that time okay to use but given the progress over the years they became
+deprecated and othe methods , that are better , should be used instead.
+
+What did not work:
+In newer versions , there cannot be anymore a variable named "enum" because this is now a keyword.
+Plus other minor problems encountered.
+For example the fact that the path to the properties files are hardcoded and given the fact that this project is not a java projet ,
+in case the path in the project would modify , the program would not find the properties files.
+		
+What you experimented with:
+I experimented all 3 types of agents and also experinced the problem with the website that is later discussed in the text of the laboratory.
+
+Output samples:
+There are images attached that show samples of the output.
+
+
+Solutions for the problem related to the fact that the website from where the information for the scheduler agent is missing:
+1.Keep the files that were on the website locally into the project.
+2.Create a new website with all the information needed.
+3.Keep all the files needed on cloud.
+4.Do not keep a hardcoded string of the website in the project. At least keep it in a separate file from the code that uses it.
+5.to be continued when I think of new ones.
