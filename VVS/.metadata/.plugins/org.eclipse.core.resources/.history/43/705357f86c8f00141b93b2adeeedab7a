@@ -1,0 +1,9 @@
+package com.vvs.webserver;
+
+public class HttpRequest {
+	private String request;
+	
+	public HttpRequest (InputStream in, Path file) {
+		
+	}
+}

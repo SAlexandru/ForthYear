@@ -1,0 +1,26 @@
+package com.vvs.webserver;
+
+import java.io.OutputStream;
+import java.nio.file.Path;
+import java.sql.Timestamp;
+import java.util.Date;
+import java.util.StringTokenizer;
+
+public class HttpResponse {
+	private String response_;
+	private String httpCode_;
+	private String date_;
+	private String serverName_;
+	private String contentLenght_;
+	private String contentType_;
+	private String connection_;
+	private String body_;
+	
+	public HttpResponse (HttpRequest request, Path base) {
+
+	}
+	
+	public void send(OutputStream out) {
+		
+	}
+}

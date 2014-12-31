@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename local variable &apos;lastIndex&apos; in &apos;com.vvs.webserver.HttpResponse.HttpResponse(...)&apos; to &apos;endIndex&apos;&#x0A;- Original project: &apos;WebServer&apos;&#x0A;- Original element: &apos;com.vvs.webserver.HttpResponse.HttpResponse(String, Path).lastIndex&apos;&#x0A;- Renamed element: &apos;lastIndex&apos;&#x0A;- Update references to refactored element" description="Rename local variable &apos;lastIndex&apos;" id="org.eclipse.jdt.ui.rename.local.variable" input="/src&lt;com.vvs.webserver{HttpResponse.java[HttpResponse~HttpResponse~QString;~QPath;@lastIndex!442!455!446!454!I!0!false" name="endIndex" references="true" stamp="1419927619820" version="1.0"/>
+</session>

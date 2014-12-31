@@ -1,0 +1,39 @@
+package com.vvs.webserver;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.file.Path;
+import java.util.StringTokenizer;
+
+public class HttpRequest {
+	private Path base_;
+	private String httpMethod_;
+	private String httpPath_;
+	private String protocol_;
+	
+	public HttpRequest (InputStream in, Path base) throws IOException {
+		BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+		
+		request_ = "";
+		for (String line; null != (line = reader.readLine()); ) {
+			if (line.trim().isEmpty()) {
+				break;
+			}
+			request_ += " " + line;
+		}
+	}
+	
+	public String getHttpMethod() {
+		
+	}
+	
+	public String getPath() {
+		
+	}
+	
+	public String getProtocol() {
+		
+	}
+}
