@@ -1,15 +1,10 @@
 package com.vvs.webserver;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketAddress;
 import java.nio.file.Path;
-import java.util.StringTokenizer;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -33,8 +28,9 @@ public class WebServer {
 		public void run() {
 			try {
 				while (true) {
-					getRequest(s_.getInputStream());
-					sendResponse(s_.getOutputStream());
+					new HttpGetResponse(new HttpRequest(s_.getInputStream()),
+										base_
+										).send(s_.getOutputStream());
 				}
 			}
 			catch (IOException e) {
@@ -51,33 +47,6 @@ public class WebServer {
 			}
 			
 		}
-
-		private void sendResponse(OutputStream outputStream) {
-			if (WebServerState.MAINTENANCE == state_) {
-				
-			}
-			else {
-				
-			}
-		}
-
-		private String getRequest(InputStream inputStream) {
-			String request = "", line;
-			BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-			
-			try {
-				while (null != (line = reader.readLine())) {
-					if (line.trim().isEmpty()) {
-						break;
-					}
-					request += line;
-				}
-			} catch (IOException e) {
-				request = "";
-			}
-			return request;
-		}
-		
 	}
 	
 	/*

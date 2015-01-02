@@ -1,0 +1,4 @@
+INDEX VERSION 1.127+/Users/salexandru/Desktop/Projects/ForthYear/SMA/.metadata/.plugins/org.eclipse.jdt.core
+138471390.index
+2743097286.index
+1189919908.index

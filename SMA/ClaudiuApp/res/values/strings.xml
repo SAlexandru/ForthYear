@@ -25,5 +25,6 @@
     <string name="title_activity_user_profile">UserProfileActivity</string>
     <string name="title_activity_participants_list">ParticipantsListActivity</string>
     <string name="title_activity_show_zumba_types">ShowZumbaTypesActivity</string>
+    <string name="title_activity_register_user">RegisterUserActivity</string>
 
 </resources>

@@ -1,5 +1,6 @@
 package com.zumba.claudiuapp;
 
+import database.BDUtilizatori;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -13,6 +14,7 @@ public class LoginActivity extends Activity {
 	public static final String loggedUser = "loggedUser";
 	private SharedPreferences loggedUserFile;
 	
+	@SuppressWarnings("unused")
 	private boolean checkIfWasLoggedIn() {
 		return loggedUserFile.getBoolean(loggedUserFile.getString("username", ""), false);
 	}
@@ -29,7 +31,7 @@ public class LoginActivity extends Activity {
 		
 		
 		
-	//	loggedUserFile = getSharedPreferences(loggedUser, Context.MODE_PRIVATE);
+		loggedUserFile = getSharedPreferences(loggedUser, Context.MODE_PRIVATE);
 	}
 	
 	
@@ -43,7 +45,8 @@ public class LoginActivity extends Activity {
 		if (userName.isEmpty() || password.isEmpty()) {
 			Toast.makeText(this, 
 					       "Please enter both username and password", 
-					       Toast.LENGTH_LONG).show();
+					       Toast.LENGTH_LONG
+					       ).show();
 		}
 		
 		//password = DigestUtils.sha256Hex(password);
@@ -56,15 +59,14 @@ public class LoginActivity extends Activity {
 			default:
 				Toast.makeText(this, 
 							   "Something went wrong, please try again later!", 
-							   Toast.LENGTH_LONG).show();
+							   Toast.LENGTH_LONG
+							   ).show();
 		}
 	}
 
 	private void doRegister(String userName, String password) {
-		/*
-		 *  invoke ioana's script
-		 */
-		
+		Intent i = new Intent(this, RegisterUserActivity.class);
+		startActivity(i);
 		
 	}
 
@@ -72,16 +74,15 @@ public class LoginActivity extends Activity {
 		/*
 		 *  invoke ioan's script
 		 */
+		int loggedIn = new BDUtilizatori().logareMailParola(userName, password);
 		
-		boolean loggedIn = true;
-		boolean isAdmin = false;
 		
-		if (loggedIn) {
+		if (-1 != loggedIn) {
 			loggedUserFile.edit().putString("username", userName);
 			loggedUserFile.edit().putBoolean(userName, true);
 			loggedUserFile.edit().commit();
 			
-			if (isAdmin) {
+			if (1 == loggedIn) {
 				Intent i = new Intent(this, AdminActivity.class);
 				startActivity(i);
 				
@@ -94,7 +95,8 @@ public class LoginActivity extends Activity {
 		else {
 			Toast.makeText(this, 
 					   	  "Invalid username or password!", 
-					      Toast.LENGTH_LONG).show();
+					      Toast.LENGTH_LONG
+					      ).show();
 		}
 		
 	}

@@ -1,0 +1,48 @@
+package com.vvs.webserver;
+
+import java.io.File;
+import java.io.OutputStream;
+import java.nio.file.Path;
+import java.sql.Timestamp;
+import java.util.Date;
+import java.util.StringTokenizer;
+
+public class HttpGetResponse {
+	private String response_;
+	private String httpCode_;
+	private String date_;
+	private String server_;
+	private String contentLength_;
+	private String contentType_;
+	private String connection_;
+	private String body_;
+	
+	public HttpGetResponse (HttpRequest request, Path base) {
+		server_ = "Server: vvs webserver (Mac)\r\n";
+		connection_ = "Connection: Keep-Alive\r\n\r\n";
+		date_ = "Date: " + new Timestamp(new Date().getTime()).toString() + "\r\n";
+		
+		File f = base.resolveSibling(request.getPath()).toFile();
+		if (!"GET".equals(request.getHttpMethod())) {
+			httpCode_ = "HTTP/1.1 501 Not implemented\r\n";
+			body_ = "<!DOCTYPE html>" +
+					"<html>" +
+						"<head>" +
+							"<title> 501 Not implemented </title>" +
+						"</head>" +
+						"<body>" +
+							"<p> The Http method used in request is not supported by this server ! </p>" +
+						"</body>" +
+					"</html>";
+			contentLength_ = "Content-Length: " + body_.length() + "\r\n";
+			connection_ = "Connection: closed\r\n\r\n";
+		}
+		else {
+			
+		}
+	}
+	
+	public void send(OutputStream out) {
+		
+	}
+}
