@@ -1,0 +1,16 @@
+package com.vvs.webserver;
+
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.nio.file.Paths;
+
+public class Main {
+	public static void main(String[] args) {
+		ServerSocket s = new ServerSocket(8013, 100);
+		WebServer server = new WebServer(new ServerSocket(8013, 100),
+				Paths.get("/Users/salexandru/Desktop/"), 3);
+			
+			server.start();
+		
+	}
+}

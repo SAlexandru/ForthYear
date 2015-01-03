@@ -1,0 +1,11 @@
+package com.vvs.webserver;
+
+import java.net.ServerSocket;
+import java.nio.file.Paths;
+
+public class Main {
+	public static void main(String[] args) {
+		WebServer server = new WebServer(new ServerSocket(8000, 100),
+										 Paths.get("~/Desktop"));
+	}
+}

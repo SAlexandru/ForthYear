@@ -1,0 +1,57 @@
+package com.vvs.webserver.HTTP;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.nio.file.Path;
+import java.sql.Timestamp;
+import java.util.Date;
+
+import javax.activation.MimetypesFileTypeMap;
+
+public class HttpGetResponse {
+	private String body_;
+	private String httpCode_;
+	private String contentType_;
+	private HttpRequest request_;
+	private File f_;
+	
+	public HttpGetResponse (HttpRequest request, Path base) {
+		body_ = "";
+		contentType_ = "text/html; charset=UTF-8\r\n";
+		httpCode_ = "HTTP/1.1 200 OK\r\n";
+		request_ = request;
+		
+		
+		File f;
+		if (request.getPath().isEmpty()) {
+			f = base.toAbsolutePath().resolve("index.html").toFile();
+		}
+		else {
+			f = base.toAbsolutePath().resolve(request.getPath()).toFile();
+		}
+		
+		
+		else {
+			httpCode_ = "HTTP/1.1 200 OK\r\n";
+			String encoding = "UTF-8";
+			try (InputStreamReader input = new InputStreamReader(new FileInputStream(f));) {
+				encoding = input.getEncoding();	
+				for (int ch = input.read(); -1 != ch; ch = input.read()) {
+					body_ = String.format("%s%c", body_, ch);
+				}
+			} catch (Exception e) {
+			}
+			
+			contentType_ =  "Content-Type: " + new MimetypesFileTypeMap().getContentType(f) + "; " + encoding + "\r\n";
+			contentLength_ = "Content-Length: " + body_.length() + "\r\n";
+		}
+	}
+	
+	public void send(OutputStream out) throws IOException {
+		HttpUtility.send(out, contentType_, httpCode_, body_);
+	}
+}

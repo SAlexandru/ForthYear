@@ -1,0 +1,42 @@
+package com.vvs.webserver.HTTP;
+
+import java.io.OutputStream;
+import java.sql.Timestamp;
+import java.util.Date;
+
+public class HttpUtility {
+	public static void send(OutputStream out, String body, String httpCode) {
+		String server = "Server: vvs webserver (Mac)\r\n";
+		String contentType = "text/html; charset=UTF-8\r\n";
+		String date = "Date: " + new Timestamp(new Date().getTime()).toString() + "\r\n";
+		String contentLength = "Content-Length: " + body.length() + "\r\n";
+		String connection = "Connection: closed\r\n\r\n";
+	}
+	
+	public static void send404(OutputStream out) {
+		String server = "Server: vvs webserver (Mac)\r\n";
+		String contentType = "text/html; charset=UTF-8\r\n";
+		String date = "Date: " + new Timestamp(new Date().getTime()).toString() + "\r\n";
+		String httpCode_ = "HTTP/1.1 404 Not Found\r\n";
+		String body = "<!DOCTYPE html>\r\n" +
+				"<html>\r\n" +
+					"<head>\r\n" +
+						"<title> 404 Not Found </title>\r\n" +
+					"</head>\r\n" +
+					"<body>\r\n" +
+						"<p> The file was not found on the server ! </p>\r\n" +
+					"</body>\r\n" +
+				"</html>\r\n";
+		String contentLength = "Content-Length: " + body.length() + "\r\n";
+		String connection = "Connection: closed\r\n\r\n";
+		
+	}
+	
+	public static void send501(OutputStream out) {
+		
+	}
+	
+	public static void send400(OutputStream out) {
+		
+	}
+}

@@ -1,0 +1,7 @@
+package com.vvs.webserver.HTTP;
+
+public class HttpUtility {
+	public static send404(OutputStream out) {
+		
+	}
+}

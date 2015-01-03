@@ -1,0 +1,28 @@
+package com.vvs.webserver;
+
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.nio.file.Paths;
+
+public class Main {
+	public static void main(String[] args) {
+		WebServer server = null;
+		try {
+			server = new WebServer(new ServerSocket(8001, 100),
+											 Paths.get("~/Desktop" ),
+											 3);
+			server.start();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			if (null != server) {
+				try {
+					server.stop();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,19 @@
+package com.vvs.webserver;
+
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.nio.file.Paths;
+
+public class Main {
+	@SuppressWarnings("unused")
+	public static void main(String[] args) {
+		WebServer server = null;
+		try (server = new WebServer(new ServerSocket(8003, 100),
+											 Paths.get("/Users/salexandru/Desktop" ),
+											 3);) {
+			server.start();
+			while (true) ;
+		} catch (IOException e) {
+		}
+	}
+}

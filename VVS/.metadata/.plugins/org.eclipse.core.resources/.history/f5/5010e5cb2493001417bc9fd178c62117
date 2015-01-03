@@ -1,0 +1,17 @@
+package com.vvs.webserver.HTTP;
+
+import java.io.OutputStream;
+
+public class HttpUtility {
+	public static void send404(OutputStream out) {
+		
+	}
+	
+	public static void send501(OutputStream out) {
+		
+	}
+	
+	public static void send400(OutputStream out) {
+		
+	}
+}

@@ -9,7 +9,10 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-public class WebServer {
+import com.vvs.webserver.HTTP.HttpGetResponse;
+import com.vvs.webserver.HTTP.HttpRequest;
+
+public class WebServer implements AutoCloseable {
 	private Path base_;
 	private Path maintenance_;
 	private ServerSocket server_;
@@ -31,6 +34,10 @@ public class WebServer {
 					new HttpGetResponse(new HttpRequest(s_.getInputStream()),
 										base_
 										).send(s_.getOutputStream());
+					if (!s_.getKeepAlive()) {
+						s_.close();
+						return;
+					}
 				}
 			}
 			catch (IOException e) {
@@ -50,9 +57,9 @@ public class WebServer {
 	}
 	
 	/*
-	 *   Will create a webserver binded to 127.0.0.1 and any available port
+	 *   Will create a web server with:
 	 *   The core pool size is set to 2
-	 *   The maximumNumberOfThreads will be set to 10
+	 *   The maximumNumberOfThreads will be set to 10 (or whatever number you added)
 	 *   The backlog will have a default value of 100
 	 */
 	public WebServer(ServerSocket socket, Path path, int maxNumberOfThreads) {
@@ -144,11 +151,21 @@ public class WebServer {
 		start();
 	}
 	
+	public void join() throws InterruptedException {
+		if (isAlive()) {
+			mainThread_.join();
+		}
+	}
 	
 	public void stop() throws IOException {
 		mainThread_.interrupt();
 		pool_.shutdown();
 		server_.close();
 		state_ = WebServerState.STOPPED;
+	}
+
+	@Override
+	public void close() throws IOException {
+		stop();
 	}
 }

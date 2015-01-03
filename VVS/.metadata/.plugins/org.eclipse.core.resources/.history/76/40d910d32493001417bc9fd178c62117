@@ -1,0 +1,25 @@
+package com.vvs.webserver.HTTP;
+
+import java.io.OutputStream;
+import java.sql.Timestamp;
+import java.util.Date;
+
+public class HttpUtility {
+	public static void send404(OutputStream out) {
+		String server_ = "Server: vvs webserver (Mac)\r\n";
+		String connection_ = "Connection: closed\r\n\r\n";
+		String contentType_ = "text/html; charset=UTF-8\r\n";
+		String httpCode_ = "HTTP/1.1 200 OK\r\n";
+		String contentLength_ = "Content-Length: 0\r\n";
+		String date_ = "Date: " + new Timestamp(new Date().getTime()).toString() + "\r\n";
+		
+	}
+	
+	public static void send501(OutputStream out) {
+		
+	}
+	
+	public static void send400(OutputStream out) {
+		
+	}
+}

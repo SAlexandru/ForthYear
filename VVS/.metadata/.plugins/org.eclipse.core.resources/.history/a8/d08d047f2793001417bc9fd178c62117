@@ -1,0 +1,108 @@
+package com.vvs.webserver.HTTP;
+
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.sql.Timestamp;
+import java.util.Date;
+
+public class HttpUtility {
+	public static boolean isGetMethod(String method) {
+		return null != method && "GET".equals(method.toUpperCase());
+	}
+	
+	public static boolean isPostMethod(String method) {
+		return null != method && "POST".equals(method.toUpperCase());
+	}
+	
+	public static boolean isConnectMethod(String method) {
+		return null != method && "CONNECT".equals(method.toUpperCase());
+	}
+	
+	public static boolean isOptionsMethod(String method) {
+		return null != method && "OPTIONS".equals(method.toUpperCase());
+	}
+	
+	public static boolean isPutMethod(String method) {
+		return null != method && "GET".equals(method.toUpperCase());
+	}
+	
+	public static boolean isDeleteMethod(String method) {
+		return null != method && "GET".equals(method.toUpperCase());
+	}
+	
+	public static boolean isHeadMethod(String method) {
+		return null != method && "GET".equals(method.toUpperCase());
+	}
+	
+	public static void send(OutputStream out) {
+		send (out, "");
+	}
+	
+	public static void send(OutputStream out, String msg) {
+		send (out, "HTTP/1.1 200 OK\r\n", "text/plain; encoding=UTF-8\r\n", msg);
+	}
+	
+	public static void send(OutputStream out, String httpCode, String contentType, String body) {
+		String server = "Server: vvs webserver (Mac)\r\n";
+		String date = "Date: " + new Timestamp(new Date().getTime()).toString() + "\r\n";
+		String contentLength = "Content-Length: " + body.length() + "\r\n";
+		String connection = "Connection: closed\r\n\r\n";
+		
+		String response = httpCode +
+				  		  date +
+				  		  server +
+				  		  "Accept-Ranges: bytes\r\n" +
+				  		  contentLength +
+				  		  contentType +
+				  		  connection +
+				  		  body;
+		
+		new PrintWriter(out, /*autoflushing*/true).println(response);	
+	}
+	
+	public static void send404(OutputStream out) {
+		String httpCode = "HTTP/1.1 404 Not Found\r\n";
+		String body = "<!DOCTYPE html>\r\n" +
+				"<html>\r\n" +
+					"<head>\r\n" +
+						"<title> 404 Not Found </title>\r\n" +
+					"</head>\r\n" +
+					"<body>\r\n" +
+						"<p> The file was not found on the server ! </p>\r\n" +
+					"</body>\r\n" +
+				"</html>\r\n";
+		
+		send (out, "text/html; charset=UTF-8\r\n", httpCode, body);
+		
+	}
+	
+	public static void send501(OutputStream out) {
+		String httpCode = "HTTP/1.1 501 Not implemented\r\n";
+		String body = "<!DOCTYPE html>\r\n" +
+				"<html>\r\n" +
+					"<head>" +
+						"<title> 501 Not implemented </title>\r\n" +
+					"</head>\r\n" +
+					"<body>\r\n" +
+						"<p> The Http method used in request is not supported by this server ! </p>\r\n" +
+					"</body>\r\n" +
+				"</html>\r\n";
+		
+		send (out, "text/html; charset=UTF-8\r\n", httpCode, body);
+	}
+	
+	public static void send400(OutputStream out) {
+		String httpCode = "HTTP/1.1 400 Bad Request\r\n";
+		String body = "<!DOCTYPE html>\r\n" +
+				"<html>\r\n" +
+					"<head>\r\n" +
+						"<title> 400 Bad Request </title>\r\n" +
+					"</head>\r\n" +
+					"<body>\r\n" +
+						"<p> The http request that was made is invalid ! </p>\r\n" +
+					"</body>\r\n" +
+				"</html>\r\n";
+		
+		send (out, "text/html; charset=UTF-8\r\n", httpCode, body);
+	}
+}
