@@ -1,5 +1,9 @@
 package com.vvs.webserver.HTTP;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.sql.Timestamp;
@@ -30,6 +34,11 @@ public class HttpUtility {
 		return null != method && "DELETE".equals(method.toUpperCase());
 	}
 	
+	
+	public static boolean isTraceMethod(String method) {
+		return null != method && "TRACE".equals(method.toUpperCase());
+	}
+	
 	public static boolean isHeadMethod(String method) {
 		return null != method && "HEAD".equals(method.toUpperCase());
 	}
@@ -39,14 +48,25 @@ public class HttpUtility {
 	}
 	
 	public static void send(OutputStream out, String msg) {
-		send (out, "HTTP/1.1 200 OK\r\n", "text/plain; encoding=UTF-8\r\n", msg);
+		new PrintWriter(out, /*autoflushing*/true).println(msg);
+		System.out.println(Thread.currentThread().getId() + ": " + msg);
 	}
 	
 	public static void send(OutputStream out, String httpCode, String contentType, String body) {
+		if (null == body) {
+			body = "";
+		}
+		if (null == httpCode) {
+			httpCode = "";
+		}
+		if (null == contentType) {
+			contentType = "";
+		}
+		
 		String server = "Server: vvs webserver (Mac)\r\n";
 		String date = "Date: " + new Timestamp(new Date().getTime()).toString() + "\r\n";
 		String contentLength = "Content-Length: " + body.length() + "\r\n";
-		String connection = "Connection: closed\r\n\r\n";
+		String connection = "Connection: Keep-Alive\r\n\r\n";
 		
 		String response = httpCode +
 				  		  date +
@@ -57,7 +77,7 @@ public class HttpUtility {
 				  		  connection +
 				  		  body;
 		
-		new PrintWriter(out, /*autoflushing*/true).println(response);	
+		send (out, response);
 	}
 	
 	public static void send404(OutputStream out) {
@@ -104,5 +124,31 @@ public class HttpUtility {
 				"</html>\r\n";
 		
 		send (out, "text/html; charset=UTF-8\r\n", httpCode, body);
+	}
+	
+	public static void send200(OutputStream out) {
+		String httpCode = "HTTP/1.1 400 Bad Request\r\n";
+		send (out, "text/html; charset=UTF-8\r\n", httpCode, "");
+	}
+	
+	public static void sendConnect(OutputStream out) {
+		send (out, "text/html; charset=UTF-8\r\n", "HTTP/1.1 200 Connection established", "");
+	}
+
+	public static void send(OutputStream out, File file) {
+		try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+			StringBuffer content = new StringBuffer();
+			for (String line = reader.readLine(); null != line; line = reader.readLine()) {
+				content.append(line);
+			}
+			send (out, content.toString());
+		} catch (IOException e) {
+		}
+		
+	}
+
+	public static void sendTrace(OutputStream out, String request) {
+		send (out, "HTTP/1.1 200 OK\r\n", "Content-Type: message/http", request);
+		
 	}
 }

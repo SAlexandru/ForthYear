@@ -1,6 +1,7 @@
 package com.vvs.webserver;
 
 import java.io.IOException;
+import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketAddress;
@@ -11,6 +12,7 @@ import java.util.concurrent.TimeUnit;
 
 import com.vvs.webserver.HTTP.HttpGetResponse;
 import com.vvs.webserver.HTTP.HttpRequest;
+import com.vvs.webserver.HTTP.HttpUtility;
 
 public class WebServer implements AutoCloseable {
 	private Path base_;
@@ -31,13 +33,30 @@ public class WebServer implements AutoCloseable {
 		public void run() {
 			try {
 				while (true) {
-					new HttpGetResponse(new HttpRequest(s_.getInputStream()),
-										base_
-										).send(s_.getOutputStream());
-					if (!s_.getKeepAlive()) {
-						s_.close();
+					if (WebServerState.MAINTENANCE == state_) {
+						synchronized (maintenance_) {
+							HttpUtility.send(s_.getOutputStream(), maintenance_
+									.toAbsolutePath().resolve("index.html")
+									.toFile());
+						}
 						return;
 					}
+					HttpRequest request = new HttpRequest(s_.getInputStream());
+					String method = request.getHttpMethod();
+					OutputStream out = s_.getOutputStream();
+					
+					System.out.println(Thread.currentThread().getId() + ": " + request.getRequest());
+					
+					if (HttpUtility.isConnectMethod(method)) {
+						HttpUtility.sendConnect(out);
+					}
+					else if (HttpUtility.isTraceMethod(method)) {
+						HttpUtility.sendTrace(out, request.getRequest());
+					}
+					else {
+							new HttpGetResponse(request, base_).send(out);
+					}
+					
 				}
 			}
 			catch (IOException e) {
@@ -79,10 +98,14 @@ public class WebServer implements AutoCloseable {
 		pool_.setMaximumPoolSize(maxNumberOfThreads);
 	}
 	
-	public Path getMaintenancePath() {return maintenance_.toAbsolutePath();}
+	public Path getMaintenancePath() {
+		return null == maintenance_ ? null : maintenance_.toAbsolutePath();
+	}
 	
-	public void setMaintenancePath(Path maintenance) {
-		maintenance_ = maintenance;
+	public void setMaintenancePath(Path maintenance) throws IOException {
+		synchronized(maintenance) {
+			maintenance_ = maintenance;
+		}
 	}
 	
 	public WebServerState getState() {
@@ -91,9 +114,12 @@ public class WebServer implements AutoCloseable {
 	
 	public void setState(WebServerState state) throws IOException {
 		switch (state) {
-			case RUNNING: start();
-			case STOPPED: stop();
-			default:
+			case RUNNING: start(); break;
+			case STOPPED: stop();  break;
+			case MAINTENANCE:
+				if (null == maintenance_) {
+					throw new IllegalArgumentException("maintenance path is null");
+				}
 				state_ = state;
 		}
 	}
@@ -158,7 +184,9 @@ public class WebServer implements AutoCloseable {
 	}
 	
 	public void stop() throws IOException {
-		mainThread_.interrupt();
+		if (null != mainThread_) {
+			mainThread_.interrupt();
+		}
 		pool_.shutdown();
 		server_.close();
 		state_ = WebServerState.STOPPED;

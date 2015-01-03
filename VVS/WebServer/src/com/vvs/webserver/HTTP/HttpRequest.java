@@ -11,29 +11,31 @@ public class HttpRequest {
 	private String httpMethod_;
 	private String httpPath_;
 	private String protocol_;
+	private String request_;
 	private boolean invalidRequest_ = false;
 	
 	public HttpRequest (InputStream in) throws IOException {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 		
-		String request = "";
+		StringBuilder request = new StringBuilder("");
 		for (String line; null != (line = reader.readLine()); ) {
 			if (line.trim().isEmpty()) {
 				break;
 			}
-			request += " " + line;
+			request.append(line + "\r\n");
 		}
+		request_ = request.toString().trim();
 		try {
-			StringTokenizer tokenizer = new StringTokenizer(request);
+			StringTokenizer tokenizer = new StringTokenizer(request.toString());
 			httpMethod_ = tokenizer.nextToken();
 			httpPath_ = tokenizer.nextToken();
 			protocol_ = tokenizer.nextToken();
 			
 			if (httpPath_.contains("://www")) {
-				httpPath_ = httpPath_.substring(httpPath_.indexOf("/", httpPath_.indexOf("://www") + 6) + 1);
+				httpPath_ = httpPath_.substring(httpPath_.indexOf('/', httpPath_.indexOf("://www") + 6) + 1);
 			}
 			if (httpPath_.contains("?")) {
-				httpPath_ = httpPath_.substring(0, httpPath_.indexOf("?"));
+				httpPath_ = httpPath_.substring(0, httpPath_.indexOf('?'));
 			}
 			if (httpPath_.startsWith("/")) {
 				httpPath_ = httpPath_.substring(1);
@@ -45,6 +47,8 @@ public class HttpRequest {
 			protocol_ = "ana are mere multe si frumoase :)";
 		}
 	}
+	
+	public String getRequest() {return request_;}
 	
 	public String getHttpMethod() {return httpMethod_;}
 	

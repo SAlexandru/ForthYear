@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.nio.file.Path;
-import javax.activation.MimetypesFileTypeMap;
 
 public class HttpGetResponse {
 	private Path p_;
@@ -31,26 +30,42 @@ public class HttpGetResponse {
 			for (int ch = input.read(); -1 != ch; ch = input.read()) {
 				body_ = String.format("%s%c", body_, ch);
 			}
-		} catch (Exception e) {
+		} catch (IOException e) {
 		}
-		contentType_ =  "Content-Type: " + new MimetypesFileTypeMap().getContentType(f) + "; " + encoding + "\r\n";
+		
+		String fileExt = f.getAbsolutePath();
+		if (-1 == fileExt.lastIndexOf('.')) {
+			fileExt = "txt";
+		}
+		else {
+			fileExt = fileExt.substring(fileExt.lastIndexOf('.') + 1);
+		}
+		contentType_ =  ContentType.valueOf(fileExt.toUpperCase()) + "; " + encoding + "\r\n";
 	}
 	
 	public void send(OutputStream out) throws IOException {
+		File f;
+		if (request_.getPath().isEmpty()) {
+			f = p_.toAbsolutePath().resolve("index.html").toFile();
+		}
+		else {
+			f = p_.toAbsolutePath().resolve(request_.getPath()).toFile();
+		}
 		if (request_.isInvalid()) {
 			HttpUtility.send400(out);
+		}
+		else if (HttpUtility.isHeadMethod(request_.getHttpMethod())) {
+			if (!f.exists()) {
+				HttpUtility.send404(out);
+			}
+			else {
+				HttpUtility.send200(out);
+			}
 		}
 		else if (!HttpUtility.isGetMethod(request_.getHttpMethod())) {
 			HttpUtility.send501(out);
 		}
 		else {
-			File f;
-			if (request_.getPath().isEmpty()) {
-				f = p_.toAbsolutePath().resolve("index.html").toFile();
-			}
-			else {
-				f = p_.toAbsolutePath().resolve(request_.getPath()).toFile();
-			}
 			if (f.exists()) {
 				getFile(f);
 				HttpUtility.send(out, httpCode_, contentType_, body_);
