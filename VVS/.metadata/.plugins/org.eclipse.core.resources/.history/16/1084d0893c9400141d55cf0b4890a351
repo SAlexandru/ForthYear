@@ -1,0 +1,92 @@
+package com.vvs.webserver.unittest.webserver;
+
+import org.junit.Test;
+
+import com.vvs.webserver.Main;
+
+public class MainTests {
+	
+	@Test
+	public final void testMainValid() throws InterruptedException {
+		Thread t = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					Main.main(new String[] {"12346", ".", ".."});
+				} catch (Exception e) {
+				}
+			}
+		});
+		t.start();
+		Thread.sleep(500);
+		t.interrupt();
+	}
+
+	@Test(expected = NullPointerException.class)
+	public final void testMainNull() throws Exception {
+		Main.main(null);
+	}
+	
+	@Test(expected = ArrayIndexOutOfBoundsException.class)
+	public final void testMainInvalidNumberOfParams0() throws Exception {
+		Main.main(new String[0]);
+	}
+	
+	@Test(expected = ArrayIndexOutOfBoundsException.class)
+	public final void testMainInvalidNumberOfParams1() throws Exception {
+		Main.main(new String[] {"10"});
+	}
+	
+	@Test(expected = NumberFormatException.class)
+	public final void testMainInvalidNumber() throws Exception {
+		Main.main(new String[] {"tttlakakal"});
+	}
+	
+	@Test(expected = Exception.class)
+	public final void testMainInvalidNumber10() throws Exception {
+		Main.main(new String[] {"10", ".", ".."});
+	}
+	
+	@Test(expected = Exception.class)
+	public final void testMainInvalidNumber700000() throws Exception {
+		Main.main(new String[] {"700000", ".", "..."}); 
+	}
+	
+	@Test(expected = Exception.class)
+	public final void testMainInvalidBasePath() throws Exception {
+		Main.main(new String[] {"123456", "...", "."});
+	}
+	
+	@Test(expected = Exception.class)
+	public final void testMainInvalidMaitenancePath() throws Exception {
+		Main.main(new String[] {"123456", "..", "...."});
+	}
+	
+	@Test(expected = Exception.class)
+	public final void testMainCannotListenToPort() throws Exception {
+		Thread t = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					Main.main(new String[] {"12347", ".", ".."});
+				} catch (Exception e) {
+					
+				}
+			}
+		});
+		t.start();
+		Main.main(new String[] {"123456", "...", "."});
+		t.interrupt();
+	}
+	
+	@Test
+	public final void testBasePathisFile() throws Exception {
+		Main.main(new String[] {"12347", "./TestSite/a", ".."});
+	}
+	
+	@Test(expected = Exception.class)
+	public final void testMPathisFile() throws Exception {
+		Main.main(new String[] {"12347", "./TestSite", "./TestSite/a"});
+	}
+
+}

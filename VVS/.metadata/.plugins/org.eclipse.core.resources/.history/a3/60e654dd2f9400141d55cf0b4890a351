@@ -1,0 +1,117 @@
+package com.vvs.webserver.unittest.http;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+import static com.vvs.webserver.HTTP.HttpUtility.*;
+
+public class HttpUtilityTest {
+	@Test
+	public final void testIsGetMethod() {
+		char[] get = "GET".toCharArray();
+		Random rand = new Random(System.nanoTime());
+		
+		for (int i = 0; i < 12; ++i) {
+			for (int j = 0; j < get.length; ++j) {
+				
+			}
+		}
+		
+	}
+
+	@Test
+	public final void testIsPostMethod() {
+		fail("Not yet implemented"); // TODO
+	}
+
+	@Test
+	public final void testIsConnectMethod() {
+		fail("Not yet implemented"); // TODO
+	}
+
+	@Test
+	public final void testIsOptionsMethod() {
+		fail("Not yet implemented"); // TODO
+	}
+
+	@Test
+	public final void testIsPutMethod() {
+		fail("Not yet implemented"); // TODO
+	}
+
+	@Test
+	public final void testIsDeleteMethod() {
+		fail("Not yet implemented"); // TODO
+	}
+
+	@Test
+	public final void testIsTraceMethod() {
+		fail("Not yet implemented"); // TODO
+	}
+
+	@Test
+	public final void testIsHeadMethod() {
+		fail("Not yet implemented"); // TODO
+	}
+
+	@Test
+	public final void testSendOutputStream() {
+		fail("Not yet implemented"); // TODO
+	}
+
+	@Test
+	public final void testSendOutputStreamString() {
+		fail("Not yet implemented"); // TODO
+	}
+
+	@Test
+	public final void testSendOutputStreamStringStringString() {
+		fail("Not yet implemented"); // TODO
+	}
+
+	@Test
+	public final void testSendOutputStreamStringStringByteArray() {
+		fail("Not yet implemented"); // TODO
+	}
+
+	@Test
+	public final void testSendOutputStreamByteArray() {
+		fail("Not yet implemented"); // TODO
+	}
+
+	@Test
+	public final void testSend404() {
+		fail("Not yet implemented"); // TODO
+	}
+
+	@Test
+	public final void testSend501() {
+		fail("Not yet implemented"); // TODO
+	}
+
+	@Test
+	public final void testSend400() {
+		fail("Not yet implemented"); // TODO
+	}
+
+	@Test
+	public final void testSend200() {
+		fail("Not yet implemented"); // TODO
+	}
+
+	@Test
+	public final void testSendConnect() {
+		fail("Not yet implemented"); // TODO
+	}
+
+	@Test
+	public final void testSendOutputStreamFile() {
+		fail("Not yet implemented"); // TODO
+	}
+
+	@Test
+	public final void testSendTrace() {
+		fail("Not yet implemented"); // TODO
+	}
+
+}

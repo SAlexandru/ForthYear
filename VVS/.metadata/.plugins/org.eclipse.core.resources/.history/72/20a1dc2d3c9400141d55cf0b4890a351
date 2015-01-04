@@ -1,0 +1,391 @@
+package com.vvs.webserver.unittest.webserver;
+
+import static org.junit.Assert.*;
+
+import java.io.IOException;
+import java.net.BindException;
+import java.net.InetSocketAddress;
+import java.net.ServerSocket;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Random;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+import com.vvs.webserver.WebServer;
+import com.vvs.webserver.WebServerState;
+
+public class WebServerTest {
+	private Random rand;
+	private ServerSocket ss;
+	private WebServer[] servers;
+	private Path base;
+	private Path maitenance;
+
+	@Before
+	public void setUp() {
+		rand = new Random(System.nanoTime());
+		servers = new WebServer[30];
+
+		base = Paths.get("./TestSite").toAbsolutePath().normalize();
+		maitenance = Paths.get("./TestSite/maitenance").toAbsolutePath().normalize();
+
+		while (true) {
+			try {
+				ss = new ServerSocket(rand.nextInt(65535 - 1024) + 1025, 1000);
+				break;
+			} catch (BindException e1) {
+				//e1.printStackTrace();
+			} catch (IOException e) {
+				//e.printStackTrace();
+			}
+		}
+
+		for (int i = 0; i < servers.length; ++i) {
+			ServerSocket s;
+				while (true) {
+					try {
+						s = new ServerSocket(rand.nextInt(65535 - 1024) + 1025,
+								1000);
+						break;
+					} catch (BindException e1) {
+						e1.printStackTrace();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+				servers[i] = new WebServer(s, base, maitenance, 3);
+		}
+	}
+
+	@After
+	public void tearDown() {
+		try {
+			ss.close();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		for (int i = 0; i < servers.length; ++i) {
+			try {
+				servers[i].stop();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public final void testWebServerNullSocket() throws IOException {
+		new WebServer(null, Paths.get("./TestSite"),
+				Paths.get("./TestSite/maitenance"), 2).close();
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public final void testWebServerNullBase() throws IOException {
+		new WebServer(ss, null, Paths.get("./TestSite/maitenance"), 2).close();
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public final void testWebServerNullMaintenance() throws IOException {
+		new WebServer(ss, Paths.get("./TestSite"), null, 2).close();
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public final void testWebServerZeroThreads() throws IOException {
+		new WebServer(ss, Paths.get("./TestSite"),
+				Paths.get("./TestSite/maitenance"), 0).close();
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public final void testWebServerAllNull() throws IOException {
+		new WebServer(null, null, null, 0).close();
+	}
+
+	@Test
+	public final void testWebServer() throws IOException {
+		WebServer s = new WebServer(ss, Paths.get("./TestSite"),
+				Paths.get("./TestSite/maitenance"), 2);
+		assertNotNull(s);
+		s.close();
+	}
+
+	@Test
+	public final void testGetMaxNumberOfThreads() {
+		assertEquals(3, servers[0].getMaxNumberOfThreads());
+
+	}
+
+	@Test
+	public final void testSetMaxNumberOfThreads() {
+		int maxNumber = rand.nextInt(10) + 2;
+		servers[1].setMaxNumberOfThreads(maxNumber);
+		assertEquals(maxNumber, servers[1].getMaxNumberOfThreads());
+	}
+
+	@Test
+	public final void testGetMaintenancePath() {
+		assertTrue(maitenance.toString().equals(servers[2].getMaintenancePath().toString()));
+	}
+
+	@Test
+	public final void testSetMaintenancePath() throws IOException {
+		Path newMaitenance = Paths.get("./../TestSite").toAbsolutePath().normalize();
+		servers[3].setMaintenancePath(newMaitenance);
+		assertTrue(newMaitenance.toString().equals(servers[3].getMaintenancePath().toString()));
+
+	}
+
+	@Test
+	public final void testGetState() {
+		assertEquals(WebServerState.STOPPED, servers[4].getState());
+	}
+
+	@Test
+	public final void testSetState() throws IOException {
+		WebServerState[] states = new WebServerState[] {
+				WebServerState.MAINTENANCE, WebServerState.RUNNING };
+		try {
+			assertEquals(servers[5].getState(), WebServerState.STOPPED);
+			WebServerState state = states[rand.nextInt(2)];
+			servers[5].setState(state);
+			assertEquals(servers[5].getState(), state);
+			assertTrue(servers[5].isAlive());
+
+		} catch (Exception e) {
+
+		} finally {
+			servers[5].close();
+		}
+	}
+
+	@Test
+	public final void testGetBaseDirectory() {
+		assertTrue(base.toString().equals(servers[6].getBaseDirectory().toString()));
+	}
+
+	@Test
+	public final void testSetBaseDirectory() throws IOException {
+		Path newBase = Paths.get("./../TestSite").toAbsolutePath().normalize();
+		servers[7].setBaseDirectory(newBase);
+		assertTrue(newBase.toString().equals(servers[7].getBaseDirectory().toString()));
+	}
+
+	@Test
+	public final void testIsAlive() {
+		assertFalse(servers[8].isAlive());
+		try {
+			servers[8].start();
+			assertTrue(servers[8].isAlive());
+		} catch (IOException e) {
+			try {
+				servers[8].stop();
+				assertFalse(servers[8].isAlive());
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+		}
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public final void testSetMaintenancePathNull() throws IOException {
+		Path newMaitenance = Paths.get("./../TestSite").toAbsolutePath().normalize();
+		servers[9].setMaintenancePath(null);
+		assertTrue(newMaitenance.toString().equals(servers[9].getMaintenancePath().toString()));
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public final void testSetBaseDirectoryNull() throws IOException {
+		Path newBase = Paths.get("./../TestSite").toAbsolutePath().normalize();
+		servers[10].setBaseDirectory(null);
+		assertTrue(newBase.toString().equals(servers[10].getBaseDirectory().toString()));
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public final void testSetMaxNumberOfThreadIllegal() {
+		servers[11].setMaxNumberOfThreads(-1);
+	}
+	
+	@Test
+	public final void testStart() throws IOException {
+		servers[12].start();
+		assertTrue(servers[12].isAlive());
+	}
+	
+	@Test
+	public final void testStop() throws IOException {
+		servers[13].start();
+		assertTrue(servers[13].isAlive());
+		servers[13].stop();
+		assertFalse(servers[13].isAlive());
+	}
+	
+	@Test
+	public final void testClose() throws IOException {
+		servers[13].start();
+		assertTrue(servers[13].isAlive());
+		servers[13].close();
+		assertFalse(servers[13].isAlive());
+	}
+	
+	@Test
+	public final void testRestart() throws IOException {
+		servers[14].start();
+		assertTrue(servers[14].isAlive());
+		servers[14].restart();
+		assertTrue(servers[14].isAlive());
+	}
+	
+	@Test
+	public final void testNotStartedJoin() throws InterruptedException {
+		servers[15].join();
+	}
+	
+	@Test
+	public final void testStartedJoin() throws IOException {
+		servers[16].start();
+		assertTrue(servers[16].isAlive());
+		try {
+			new Thread(new Runnable() {
+
+				@Override
+				public void run() {
+					try {
+						Thread.sleep(500);
+					} catch (InterruptedException e1) {
+						e1.printStackTrace();
+					}
+					try {
+						servers[16].stop();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				
+			}).start();
+			servers[16].join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		finally {
+			assertFalse(servers[16].isAlive());
+		}
+	}
+	
+	@Test
+	public final void testSetMaintenancePathStarted() throws IOException {
+		Path newMaitenance = Paths.get("./../TestSite").toAbsolutePath().normalize();
+		servers[17].start();
+		assertTrue(servers[17].isAlive());
+		servers[17].setMaintenancePath(newMaitenance);
+		assertTrue(servers[17].isAlive());
+		assertTrue(newMaitenance.toString().equals(servers[17].getMaintenancePath().toString()));
+		assertTrue(servers[17].isAlive());
+	}
+	
+	@Test
+	public final void testSetBaseDirectoryStarted() throws IOException {
+		Path newBase = Paths.get("./../TestSite").toAbsolutePath().normalize();
+		servers[18].start();
+		assertTrue(servers[18].isAlive());
+		servers[18].setBaseDirectory(newBase);
+		assertTrue(servers[18].isAlive());
+		assertTrue(newBase.toString().equals(servers[18].getBaseDirectory().toString()));
+		assertTrue(servers[18].isAlive());
+	}
+	
+	@Test
+	public final void testSetRunning() throws IOException {
+		servers[19].setState(WebServerState.RUNNING);
+		assertTrue(servers[19].isAlive());
+		assertEquals(WebServerState.RUNNING, servers[19].getState());
+	}
+	
+	@Test
+	public final void testSetMaintenanceStop() throws IOException {
+		servers[20].setState(WebServerState.MAINTENANCE);
+		assertTrue(servers[20].isAlive());
+		assertEquals(WebServerState.MAINTENANCE, servers[20].getState());
+	}
+	
+	@Test
+	public final void testSetMaintenanceStart() throws IOException {
+		servers[21].start();
+		servers[21].setState(WebServerState.MAINTENANCE);
+		assertTrue(servers[21].isAlive());
+		assertEquals(WebServerState.MAINTENANCE, servers[21].getState());
+	}
+	
+	@Test
+	public final void testSetStop() throws IOException {
+		servers[22].start();
+		servers[22].setState(WebServerState.STOPPED);
+		assertFalse(servers[22].isAlive());
+		assertEquals(WebServerState.STOPPED, servers[22].getState());
+	}
+	
+	@Test
+	public final void testBindStop() {
+		InetSocketAddress addr;
+		while (true) {
+			try {
+				addr = new InetSocketAddress(rand.nextInt(65535 - 1024) + 1025);
+				servers[24].bind(addr, 100);
+				break;
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	@Test
+	public final void testBindStart() throws IOException {
+		InetSocketAddress addr;
+		servers[25].start();
+		while (true) {
+			try {
+				addr = new InetSocketAddress(rand.nextInt(65535 - 1024) + 1025);
+				servers[25].bind(addr, 100);
+				break;
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	@Test
+	public final void testBindStop2() {
+		InetSocketAddress addr;
+		while (true) {
+			try {
+				addr = new InetSocketAddress(rand.nextInt(65535 - 1024) + 1025);
+				servers[26].bind(addr);
+				break;
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	@Test
+	public final void testBindStart2() throws IOException {
+		InetSocketAddress addr;
+		servers[27].start();
+		while (true) {
+			try {
+				addr = new InetSocketAddress(rand.nextInt(65535 - 1024) + 1025);
+				servers[27].bind(addr);
+				break;
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	@Test
+	public final void testGetSocketAddress() {
+		assertEquals(servers[28].getSocketAddress().toString().contains("0.0.0.0/0.0.0.0"));
+	}
+}

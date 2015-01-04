@@ -1,0 +1,5 @@
+package com.vvs.webserver.unittest.http;
+
+public class StringBufferOutputStream {
+
+}

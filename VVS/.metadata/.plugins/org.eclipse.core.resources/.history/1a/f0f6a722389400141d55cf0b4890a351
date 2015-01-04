@@ -1,0 +1,19 @@
+package com.vvs.webserver.unittest.webserver;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+import com.vvs.webserver.Main;
+import com.vvs.webserver.unittest.StringBufferOutputStream;
+
+public class MainTests {
+
+	@Test
+	public final void testMainNull() {
+		StringBufferOutputStream buff = new StringBufferOutputStream();
+		System.setOut(new PrintStream(buff));
+		Main.main(null);
+	}
+
+}

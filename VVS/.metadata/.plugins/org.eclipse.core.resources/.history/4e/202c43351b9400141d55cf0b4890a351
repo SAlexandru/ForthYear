@@ -1,0 +1,36 @@
+package com.vvs.webserver.unittest.http;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+import com.vvs.webserver.HTTP.ContentType;
+
+public class ContentTypeTest {
+
+	@Test
+	public void testContentType() {
+		assertEquals(ContentType.CSS.toString(), "Content-Type: text/css"); 
+		assertEquals(ContentType.GIF, "Content-Type: image/gif");
+		assertEquals(ContentType.HTM, "Content-Type: text/html");
+		assertEquals(ContentType.HTML, "Content-Type: text/html");
+		assertEquals(ContentType.ICO, "Content-Type: image/gif");
+		assertEquals(ContentType.JPG, "Content-Type: image/jpeg");
+		assertEquals(ContentType.JPEG, "Content-Type: image/jpeg");
+		assertEquals(ContentType.PNG, "Content-Type: image/png");
+		case HTM:
+		case HTML:
+			return "Content-Type: text/html";
+		case ICO:
+			return "Content-Type: image/gif";
+		case JPG:
+		case JPEG:
+			return "Content-Type: image/jpeg";
+		case PNG:
+			return "Content-Type: image/png";
+		case TXT:
+			return "Content-type: text/plain";
+		case XML:
+			return "Content-type: text/xml";
+	}
+}

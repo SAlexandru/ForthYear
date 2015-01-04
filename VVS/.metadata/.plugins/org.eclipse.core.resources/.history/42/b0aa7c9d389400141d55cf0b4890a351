@@ -1,0 +1,44 @@
+package com.vvs.webserver.unittest.webserver;
+
+import static org.junit.Assert.*;
+
+import java.io.PrintStream;
+
+import org.junit.Test;
+
+import com.vvs.webserver.Main;
+import com.vvs.webserver.unittest.StringBufferOutputStream;
+
+public class MainTests {
+
+	@Test
+	public final void testMainNull() {
+		StringBufferOutputStream buff = new StringBufferOutputStream();
+		PrintStream out = System.out;
+		System.setOut(new PrintStream(buff));
+		Main.main(null);
+		assertEquals("Usage: java Main port basePath maitenancePath\nError: null\n", buff.toString());
+		System.setOut(out);
+	}
+	
+	@Test
+	public final void testMainInvalidNumberOfParams0() {
+		StringBufferOutputStream buff = new StringBufferOutputStream();
+		PrintStream out = System.out;
+		System.setOut(new PrintStream(buff));
+		Main.main(new String[0]);
+		assertEquals("Usage: java Main port basePath maitenancePath\nError: 0\n", buff.toString());
+		System.setOut(out);
+	}
+	
+	@Test
+	public final void testMainInvalidNumberOfParamsl() {
+		StringBufferOutputStream buff = new StringBufferOutputStream();
+		PrintStream out = System.out;
+		System.setOut(new PrintStream(buff));
+		Main.main(new String[] {"10"});
+		assertEquals("Usage: java Main port basePath maitenancePath\nError: 1\n", buff.toString());
+		System.setOut(out);
+	}
+
+}

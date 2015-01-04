@@ -174,8 +174,8 @@ public class HttpUtility {
 	}
 	
 	public static void send200(OutputStream out) {
-		String httpCode = "HTTP/1.1 400 Bad Request\r\n";
-		send (out, httpCode, "text/html; charset=UTF-8\r\n", "");
+		String httpCode = "HTTP/1.1 200 OK\r\n";
+		send (out, httpCode, "Content-Type: text/html; charset=UTF-8\r\n", "");
 	}
 	
 	public static void sendConnect(OutputStream out) {

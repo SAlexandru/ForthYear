@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="WebServerStateTests" project="WebServer" tests="3" started="3" failures="0" errors="0" ignored="0">
+  <testsuite name="com.vvs.webserver.unittest.webserver.WebServerStateTests" time="0.001">
+    <testcase name="testWebServereToString" classname="com.vvs.webserver.unittest.webserver.WebServerStateTests" time="0.001"/>
+    <testcase name="testWebServerThrow" classname="com.vvs.webserver.unittest.webserver.WebServerStateTests" time="0.0"/>
+    <testcase name="testWebServerFromValue" classname="com.vvs.webserver.unittest.webserver.WebServerStateTests" time="0.0"/>
+  </testsuite>
+</testrun>

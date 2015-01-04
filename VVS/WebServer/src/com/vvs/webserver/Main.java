@@ -7,7 +7,8 @@ import java.nio.file.FileSystems;
 import java.nio.file.Path;
 
 public class Main {
-	public static void main(String[] args) {
+	@SuppressWarnings("resource")
+	public static void main(String[] args) throws Exception {
 		int port;
 		Path base;
 		Path maintenance;
@@ -17,7 +18,7 @@ public class Main {
 			base = FileSystems.getDefault().getPath(args[1]);
 			maintenance = FileSystems.getDefault().getPath(args[2]);
 			
-			File b = base.toFile(), m = maintenance.toFile();
+			File b = base.toAbsolutePath().normalize().toFile(), m = maintenance.toAbsolutePath().normalize().toFile();
 			
 			if (port < 1025 || port > 65535) {
 				throw new Exception ("port number must be between 1024 and 65535");
@@ -29,7 +30,7 @@ public class Main {
 		catch (Exception e) {
 			System.out.println("Usage: java Main port basePath maitenancePath");
 			System.out.println("Error: " + e.getMessage());
-			return ;
+			throw e;
 		}
 		
 		ServerSocket s = null;
@@ -38,25 +39,28 @@ public class Main {
 			s = new ServerSocket(port, 100);
 		} catch (IOException e) {
 			System.out.println("Cannot listen to the port you specified");
+			
 		}
 		
 		WebServer server = new WebServer(s, base, maintenance, 10);
 		try {
 			server.start();
 		} catch (IOException e1) {
-			e1.printStackTrace();
+			throw e1;
 		}
 		
 		try {
 			server.join();
 		} catch (InterruptedException e) {
 			System.out.println("server was interrupted");
+			throw e;
 		}
 		finally {
 			try {
 				server.close();
 			} catch (IOException e) {
-				e.printStackTrace();
+				//e.printStackTrace();
+				throw e;
 			}
 		}
 		

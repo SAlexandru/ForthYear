@@ -50,12 +50,11 @@ public class HttpGetResponse {
 	}
 	
 	public void send(OutputStream out) throws IOException {
-		File f = new File("......");
+		File f;
 		if (request_.getPath().isEmpty()) {
-			f = p_.toAbsolutePath().resolve("index.html").toFile();
+			f = p_.toAbsolutePath().normalize().resolve("index.html").toFile();
 		}
 		else  {
-			//String path = request_.getPath().replace("%20", " ");
 			f = p_.toAbsolutePath().resolve(request_.getPath()).normalize().toFile();
 		}
 		

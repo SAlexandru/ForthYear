@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="com.vvs.webserver.unittest.http" project="WebServer" tests="26" started="26" failures="0" errors="0" ignored="0">
+  <testsuite name="com.vvs.webserver.unittest.http.ContentTypeTest" time="0.0">
+    <testcase name="testContentTypeToString" classname="com.vvs.webserver.unittest.http.ContentTypeTest" time="0.0"/>
+    <testcase name="testContentTypeFromValue" classname="com.vvs.webserver.unittest.http.ContentTypeTest" time="0.0"/>
+    <testcase name="testContentTypeThrow" classname="com.vvs.webserver.unittest.http.ContentTypeTest" time="0.0"/>
+  </testsuite>
+  <testsuite name="com.vvs.webserver.unittest.http.HttpGetResponseTest" time="0.249">
+    <testcase name="testHttpGetFileTxt200" classname="com.vvs.webserver.unittest.http.HttpGetResponseTest" time="0.235"/>
+    <testcase name="testHttpGetResponse400" classname="com.vvs.webserver.unittest.http.HttpGetResponseTest" time="0.003"/>
+    <testcase name="testHttpGetResponse404" classname="com.vvs.webserver.unittest.http.HttpGetResponseTest" time="0.0"/>
+    <testcase name="testHttpGetResponse501" classname="com.vvs.webserver.unittest.http.HttpGetResponseTest" time="0.002"/>
+    <testcase name="testHttpGetResponseNullRequest" classname="com.vvs.webserver.unittest.http.HttpGetResponseTest" time="0.0"/>
+    <testcase name="testHttpGetFile200" classname="com.vvs.webserver.unittest.http.HttpGetResponseTest" time="0.003"/>
+    <testcase name="testHttpGetResponseHEAD200" classname="com.vvs.webserver.unittest.http.HttpGetResponseTest" time="0.001"/>
+    <testcase name="testHttpGetResponseHEAD404" classname="com.vvs.webserver.unittest.http.HttpGetResponseTest" time="0.001"/>
+    <testcase name="testHttpGetResponseNullBase" classname="com.vvs.webserver.unittest.http.HttpGetResponseTest" time="0.001"/>
+    <testcase name="testHttpGetFileATxt200" classname="com.vvs.webserver.unittest.http.HttpGetResponseTest" time="0.001"/>
+    <testcase name="testHttpGetResponseNullAll" classname="com.vvs.webserver.unittest.http.HttpGetResponseTest" time="0.002"/>
+  </testsuite>
+  <testsuite name="com.vvs.webserver.unittest.http.HttpRequestTests" time="0.002">
+    <testcase name="testConstructorNull" classname="com.vvs.webserver.unittest.http.HttpRequestTests" time="0.0"/>
+    <testcase name="testInvalidGet1" classname="com.vvs.webserver.unittest.http.HttpRequestTests" time="0.0"/>
+    <testcase name="testInvalidGet2" classname="com.vvs.webserver.unittest.http.HttpRequestTests" time="0.0"/>
+    <testcase name="testInvalidGet3" classname="com.vvs.webserver.unittest.http.HttpRequestTests" time="0.0"/>
+    <testcase name="testValidGet127Port" classname="com.vvs.webserver.unittest.http.HttpRequestTests" time="0.0"/>
+    <testcase name="testClose" classname="com.vvs.webserver.unittest.http.HttpRequestTests" time="0.0"/>
+    <testcase name="testHost" classname="com.vvs.webserver.unittest.http.HttpRequestTests" time="0.0"/>
+    <testcase name="testValidGet1" classname="com.vvs.webserver.unittest.http.HttpRequestTests" time="0.0"/>
+    <testcase name="testValidGet2" classname="com.vvs.webserver.unittest.http.HttpRequestTests" time="0.001"/>
+    <testcase name="testValidGet3" classname="com.vvs.webserver.unittest.http.HttpRequestTests" time="0.0"/>
+    <testcase name="testValidGetlocalhost" classname="com.vvs.webserver.unittest.http.HttpRequestTests" time="0.0"/>
+    <testcase name="testValidGet127" classname="com.vvs.webserver.unittest.http.HttpRequestTests" time="0.0"/>
+  </testsuite>
+</testrun>

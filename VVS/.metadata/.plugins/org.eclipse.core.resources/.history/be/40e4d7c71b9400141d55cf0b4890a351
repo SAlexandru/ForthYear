@@ -1,0 +1,43 @@
+package com.vvs.webserver.unittest.http;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+import com.vvs.webserver.HTTP.ContentType;
+
+public class ContentTypeTest {
+
+	@Test
+	public void testContentTypeToString() {
+		assertEquals(ContentType.CSS.toString(), "Content-Type: text/css"); 
+		assertEquals(ContentType.GIF.toString(), "Content-Type: image/gif");
+		assertEquals(ContentType.HTM.toString(), "Content-Type: text/html");
+		assertEquals(ContentType.HTML.toString(), "Content-Type: text/html");
+		assertEquals(ContentType.ICO.toString(), "Content-Type: image/gif");
+		assertEquals(ContentType.JPG.toString(), "Content-Type: image/jpeg");
+		assertEquals(ContentType.JPEG.toString(), "Content-Type: image/jpeg");
+		assertEquals(ContentType.PNG.toString(), "Content-Type: image/png");
+		assertEquals(ContentType.TXT.toString(), "Content-type: text/plain");
+		assertEquals(ContentType.XML.toString(), "Content-type: text/xml");
+	}
+	
+	@Test
+	public void testContentTypeFromValue() {
+		assertEquals(ContentType.CSS, ContentType.valueOf("CSS")); 
+		assertEquals(ContentType.GIF, ContentType.valueOf("GIF"));
+		assertEquals(ContentType.HTM, ContentType.valueOf("HTM"));
+		assertEquals(ContentType.HTML, ContentType.valueOf("HTML"));
+		assertEquals(ContentType.ICO, ContentType.valueOf("ICO"));
+		assertEquals(ContentType.JPG, ContentType.valueOf("JPG"));
+		assertEquals(ContentType.JPEG, ContentType.valueOf("JPGE"));
+		assertEquals(ContentType.PNG, ContentType.valueOf("PNG"));
+		assertEquals(ContentType.TXT, ContentType.valueOf("TXT"));
+		assertEquals(ContentType.XML, ContentType.valueOf("XML"));
+	}
+	
+	@Test
+	public void testContentTypeThrow() {
+		ContentType.valueOf("....")
+	}
+}

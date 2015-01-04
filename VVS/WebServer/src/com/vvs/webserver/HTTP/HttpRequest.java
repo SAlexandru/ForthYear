@@ -30,7 +30,7 @@ public class HttpRequest {
 				break;
 			}
 			if (line.startsWith("Host:")) {
-				host = line.substring(line.indexOf("Host") + 4).trim();
+				host = line.substring(line.indexOf("Host:") + 5).trim();
 			}
 			request.append(line + "\r\n");
 		}

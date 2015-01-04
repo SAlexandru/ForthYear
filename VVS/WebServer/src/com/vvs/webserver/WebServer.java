@@ -19,7 +19,7 @@ public class WebServer implements AutoCloseable {
 	private Path base_;
 	private Path maintenance_;
 	private ServerSocket server_;
-	private Thread mainThread_;
+	private Thread mainThread_ = null;
 	private ThreadPoolExecutor pool_;
 	private int maxNumberOfThreads_ = 2;
 	private WebServerState state_ = WebServerState.STOPPED;
@@ -87,8 +87,11 @@ public class WebServer implements AutoCloseable {
 	 *   The maximumNumberOfThreads will be set to 10 (or whatever number you added)
 	 *   The backlog will have a default value of 100
 	 */
-	public WebServer(ServerSocket socket, Path path, Path maintenance, int maxNumberOfThreads) {
-		base_   = path;
+	public WebServer(ServerSocket socket, Path base, Path maintenance, int maxNumberOfThreads) {
+		if (null == socket || null == base || null == maintenance || maxNumberOfThreads < 2) {
+			throw new IllegalArgumentException();
+		}
+		base_   = base;
 		server_ = socket;
 		maintenance_ = maintenance;
 		maxNumberOfThreads_ = maxNumberOfThreads;
@@ -107,11 +110,14 @@ public class WebServer implements AutoCloseable {
 	}
 	
 	public Path getMaintenancePath() {
-		return null == maintenance_ ? null : maintenance_.toAbsolutePath();
+		return maintenance_.toAbsolutePath();
 	}
 	
 	public void setMaintenancePath(Path maintenance) throws IOException {
-		synchronized(maintenance) {
+		if (null == maintenance) {
+			throw new IllegalArgumentException();
+		}
+		synchronized(maintenance) { 
 			maintenance_ = maintenance;
 		}
 	}
@@ -125,8 +131,8 @@ public class WebServer implements AutoCloseable {
 			case RUNNING: start(); break;
 			case STOPPED: stop();  break;
 			case MAINTENANCE:
-				if (null == maintenance_) {
-					throw new IllegalArgumentException("maintenance path is null");
+				if (state_ == WebServerState.STOPPED) {
+					start();
 				}
 				state_ = state;
 		}
@@ -135,29 +141,50 @@ public class WebServer implements AutoCloseable {
 	public Path getBaseDirectory() {return base_.toAbsolutePath();}
 	
 	public void setBaseDirectory(Path path) throws IOException {
-		stop();
-		base_ = path;
-		start();
+		if (null == path) {
+			throw new IllegalArgumentException();
+		}
+		else if (isAlive()) {
+			base_  = path;
+		}
+		else {
+			stop();
+			base_ = path;
+			start();
+		}
 	}
 	
 	public SocketAddress getSocketAddress() {return server_.getLocalSocketAddress();}
 	
 	public void bind(SocketAddress endpoint) throws IOException {
-		stop();
-		server_ = new ServerSocket();
-		server_.bind(endpoint);
-		start();
+		if (isAlive()) {
+			stop();
+			server_ = new ServerSocket();
+			server_.bind(endpoint);
+			start();	
+		}
+		else {
+			server_ = new ServerSocket();
+			server_.bind(endpoint);
+		}
 	}
 	
 	public void bind(SocketAddress endpoint, int backlog) throws IOException {
-		stop();
-		server_ = new ServerSocket();
-		server_.bind(endpoint, backlog);
-		start();
+		if (isAlive()) {
+			stop();
+			server_ = new ServerSocket();
+			server_.bind(endpoint, backlog);
+			start();
+		}
+		else {
+			server_ = new ServerSocket();
+			server_.bind(endpoint, backlog);
+		}
 	}
 	
 	public boolean isAlive() {
-		return null != mainThread_ &&
+		return WebServerState.STOPPED != state_ && 
+			   null != mainThread_ &&
 			   mainThread_.isAlive();
 	}
 	

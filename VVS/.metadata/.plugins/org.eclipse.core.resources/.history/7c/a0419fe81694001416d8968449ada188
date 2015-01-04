@@ -1,0 +1,140 @@
+package com.vvs.webserver.unittest.http;
+
+import static org.junit.Assert.*;
+
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.StringBufferInputStream;
+
+import org.junit.Test;
+
+import com.vvs.webserver.HTTP.HttpRequest;
+
+@SuppressWarnings("deprecation")
+public class HttpRequestTests {
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testConstructorNull() throws IllegalArgumentException, IOException {
+			new HttpRequest(null);
+	}
+	
+	@Test()
+	public void testValidGet1() throws Exception {
+		ByteArrayInputStream s = new ByteArrayInputStream("GET / HTTP/1.1\r\nHost: www.example.com\r\nConnection: closed\r\n\r\n".getBytes());
+		HttpRequest request = new HttpRequest(s);
+		assertEquals(request.isInvalid(), false);
+		assertEquals(request.getHttpMethod(), "GET");
+		assertEquals(request.getPath(), "");
+		assertEquals(request.getProtocol(), "HTTP/1.1");
+		assertEquals(request.getRequest(), "GET / HTTP/1.1\r\nHost: www.example.com\r\nConnection: closed");
+	}
+	
+	@Test()
+	public void testValidGet127() throws Exception {
+		ByteArrayInputStream s = new ByteArrayInputStream("GET / HTTP/1.1\r\nHost: 127.0.0.1\r\nConnection: closed\r\n\r\n".getBytes());
+		HttpRequest request = new HttpRequest(s);
+		assertEquals(request.isInvalid(), false);
+		assertEquals(request.getHttpMethod(), "GET");
+		assertEquals(request.getPath(), "");
+		assertEquals(request.getHost(), "127.0.0.1");
+		assertEquals(request.isLocalhost(), true);
+		assertEquals(request.getProtocol(), "HTTP/1.1");
+		assertEquals(request.getRequest(), "GET / HTTP/1.1\r\nHost: www.example.com\r\nConnection: closed");
+	}
+	
+	@Test()
+	public void testValidGet127Port() throws Exception {
+		ByteArrayInputStream s = new ByteArrayInputStream("GET / HTTP/1.1\r\nHost: 127.0.0.1:80\r\nConnection: closed\r\n\r\n".getBytes());
+		HttpRequest request = new HttpRequest(s);
+		assertEquals(request.isInvalid(), false);
+		assertEquals(request.getHttpMethod(), "GET");
+		assertEquals(request.getPath(), "");
+		assertEquals(request.getHost(), "127.0.0.1:80");
+		assertEquals(request.isLocalhost(), true);
+		assertEquals(request.getProtocol(), "HTTP/1.1");
+		assertEquals(request.getRequest(), "GET / HTTP/1.1\r\nHost: 127.0.0.1:80\r\nConnection: closed");
+	}
+	
+	@Test()
+	public void testValidGetlocalhost() throws Exception {
+		ByteArrayInputStream s = new ByteArrayInputStream("GET / HTTP/1.1\r\nHost: localhost\r\nConnection: closed\r\n\r\n".getBytes());
+		HttpRequest request = new HttpRequest(s);
+		assertEquals(request.isInvalid(), false);
+		assertEquals(request.getHttpMethod(), "GET");
+		assertEquals(request.getPath(), "");
+		assertEquals(request.getHost(), "localhost");
+		assertEquals(request.isLocalhost(), true);
+		assertEquals(request.getProtocol(), "HTTP/1.1");
+		assertEquals(request.getRequest(), "GET / HTTP/1.1\r\nHost: localhost\r\nConnection: closed");
+	}
+	
+	@Test()
+	public void testValidGet2() throws Exception {
+		ByteArrayInputStream s = new ByteArrayInputStream("GET www.example.com/a/b/c/merecupere/siterte/a.html?am=pere HTTP/1.1\r\nHost: www.example.com\r\nConnection: closed".getBytes());
+		HttpRequest request = new HttpRequest(s);
+		assertEquals(request.isInvalid(), false);
+		assertEquals(request.getHttpMethod(), "GET");
+		assertEquals(request.getPath(), "a/b/c/merecupere/siterte/a.html");
+		assertEquals(request.getProtocol(), "HTTP/1.1");
+		assertEquals(request.getRequest(), "GET www.example.com/a/b/c/merecupere/siterte/a.html?am=pere HTTP/1.1\r\nHost: www.example.com\r\nConnection: closed");
+	}
+	
+	@Test()
+	public void testValidGet3() throws Exception {
+		ByteArrayInputStream s = new ByteArrayInputStream( "GET http://www.example.com/a/b/c/merecupere/siterte/a.html?am=pere HTTP/1.1\r\nHost: www.example.com\r\nConnection: closed".getBytes());
+		HttpRequest request = new HttpRequest(s);
+		assertEquals(request.isInvalid(), false);
+		assertEquals(request.getHttpMethod(), "GET");
+		assertEquals(request.getHost(), "www.example.com");
+		assertEquals(request.isLocalhost(), false);
+		assertEquals(request.getPath(), "a/b/c/merecupere/siterte/a.html");
+		assertEquals(request.getProtocol(), "HTTP/1.1");
+		assertEquals(request.getRequest(), "GET http://www.example.com/a/b/c/merecupere/siterte/a.html?am=pere HTTP/1.1\r\nHost: www.example.com\r\nConnection: closed");
+	}
+	
+	@Test()
+	public void testInvalidGet1() throws Exception {
+		ByteArrayInputStream s = new ByteArrayInputStream( "".getBytes());
+		HttpRequest request = new HttpRequest(s);
+		assertEquals(request.isInvalid(), true);
+		assertEquals(request.getHttpMethod(), "");
+		assertEquals(request.getPath(), "}{}{}{");
+		assertEquals(request.getProtocol(), "ana are mere multe si frumoase :)");
+		assertEquals(request.getRequest(), "");
+	}
+	
+	@Test()
+	public void testInvalidGet2() throws Exception {
+		ByteArrayInputStream s = new ByteArrayInputStream( "GET ".getBytes());
+		HttpRequest request = new HttpRequest(s);
+		assertEquals(request.isInvalid(), true);
+		assertEquals(request.getHttpMethod(), "");
+		assertEquals(request.getPath(), "}{}{}{");
+		assertEquals(request.getProtocol(), "ana are mere multe si frumoase :)");
+		assertEquals(request.getRequest(), "GET");
+	}
+	
+	@Test()
+	public void testInvalidGet3() throws Exception {
+		ByteArrayInputStream s = new ByteArrayInputStream( "GET ???????".getBytes());
+		HttpRequest request = new HttpRequest(s);
+		assertEquals(request.isInvalid(), true);
+		assertEquals(request.getHttpMethod(), "");
+		assertEquals(request.getPath(), "}{}{}{");
+		assertEquals(request.getProtocol(), "ana are mere multe si frumoase :)");
+		assertEquals(request.getRequest(), "GET ???????");
+	}
+	
+	@Test
+	public void testClose() throws Exception {
+		ByteArrayInputStream s = new ByteArrayInputStream( "CLOSE".getBytes());
+		HttpRequest request = new HttpRequest(s);
+		assertEquals(request.isInvalid(), false);
+		assertEquals(request.getHttpMethod(), "CLOSE");
+	}
+	
+	@Test
+	public void testHost() {
+		
+	}
+}

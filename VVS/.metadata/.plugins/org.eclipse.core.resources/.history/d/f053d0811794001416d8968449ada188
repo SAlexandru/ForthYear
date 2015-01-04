@@ -1,0 +1,244 @@
+package com.vvs.webserver.unittest.http;
+
+import static org.junit.Assert.*;
+
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+import static org.mockito.Mockito.*;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import com.vvs.webserver.HTTP.HttpGetResponse;
+import com.vvs.webserver.HTTP.HttpRequest;
+
+public class HttpGetResponseTest {
+	private HttpRequest request;
+	private Path base;
+
+	@Before
+	public void setUp() {
+		try {
+			request = new HttpRequest(new ByteArrayInputStream("GET / HTTP/1.1\r\nHost: www.example.com\r\nConnection: closed\r\n\r\n".getBytes()));
+		}
+		catch (IOException e) {
+			
+		}
+		
+		base = Paths.get("./TestSite");
+	
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testHttpGetResponseNullBase() {
+		new HttpGetResponse(request, null);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testHttpGetResponseNullRequest() {
+		new HttpGetResponse(null, base);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testHttpGetResponseNullAll() {
+		new HttpGetResponse(null, null);
+	}
+
+	@Test
+	public void testHttpGetResponse400() throws IOException {
+		HttpRequest r = mock(HttpRequest.class);
+		
+		when(r.isInvalid()).thenReturn(true);
+		when(r.getHttpMethod()).thenReturn("GET");
+		when(r.getFullHttpPath()).thenReturn(request.getFullHttpPath());
+		when(r.getHost()).thenReturn(request.getHost());
+		when(r.getPath()).thenReturn(request.getPath());
+		when(r.getProtocol()).thenReturn(request.getProtocol());
+		when(r.getRequest()).thenReturn(request.getRequest());
+		
+		StringBufferOutputStream buff = new StringBufferOutputStream();
+		String body = "<!DOCTYPE html>\r\n" +
+				"<html>\r\n" +
+				"<head>\r\n" +
+					"<title> 400 Bad Request </title>\r\n" +
+				"</head>\r\n" +
+				"<body>\r\n" +
+					"<p> The http request that was made is invalid ! </p>\r\n" +
+				"</body>\r\n" +
+			"</html>\r\n";
+		String contentType = "Content-Type: text/html; charset=UTF-8\r\n";
+		String httpCode = "HTTP/1.1 400 Bad Request\r\n";
+		String server = "Server: vvs webserver (Mac)\r\n";
+		String contentLength = "Content-Length: " + body.length() + "\r\n";
+		String connection = "Connection: Keep-Alive\r\n\r\n";
+		new HttpGetResponse(r, base).send(buff);
+		
+		assertTrue(buff.toString().contains(contentType));
+		assertTrue(buff.toString().contains(httpCode));
+		assertTrue(buff.toString().contains(server));
+		assertTrue(buff.toString().contains(contentLength));
+		assertTrue(buff.toString().contains(connection));
+		assertTrue(buff.toString().contains(body));
+	}
+	
+	@Test
+	public void testHttpGetResponse404() throws IOException {
+		StringBufferOutputStream buff = new StringBufferOutputStream();
+		String httpCode = "HTTP/1.1 404 Not Found\r\n";
+		String body = "<!DOCTYPE html>\r\n" +
+				"<html>\r\n" +
+					"<head>\r\n" +
+						"<title> 404 Not Found </title>\r\n" + 
+					"</head>\r\n" +
+					"<body>\r\n" +
+						"<p> The file was not found on the server ! </p>\r\n" +
+					"</body>\r\n" +
+				"</html>\r\n";
+		String contentType = "Content-Type: text/html; charset=UTF-8\r\n";
+		String server = "Server: vvs webserver (Mac)\r\n";
+		String contentLength = "Content-Length: " + body.length() + "\r\n";
+		String connection = "Connection: Keep-Alive\r\n\r\n";
+		new HttpGetResponse(request, base).send(buff);
+		
+		assertTrue(buff.toString().contains(contentType));
+		assertTrue(buff.toString().contains(httpCode));
+		assertTrue(buff.toString().contains(server));
+		assertTrue(buff.toString().contains(contentLength));
+		assertTrue(buff.toString().contains(connection));
+		assertTrue(buff.toString().contains(body));
+	}
+	
+	@Test
+	public void testHttpGetResponseHEAD200() throws IOException {
+		HttpRequest r = mock(HttpRequest.class);
+		
+		when(r.getHttpMethod()).thenReturn("HEAD");
+		when(r.getFullHttpPath()).thenReturn("a.html");
+		when(r.getHost()).thenReturn("localhost");
+		when(r.getPath()).thenReturn("a.html");
+		when(r.getProtocol()).thenReturn("HTTP/1.1");
+		when(r.getRequest()).thenReturn("GET a.html HTTP/1.1");
+		
+		StringBufferOutputStream buff = new StringBufferOutputStream();
+		String body = "";
+		String contentType = "Content-Type: text/html; charset=UTF-8\r\n";
+		String httpCode = "HTTP/1.1 200 OK\r\n";
+		String server = "Server: vvs webserver (Mac)\r\n";
+		String contentLength = "Content-Length: " + body.length() + "\r\n";
+		String connection = "Connection: Keep-Alive\r\n\r\n";
+		new HttpGetResponse(r, base).send(buff);
+		
+		assertTrue(buff.toString().contains(contentType));
+		assertTrue(buff.toString().contains(httpCode));
+		assertTrue(buff.toString().contains(server));
+		assertTrue(buff.toString().contains(contentLength));
+		assertTrue(buff.toString().contains(connection));
+		assertTrue(buff.toString().contains(body));
+	}
+	
+	@Test
+	public void testHttpGetResponseHEAD404() throws IOException {
+		HttpRequest r = mock(HttpRequest.class);
+		
+		when(r.getHttpMethod()).thenReturn("HEAD");
+		request.getFullHttpPath(); 
+		when(r.getFullHttpPath()).thenReturn(request.getFullHttpPath());
+		when(r.getHost()).thenReturn(request.getHost());
+		when(r.getPath()).thenReturn(request.getPath());
+		when(r.getProtocol()).thenReturn(request.getProtocol());
+		when(r.getRequest()).thenReturn(request.getRequest()); 
+		StringBufferOutputStream buff = new StringBufferOutputStream();
+		String httpCode = "HTTP/1.1 404 Not Found\r\n";
+		String body = "<!DOCTYPE html>\r\n" +
+				"<html>\r\n" +
+					"<head>\r\n" +
+						"<title> 404 Not Found </title>\r\n" +
+					"</head>\r\n" +
+					"<body>\r\n" +
+						"<p> The file was not found on the server ! </p>\r\n" +
+					"</body>\r\n" +
+				"</html>\r\n";
+		String contentType = "Content-Type: text/html; charset=UTF-8\r\n";
+		String server = "Server: vvs webserver (Mac)\r\n";
+		String contentLength = "Content-Length: " + body.length() + "\r\n";
+		String connection = "Connection: Keep-Alive\r\n\r\n";
+		new HttpGetResponse(r, base).send(buff);
+		
+		assertTrue(buff.toString().contains(contentType));
+		assertTrue(buff.toString().contains(httpCode));
+		assertTrue(buff.toString().contains(server));
+		assertTrue(buff.toString().contains(contentLength));
+		assertTrue(buff.toString().contains(connection));
+		assertTrue(buff.toString().contains(body));
+	}
+	
+	@Test
+	public void testHttpGetResponse501() throws IOException {
+		HttpRequest r = mock(HttpRequest.class);
+		
+		when(r.getHttpMethod()).thenReturn("Mama");
+		when(r.getFullHttpPath()).thenReturn(request.getFullHttpPath());
+		when(r.getHost()).thenReturn(request.getHost());
+		when(r.getPath()).thenReturn(request.getPath());
+		when(r.getProtocol()).thenReturn(request.getProtocol());
+		when(r.getRequest()).thenReturn(request.getRequest());
+		
+		StringBufferOutputStream buff = new StringBufferOutputStream();
+		String httpCode = "HTTP/1.1 501 Not implemented\r\n";
+		String body = "<!DOCTYPE html>\r\n" +
+				"<html>\r\n" +
+					"<head>" +
+						"<title> 501 Not implemented </title>\r\n" +
+					"</head>\r\n" +
+					"<body>\r\n" +
+						"<p> The Http method used in request is not supported by this server ! </p>\r\n" +
+					"</body>\r\n" +
+				"</html>\r\n";
+		String contentType = "Content-Type: text/html; charset=UTF-8\r\n";
+		String server = "Server: vvs webserver (Mac)\r\n";
+		String contentLength = "Content-Length: " + body.length() + "\r\n";
+		String connection = "Connection: Keep-Alive\r\n\r\n";
+		new HttpGetResponse(r, base).send(buff);
+		
+		assertTrue(buff.toString().contains(contentType));
+		assertTrue(buff.toString().contains(httpCode));
+		assertTrue(buff.toString().contains(server));
+		assertTrue(buff.toString().contains(contentLength));
+		assertTrue(buff.toString().contains(connection));
+		assertTrue(buff.toString().contains(body));
+	}
+	
+	@Test
+	public void testHttpGetFile200() throws IOException {
+		HttpRequest r = mock(HttpRequest.class);
+		
+		when(r.getHttpMethod()).thenReturn("GET");
+		when(r.getFullHttpPath()).thenReturn("a.html");
+		when(r.getHost()).thenReturn("localhost");
+		when(r.getPath()).thenReturn("a.html");
+		when(r.getProtocol()).thenReturn("HTTP/1.1");
+		when(r.getRequest()).thenReturn("GET a.html HTTP/1.1");
+		
+		StringBufferOutputStream buff = new StringBufferOutputStream();
+		String body = readFile();
+		String contentType = "Content-Type: text/html; charset=UTF-8\r\n";
+		String httpCode = "HTTP/1.1 200 OK\r\n";
+		String server = "Server: vvs webserver (Mac)\r\n";
+		String contentLength = "Content-Length: " + body.length() + "\r\n";
+		String connection = "Connection: Keep-Alive\r\n\r\n";
+		new HttpGetResponse(r, base).send(buff);
+		
+		assertTrue(buff.toString().contains(contentType));
+		assertTrue(buff.toString().contains(httpCode));
+		assertTrue(buff.toString().contains(server));
+		assertTrue(buff.toString().contains(contentLength));
+		assertTrue(buff.toString().contains(connection));
+		assertTrue(buff.toString().contains(body));
+	}
+
+
+
+}

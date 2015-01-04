@@ -45,7 +45,7 @@ public enum ContentType {
 			case XML:
 				return "Content-type: text/xml";
 			default:
-				return null;
+				return "";
 		}
 	}
 }

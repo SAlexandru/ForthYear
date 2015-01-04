@@ -1,0 +1,23 @@
+package com.vvs.webserver.unittest.http;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+import com.vvs.webserver.HTTP.ContentType;
+
+public class ContentTypeTest {
+
+	@Test
+	public void testContentType() {
+		for (ContentType t : ContentType.values()) {
+			s
+		}
+	}
+
+	@Test
+	public void testToString() {
+		fail("Not yet implemented");
+	}
+
+}

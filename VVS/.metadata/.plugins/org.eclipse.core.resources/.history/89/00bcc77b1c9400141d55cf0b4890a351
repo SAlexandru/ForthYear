@@ -1,0 +1,32 @@
+package com.vvs.webserver.unittest.webserver;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+import com.vvs.webserver.WebServerState;
+import com.vvs.webserver.HTTP.ContentType;
+
+public class WebServerStateTests {
+
+	@Test
+	public void testWebServereToString() {
+		assertEquals(ContentType.CSS.toString(), "Content-Type: text/css"); 
+		assertEquals(ContentType.GIF.toString(), "Content-Type: image/gif");
+		assertEquals(ContentType.HTM.toString(), "Content-Type: text/html");
+	}
+	
+	@Test
+	public void testWebServerFromValue() {
+		assertEquals(ContentType.CSS, ContentType.valueOf("CSS")); 
+		assertEquals(ContentType.GIF, ContentType.valueOf("GIF"));
+		assertEquals(ContentType.HTM, ContentType.valueOf("HTM"));
+	
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testWebServerThrow() {
+		WebServerState.valueOf("....");
+	}
+
+}

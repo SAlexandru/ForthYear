@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="WebServerTest.testSetBaseDirectoryNull" project="WebServer" tests="1" started="1" failures="0" errors="0" ignored="0">
+  <testcase name="testSetBaseDirectoryNull" classname="com.vvs.webserver.unittest.webserver.WebServerTest" time="0.0"/>
+</testrun>

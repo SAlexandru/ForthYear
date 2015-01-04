@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="WebServerTest" project="WebServer" tests="23" started="23" failures="0" errors="0" ignored="0">
+  <testsuite name="com.vvs.webserver.unittest.webserver.WebServerTest" time="0.498">
+    <testcase name="testStartedJoin" classname="com.vvs.webserver.unittest.webserver.WebServerTest" time="0.468"/>
+    <testcase name="testSetMaxNumberOfThreads" classname="com.vvs.webserver.unittest.webserver.WebServerTest" time="0.002"/>
+    <testcase name="testGetState" classname="com.vvs.webserver.unittest.webserver.WebServerTest" time="0.002"/>
+    <testcase name="testWebServerNullBase" classname="com.vvs.webserver.unittest.webserver.WebServerTest" time="0.001"/>
+    <testcase name="testStart" classname="com.vvs.webserver.unittest.webserver.WebServerTest" time="0.003"/>
+    <testcase name="testWebServerAllNull" classname="com.vvs.webserver.unittest.webserver.WebServerTest" time="0.001"/>
+    <testcase name="testStop" classname="com.vvs.webserver.unittest.webserver.WebServerTest" time="0.001"/>
+    <testcase name="testNotStartedJoin" classname="com.vvs.webserver.unittest.webserver.WebServerTest" time="0.001"/>
+    <testcase name="testWebServerNullMaintenance" classname="com.vvs.webserver.unittest.webserver.WebServerTest" time="0.001"/>
+    <testcase name="testSetMaxNumberOfThreadIllegal" classname="com.vvs.webserver.unittest.webserver.WebServerTest" time="0.001"/>
+    <testcase name="testGetMaintenancePath" classname="com.vvs.webserver.unittest.webserver.WebServerTest" time="0.001"/>
+    <testcase name="testSetBaseDirectory" classname="com.vvs.webserver.unittest.webserver.WebServerTest" time="0.001"/>
+    <testcase name="testWebServer" classname="com.vvs.webserver.unittest.webserver.WebServerTest" time="0.001"/>
+    <testcase name="testGetMaxNumberOfThreads" classname="com.vvs.webserver.unittest.webserver.WebServerTest" time="0.001"/>
+    <testcase name="testSetBaseDirectoryNull" classname="com.vvs.webserver.unittest.webserver.WebServerTest" time="0.002"/>
+    <testcase name="testWebServerNullSocket" classname="com.vvs.webserver.unittest.webserver.WebServerTest" time="0.001"/>
+    <testcase name="testSetMaintenancePath" classname="com.vvs.webserver.unittest.webserver.WebServerTest" time="0.001"/>
+    <testcase name="testRestart" classname="com.vvs.webserver.unittest.webserver.WebServerTest" time="0.002"/>
+    <testcase name="testSetMaintenancePathNull" classname="com.vvs.webserver.unittest.webserver.WebServerTest" time="0.001"/>
+    <testcase name="testGetBaseDirectory" classname="com.vvs.webserver.unittest.webserver.WebServerTest" time="0.002"/>
+    <testcase name="testWebServerZeroThreads" classname="com.vvs.webserver.unittest.webserver.WebServerTest" time="0.001"/>
+    <testcase name="testIsAlive" classname="com.vvs.webserver.unittest.webserver.WebServerTest" time="0.001"/>
+    <testcase name="testSetState" classname="com.vvs.webserver.unittest.webserver.WebServerTest" time="0.002"/>
+  </testsuite>
+</testrun>
