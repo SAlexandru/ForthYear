@@ -3,13 +3,13 @@ package com.vvs.webserver.HTTP;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.file.Path;
 
 public class HttpGetResponse {
 	private Path p_;
-	private String body_;
+	private byte[] body_;
 	private String httpCode_;
 	private String contentType_;
 	private HttpRequest request_;
@@ -20,7 +20,7 @@ public class HttpGetResponse {
 		}
 		
 		p_ = base;
-		body_ = "";
+		body_ = new byte[0];
 		contentType_ = "text/html; charset=UTF-8\r\n";
 		httpCode_ = "HTTP/1.1 200 OK\r\n";
 		request_ = request;
@@ -29,10 +29,12 @@ public class HttpGetResponse {
 	private void getFile(File f) {
 		httpCode_ = "HTTP/1.1 200 OK\r\n";
 		String encoding = "UTF-8";
-		try (InputStreamReader input = new InputStreamReader(new FileInputStream(f));) {
-			encoding = input.getEncoding();	
-			for (int ch = input.read(); -1 != ch; ch = input.read()) {
-				body_ = String.format("%s%c", body_, ch);
+		try (InputStream input = new FileInputStream(f)) {
+			int length = (int) f.length();
+			body_ = new byte[length];
+			
+			for (int offset = 0; offset < length; ) {
+				offset += input.read(body_, offset, length - offset);
 			}
 		} catch (IOException e) {
 		}
@@ -44,17 +46,19 @@ public class HttpGetResponse {
 		else {
 			fileExt = fileExt.substring(fileExt.lastIndexOf('.') + 1);
 		}
-		contentType_ =  ContentType.valueOf(fileExt.toUpperCase()) + "; " + encoding + "\r\n";
+		contentType_ =  ContentType.valueOf(fileExt.toUpperCase()) +  "; charset=" + encoding + "\r\n";
 	}
 	
 	public void send(OutputStream out) throws IOException {
-		File f;
+		File f = new File("......");
 		if (request_.getPath().isEmpty()) {
 			f = p_.toAbsolutePath().resolve("index.html").toFile();
 		}
-		else {
+		else  {
+			//String path = request_.getPath().replace("%20", " ");
 			f = p_.toAbsolutePath().resolve(request_.getPath()).normalize().toFile();
 		}
+		
 		if (request_.isInvalid()) {
 			HttpUtility.send400(out);
 		}

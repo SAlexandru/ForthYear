@@ -1,0 +1,185 @@
+package com.vvs.webserver.HTTP;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.sql.Timestamp;
+import java.util.Date;
+
+public class HttpUtility {
+	public static boolean isGetMethod(String method) {
+		return null != method && "GET".equals(method.toUpperCase());
+	}
+	
+	public static boolean isPostMethod(String method) {
+		return null != method && "POST".equals(method.toUpperCase());
+	}
+	
+	public static boolean isConnectMethod(String method) {
+		return null != method && "CONNECT".equals(method.toUpperCase());
+	}
+	
+	public static boolean isOptionsMethod(String method) {
+		return null != method && "OPTIONS".equals(method.toUpperCase());
+	}
+	
+	public static boolean isPutMethod(String method) {
+		return null != method && "PUT".equals(method.toUpperCase());
+	}
+	
+	public static boolean isDeleteMethod(String method) {
+		return null != method && "DELETE".equals(method.toUpperCase());
+	}
+	
+	
+	public static boolean isTraceMethod(String method) {
+		return null != method && "TRACE".equals(method.toUpperCase());
+	}
+	
+	public static boolean isHeadMethod(String method) {
+		return null != method && "HEAD".equals(method.toUpperCase());
+	}
+	
+	public static void send(OutputStream out) {
+		send (out, "");
+	}
+	
+	public static void send(OutputStream out, String msg) {
+		if (null == out || null == msg) {
+			throw new IllegalArgumentException();
+		}
+		new PrintWriter(out, /*autoflushing*/true).println(msg);
+		System.out.println(Thread.currentThread().getId() + ": " + msg);
+	}
+	
+	public static void send(OutputStream out, String httpCode, String contentType, String body) {
+		if (null == body) {
+			body = "";
+		}
+		if (null == httpCode) {
+			httpCode = "";
+		}
+		if (null == contentType) {
+			contentType = "";
+		}
+		
+		String server = "Server: vvs webserver (Mac)\r\n";
+		String date = "Date: " + new Timestamp(new Date().getTime()).toString() + "\r\n";
+		String contentLength = "Content-Length: " + body.length() + "\r\n";
+		String connection = "Connection: Keep-Alive\r\n\r\n";
+		
+		String response = httpCode +
+				  		  date +
+				  		  server +
+				  		  "Accept-Ranges: bytes\r\n" +
+				  		  contentLength +
+				  		  contentType +
+				  		  connection +
+				  		  body;
+		
+		send (out, response);
+	}
+	
+	public static void send(OutputStream out, String httpCode, String contentType, byte[] body) {
+		if (null == body) {
+			body = new byte[0];
+		}
+		if (null == httpCode) {
+			httpCode = "";
+		}
+		if (null == contentType) {
+			contentType = "";
+		}
+		
+		String server = "Server: vvs webserver (Mac)\r\n";
+		String date = "Date: " + new Timestamp(new Date().getTime()).toString() + "\r\n";
+		String contentLength = "Content-Length: " + body.length + "\r\n";
+		String connection = "Connection: Keep-Alive\r\n\r\n";
+		
+		String response = httpCode +
+				  		  date +
+				  		  server +
+				  		  "Accept-Ranges: bytes\r\n" +
+				  		  contentLength +
+				  		  contentType +
+				  		  connection +
+				  		  body;
+		
+		send (out, response);
+	}
+	
+	public static void send404(OutputStream out) {
+		String httpCode = "HTTP/1.1 404 Not Found\r\n";
+		String body = "<!DOCTYPE html>\r\n" +
+				"<html>\r\n" +
+					"<head>\r\n" +
+						"<title> 404 Not Found </title>\r\n" +
+					"</head>\r\n" +
+					"<body>\r\n" +
+						"<p> The file was not found on the server ! </p>\r\n" +
+					"</body>\r\n" +
+				"</html>\r\n";
+		
+		send (out, httpCode, "Content-Type: text/html; charset=UTF-8\r\n", body);
+		
+	}
+	
+	public static void send501(OutputStream out) {
+		String httpCode = "HTTP/1.1 501 Not implemented\r\n";
+		String body = "<!DOCTYPE html>\r\n" +
+				"<html>\r\n" +
+					"<head>" +
+						"<title> 501 Not implemented </title>\r\n" +
+					"</head>\r\n" +
+					"<body>\r\n" +
+						"<p> The Http method used in request is not supported by this server ! </p>\r\n" +
+					"</body>\r\n" +
+				"</html>\r\n";
+		
+		send (out, httpCode, "Content-Type: text/html; charset=UTF-8\r\n", body);
+	}
+	
+	public static void send400(OutputStream out) {
+		String httpCode = "HTTP/1.1 400 Bad Request\r\n";
+		String body = "<!DOCTYPE html>\r\n" +
+				"<html>\r\n" +
+					"<head>\r\n" +
+						"<title> 400 Bad Request </title>\r\n" +
+					"</head>\r\n" +
+					"<body>\r\n" +
+						"<p> The http request that was made is invalid ! </p>\r\n" +
+					"</body>\r\n" +
+				"</html>\r\n";
+		
+		send (out, httpCode, "Content-Type: text/html; charset=UTF-8\r\n", body);
+	}
+	
+	public static void send200(OutputStream out) {
+		String httpCode = "HTTP/1.1 400 Bad Request\r\n";
+		send (out, httpCode, "text/html; charset=UTF-8\r\n", "");
+	}
+	
+	public static void sendConnect(OutputStream out) {
+		send (out, "HTTP/1.1 200 Connection established", "text/html; charset=UTF-8\r\n", "");
+	}
+
+	public static void send(OutputStream out, File file) {
+		try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+			StringBuffer content = new StringBuffer();
+			for (String line = reader.readLine(); null != line; line = reader.readLine()) {
+				content.append(line);
+			}
+			send (out, content.toString());
+		} catch (IOException e) {
+		}
+		
+	}
+
+	public static void sendTrace(OutputStream out, String request) {
+		send (out, "HTTP/1.1 200 OK\r\n", "Content-Type: message/http", request);
+		
+	}
+}

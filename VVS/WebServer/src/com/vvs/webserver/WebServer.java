@@ -57,6 +57,8 @@ public class WebServer implements AutoCloseable {
 							new HttpGetResponse(request, base_).send(out);
 					}
 					
+					return;
+					
 				}
 			}
 			catch (IOException e) {
