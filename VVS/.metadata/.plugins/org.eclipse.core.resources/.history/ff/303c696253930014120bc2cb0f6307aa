@@ -1,0 +1,14 @@
+package com.vvs.webserver.unittest.http;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class HttpRequestTests {
+
+	@Test
+	public void test() {
+		fail("Not yet implemented");
+	}
+
+}

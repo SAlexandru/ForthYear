@@ -14,7 +14,10 @@ public class HttpRequest {
 	private String request_;
 	private boolean invalidRequest_ = false;
 	
-	public HttpRequest (InputStream in) throws IOException {
+	public HttpRequest (InputStream in) throws IOException, IllegalArgumentException {
+		if (null == in) {
+			throw new IllegalArgumentException();
+		}
 		BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 		
 		StringBuilder request = new StringBuilder("");
@@ -31,8 +34,8 @@ public class HttpRequest {
 			httpPath_ = tokenizer.nextToken();
 			protocol_ = tokenizer.nextToken();
 			
-			if (httpPath_.contains("://www")) {
-				httpPath_ = httpPath_.substring(httpPath_.indexOf('/', httpPath_.indexOf("://www") + 6) + 1);
+			if (httpPath_.contains("www.")) {
+				httpPath_ = httpPath_.substring(httpPath_.indexOf('/', httpPath_.indexOf("www.") + 4) + 1);
 			}
 			if (httpPath_.contains("?")) {
 				httpPath_ = httpPath_.substring(0, httpPath_.indexOf('?'));

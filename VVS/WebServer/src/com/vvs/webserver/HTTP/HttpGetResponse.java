@@ -15,6 +15,10 @@ public class HttpGetResponse {
 	private HttpRequest request_;
 	
 	public HttpGetResponse (HttpRequest request, Path base) {
+		if (null == base || null == request) {
+			throw new IllegalArgumentException();
+		}
+		
 		p_ = base;
 		body_ = "";
 		contentType_ = "text/html; charset=UTF-8\r\n";
@@ -49,7 +53,7 @@ public class HttpGetResponse {
 			f = p_.toAbsolutePath().resolve("index.html").toFile();
 		}
 		else {
-			f = p_.toAbsolutePath().resolve(request_.getPath()).toFile();
+			f = p_.toAbsolutePath().resolve(request_.getPath()).normalize().toFile();
 		}
 		if (request_.isInvalid()) {
 			HttpUtility.send400(out);

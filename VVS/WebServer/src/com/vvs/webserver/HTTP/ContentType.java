@@ -16,6 +16,7 @@ public enum ContentType {
 	TXT("TXT"), //
 	XML("XML"); //
 
+	@SuppressWarnings("unused")
 	private final String extension;
 
 	ContentType(String extension) {

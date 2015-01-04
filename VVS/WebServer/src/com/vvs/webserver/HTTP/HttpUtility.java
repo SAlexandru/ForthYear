@@ -48,6 +48,9 @@ public class HttpUtility {
 	}
 	
 	public static void send(OutputStream out, String msg) {
+		if (null == out || null == msg) {
+			throw new IllegalArgumentException();
+		}
 		new PrintWriter(out, /*autoflushing*/true).println(msg);
 		System.out.println(Thread.currentThread().getId() + ": " + msg);
 	}

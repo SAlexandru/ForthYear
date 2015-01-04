@@ -1,0 +1,3 @@
+eclipse.preferences.version=1
+manual.mockObjectPattern=java.sql.Connection;java.sql.ResultSet;java.sql.Statement;java.nio.file.Path
+manual.mockObjectsEnabled=true
