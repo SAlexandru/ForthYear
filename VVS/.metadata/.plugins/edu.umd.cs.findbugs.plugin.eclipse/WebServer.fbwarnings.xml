@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<BugCollection version="3.0.1-dev-20150101-123b89a" sequence="4" timestamp="1420395518399" analysisTimestamp="1420395517695" release="">
+<BugCollection version="3.0.1-dev-20150101-123b89a" sequence="1" timestamp="1420398483265" analysisTimestamp="1420398478393" release="">
   <Project projectName="WebServer">
-    <Jar>/Users/salexandru/Desktop/Projects/ForthYear/VVS/WebServer/bin/com/vvs/webserver/unittest</Jar>
+    <Jar>/Users/salexandru/Desktop/Projects/ForthYear/VVS/WebServer/bin</Jar>
     <AuxClasspathEntry>/Users/salexandru/Desktop/Projects/ForthYear/VVS/WebServer/bin</AuxClasspathEntry>
     <AuxClasspathEntry>/Users/salexandru/bin/eclipse/plugins/org.junit_4.11.0.v201303080030/junit.jar</AuxClasspathEntry>
     <AuxClasspathEntry>/Users/salexandru/bin/eclipse/plugins/org.hamcrest.core_1.3.0.v201303031735.jar</AuxClasspathEntry>
@@ -11,31 +11,6 @@
     <SrcDir>/Users/salexandru/Desktop/Projects/ForthYear/VVS/WebServer/src</SrcDir>
     <Cloud id="edu.umd.cs.findbugs.cloud.doNothingCloud" online="false"></Cloud>
   </Project>
-  <BugInstance type="NP_TOSTRING_COULD_RETURN_NULL" priority="2" rank="14" abbrev="NP" category="BAD_PRACTICE" first="1" last="1" removedByChange="true">
-    <Class classname="com.vvs.webserver.HTTP.ContentType">
-      <SourceLine classname="com.vvs.webserver.HTTP.ContentType" sourcefile="ContentType.java" sourcepath="com/vvs/webserver/HTTP/ContentType.java"/>
-    </Class>
-    <Method classname="com.vvs.webserver.HTTP.ContentType" name="toString" signature="()Ljava/lang/String;" isStatic="false">
-      <SourceLine classname="com.vvs.webserver.HTTP.ContentType" start="28" end="48" startBytecode="0" endBytecode="186" sourcefile="ContentType.java" sourcepath="com/vvs/webserver/HTTP/ContentType.java"/>
-    </Method>
-    <SourceLine classname="com.vvs.webserver.HTTP.ContentType" start="48" end="48" startBytecode="89" endBytecode="89" sourcefile="ContentType.java" sourcepath="com/vvs/webserver/HTTP/ContentType.java"/>
-    <SourceLine classname="com.vvs.webserver.HTTP.ContentType" start="48" end="48" startBytecode="89" endBytecode="89" sourcefile="ContentType.java" sourcepath="com/vvs/webserver/HTTP/ContentType.java"/>
-  </BugInstance>
-  <BugInstance type="DLS_DEAD_LOCAL_STORE" priority="2" rank="17" abbrev="DLS" category="STYLE" first="1" last="1" removedByChange="true">
-    <Class classname="com.vvs.webserver.HTTP.HttpGetResponse">
-      <SourceLine classname="com.vvs.webserver.HTTP.HttpGetResponse" sourcefile="HttpGetResponse.java" sourcepath="com/vvs/webserver/HTTP/HttpGetResponse.java"/>
-    </Class>
-    <Method classname="com.vvs.webserver.HTTP.HttpGetResponse" name="send" signature="(Ljava/io/OutputStream;)V" isStatic="false">
-      <SourceLine classname="com.vvs.webserver.HTTP.HttpGetResponse" start="53" end="82" startBytecode="0" endBytecode="75" sourcefile="HttpGetResponse.java" sourcepath="com/vvs/webserver/HTTP/HttpGetResponse.java"/>
-    </Method>
-    <LocalVariable name="f" register="2" pc="10" role="LOCAL_VARIABLE_NAMED"/>
-    <SourceLine classname="com.vvs.webserver.HTTP.HttpGetResponse" start="53" end="53" startBytecode="9" endBytecode="9" sourcefile="HttpGetResponse.java" sourcepath="com/vvs/webserver/HTTP/HttpGetResponse.java"/>
-    <SourceLine classname="com.vvs.webserver.HTTP.HttpGetResponse" start="53" end="53" startBytecode="9" endBytecode="9" sourcefile="HttpGetResponse.java" sourcepath="com/vvs/webserver/HTTP/HttpGetResponse.java"/>
-    <Property name="edu.umd.cs.findbugs.detect.DeadLocalStoreProperty.DEAD_OBJECT_STORE" value="true"/>
-    <Property name="edu.umd.cs.findbugs.detect.DeadLocalStoreProperty.KILLED_BY_SUBSEQUENT_STORE" value="true"/>
-    <Property name="edu.umd.cs.findbugs.detect.DeadLocalStoreProperty.LOCAL_NAME" value="f"/>
-    <Property name="edu.umd.cs.findbugs.detect.DeadLocalStoreProperty.METHOD_RESULT" value="true"/>
-  </BugInstance>
   <BugInstance type="DM_CONVERT_CASE" priority="3" rank="20" abbrev="Dm" category="I18N" first="1">
     <Class classname="com.vvs.webserver.HTTP.HttpGetResponse">
       <SourceLine classname="com.vvs.webserver.HTTP.HttpGetResponse" sourcefile="HttpGetResponse.java" sourcepath="com/vvs/webserver/HTTP/HttpGetResponse.java"/>
@@ -151,32 +126,6 @@
     </Method>
     <SourceLine classname="com.vvs.webserver.HTTP.HttpUtility" start="55" end="55" startBytecode="22" endBytecode="22" sourcefile="HttpUtility.java" sourcepath="com/vvs/webserver/HTTP/HttpUtility.java"/>
     <SourceLine classname="com.vvs.webserver.HTTP.HttpUtility" start="55" end="55" startBytecode="22" endBytecode="22" sourcefile="HttpUtility.java" sourcepath="com/vvs/webserver/HTTP/HttpUtility.java"/>
-  </BugInstance>
-  <BugInstance type="UWF_FIELD_NOT_INITIALIZED_IN_CONSTRUCTOR" priority="3" rank="20" abbrev="UwF" category="STYLE" first="1" last="1" removedByChange="true">
-    <Class classname="com.vvs.webserver.WebServer">
-      <SourceLine classname="com.vvs.webserver.WebServer" sourcefile="WebServer.java" sourcepath="com/vvs/webserver/WebServer.java"/>
-    </Class>
-    <Field classname="com.vvs.webserver.WebServer" name="mainThread_" signature="Ljava/lang/Thread;" isStatic="false">
-      <SourceLine classname="com.vvs.webserver.WebServer" sourcefile="WebServer.java" sourcepath="com/vvs/webserver/WebServer.java"/>
-    </Field>
-    <Method classname="com.vvs.webserver.WebServer" name="join" signature="()V" isStatic="false">
-      <SourceLine classname="com.vvs.webserver.WebServer" start="229" end="232" startBytecode="0" endBytecode="73" sourcefile="WebServer.java" sourcepath="com/vvs/webserver/WebServer.java"/>
-    </Method>
-    <SourceLine classname="com.vvs.webserver.WebServer" start="230" end="230" startBytecode="11" endBytecode="11" sourcefile="WebServer.java" sourcepath="com/vvs/webserver/WebServer.java"/>
-    <SourceLine classname="com.vvs.webserver.WebServer" start="230" end="230" startBytecode="11" endBytecode="11" sourcefile="WebServer.java" sourcepath="com/vvs/webserver/WebServer.java"/>
-  </BugInstance>
-  <BugInstance type="EQ_CHECK_FOR_OPERAND_NOT_COMPATIBLE_WITH_THIS" priority="1" rank="14" abbrev="Eq" category="BAD_PRACTICE" first="1">
-    <Class classname="com.vvs.webserver.unittest.StringBufferOutputStream">
-      <SourceLine classname="com.vvs.webserver.unittest.StringBufferOutputStream" sourcefile="StringBufferOutputStream.java" sourcepath="com/vvs/webserver/unittest/StringBufferOutputStream.java"/>
-    </Class>
-    <Method classname="com.vvs.webserver.unittest.StringBufferOutputStream" name="equals" signature="(Ljava/lang/Object;)Z" isStatic="false">
-      <SourceLine classname="com.vvs.webserver.unittest.StringBufferOutputStream" start="55" end="61" startBytecode="0" endBytecode="132" sourcefile="StringBufferOutputStream.java" sourcepath="com/vvs/webserver/unittest/StringBufferOutputStream.java"/>
-    </Method>
-    <Type descriptor="Ljava/lang/String;" role="TYPE_FOUND">
-      <SourceLine classname="java.lang.String" start="111" end="3128" sourcefile="String.java" sourcepath="java/lang/String.java"/>
-    </Type>
-    <SourceLine classname="com.vvs.webserver.unittest.StringBufferOutputStream" start="56" end="56" startBytecode="7" endBytecode="7" sourcefile="StringBufferOutputStream.java" sourcepath="com/vvs/webserver/unittest/StringBufferOutputStream.java"/>
-    <SourceLine classname="com.vvs.webserver.unittest.StringBufferOutputStream" start="56" end="56" startBytecode="7" endBytecode="7" sourcefile="StringBufferOutputStream.java" sourcepath="com/vvs/webserver/unittest/StringBufferOutputStream.java"/>
   </BugInstance>
   <BugInstance type="DM_DEFAULT_ENCODING" priority="1" rank="19" abbrev="Dm" category="I18N" first="1">
     <Class classname="com.vvs.webserver.unittest.http.HttpGetResponseTest">
@@ -474,10 +423,34 @@
     <SourceLine classname="com.vvs.webserver.unittest.webserver.WebServerTest" start="156" end="156" startBytecode="81" endBytecode="81" sourcefile="WebServerTest.java" sourcepath="com/vvs/webserver/unittest/webserver/WebServerTest.java"/>
   </BugInstance>
   <Errors errors="0" missingClasses="0"></Errors>
-  <FindBugsSummary timestamp="Sun, 4 Jan 2015 20:18:02 +0200" total_classes="14" referenced_classes="67" total_bugs="36" total_size="884" num_packages="4" java_version="1.8.0_25" vm_version="25.25-b02" cpu_seconds="3.36" clock_seconds="0.71" peak_mbytes="812.19" alloc_mbytes="456.00" gc_seconds="0.06" priority_3="20" priority_2="1" priority_1="15">
-    <PackageStats package="com.vvs.webserver.unittest" total_bugs="1" total_types="2" total_size="41" priority_1="1">
+  <FindBugsSummary timestamp="Sun, 4 Jan 2015 21:07:10 +0200" total_classes="32" referenced_classes="134" total_bugs="35" total_size="1788" num_packages="6" java_version="1.8.0_25" vm_version="25.25-b02" cpu_seconds="22.11" clock_seconds="4.88" peak_mbytes="587.52" alloc_mbytes="455.50" gc_seconds="0.27" priority_3="20" priority_2="1" priority_1="14">
+    <PackageStats package="com.vvs.webserver" total_bugs="0" total_types="5" total_size="228">
+      <ClassStats class="com.vvs.webserver.Main" sourceFile="Main.java" interface="false" size="34" bugs="0"/>
+      <ClassStats class="com.vvs.webserver.WebServer" sourceFile="WebServer.java" interface="false" size="130" bugs="0"/>
+      <ClassStats class="com.vvs.webserver.WebServer$1" sourceFile="WebServer.java" interface="false" size="14" bugs="0"/>
+      <ClassStats class="com.vvs.webserver.WebServer$RequestSolver" sourceFile="WebServer.java" interface="false" size="36" bugs="0"/>
+      <ClassStats class="com.vvs.webserver.WebServerState" sourceFile="WebServerState.java" interface="false" size="14" bugs="0"/>
+    </PackageStats>
+    <PackageStats package="com.vvs.webserver.HTTP" total_bugs="11" total_types="4" total_size="278" priority_3="9" priority_1="2">
+      <ClassStats class="com.vvs.webserver.HTTP.ContentType" sourceFile="ContentType.java" interface="false" size="45" bugs="0"/>
+      <ClassStats class="com.vvs.webserver.HTTP.HttpGetResponse" sourceFile="HttpGetResponse.java" interface="false" size="55" bugs="1" priority_3="1"/>
+      <ClassStats class="com.vvs.webserver.HTTP.HttpRequest" sourceFile="HttpRequest.java" interface="false" size="65" bugs="1" priority_1="1"/>
+      <ClassStats class="com.vvs.webserver.HTTP.HttpUtility" sourceFile="HttpUtility.java" interface="false" size="113" bugs="9" priority_3="8" priority_1="1"/>
+    </PackageStats>
+    <PackageStats package="com.vvs.webserver.ui" total_bugs="0" total_types="9" total_size="400">
+      <ClassStats class="com.vvs.webserver.ui.WebServerUI" sourceFile="WebServerUI.java" interface="false" size="235" bugs="0"/>
+      <ClassStats class="com.vvs.webserver.ui.WebServerUI$1" sourceFile="WebServerUI.java" interface="false" size="10" bugs="0"/>
+      <ClassStats class="com.vvs.webserver.ui.WebServerUI$2" sourceFile="WebServerUI.java" interface="false" size="33" bugs="0"/>
+      <ClassStats class="com.vvs.webserver.ui.WebServerUI$3" sourceFile="WebServerUI.java" interface="false" size="20" bugs="0"/>
+      <ClassStats class="com.vvs.webserver.ui.WebServerUI$4" sourceFile="WebServerUI.java" interface="false" size="22" bugs="0"/>
+      <ClassStats class="com.vvs.webserver.ui.WebServerUI$5" sourceFile="WebServerUI.java" interface="false" size="28" bugs="0"/>
+      <ClassStats class="com.vvs.webserver.ui.WebServerUI$6" sourceFile="WebServerUI.java" interface="false" size="28" bugs="0"/>
+      <ClassStats class="com.vvs.webserver.ui.WebServerUI$7" sourceFile="WebServerUI.java" interface="false" size="12" bugs="0"/>
+      <ClassStats class="com.vvs.webserver.ui.WebServerUI$8" sourceFile="WebServerUI.java" interface="false" size="12" bugs="0"/>
+    </PackageStats>
+    <PackageStats package="com.vvs.webserver.unittest" total_bugs="0" total_types="2" total_size="39">
       <ClassStats class="com.vvs.webserver.unittest.AllTests" sourceFile="AllTests.java" interface="false" size="3" bugs="0"/>
-      <ClassStats class="com.vvs.webserver.unittest.StringBufferOutputStream" sourceFile="StringBufferOutputStream.java" interface="false" size="38" bugs="1" priority_1="1"/>
+      <ClassStats class="com.vvs.webserver.unittest.StringBufferOutputStream" sourceFile="StringBufferOutputStream.java" interface="false" size="36" bugs="0"/>
     </PackageStats>
     <PackageStats package="com.vvs.webserver.unittest.http" total_bugs="19" total_types="5" total_size="505" priority_3="6" priority_2="1" priority_1="12">
       <ClassStats class="com.vvs.webserver.unittest.http.AllHttpTests" sourceFile="AllHttpTests.java" interface="false" size="3" bugs="0"/>
@@ -496,27 +469,34 @@
       <ClassStats class="com.vvs.webserver.unittest.webserver.WebServerTest$1" sourceFile="WebServerTest.java" interface="false" size="13" bugs="0"/>
     </PackageStats>
     <FindBugsProfile>
-      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.ClassInfoAnalysisEngine" totalMilliseconds="93" invocations="518" avgMicrosecondsPerInvocation="180" maxMicrosecondsPerInvocation="15851" standardDeviationMircosecondsPerInvocation="751"/>
-      <ClassProfile name="de.tobject.findbugs.builder.FindBugs2Eclipse" totalMilliseconds="67" invocations="2" avgMicrosecondsPerInvocation="33897" maxMicrosecondsPerInvocation="52595" standardDeviationMircosecondsPerInvocation="18698"/>
-      <ClassProfile name="edu.umd.cs.findbugs.detect.FindRefComparison$SpecialTypeAnalysis" totalMilliseconds="41" invocations="114" avgMicrosecondsPerInvocation="363" maxMicrosecondsPerInvocation="23956" standardDeviationMircosecondsPerInvocation="2227"/>
-      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.IsNullValueDataflowFactory" totalMilliseconds="36" invocations="116" avgMicrosecondsPerInvocation="314" maxMicrosecondsPerInvocation="2016" standardDeviationMircosecondsPerInvocation="358"/>
-      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.ValueNumberDataflowFactory" totalMilliseconds="35" invocations="128" avgMicrosecondsPerInvocation="277" maxMicrosecondsPerInvocation="1650" standardDeviationMircosecondsPerInvocation="346"/>
-      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.TypeDataflowFactory" totalMilliseconds="31" invocations="127" avgMicrosecondsPerInvocation="250" maxMicrosecondsPerInvocation="1129" standardDeviationMircosecondsPerInvocation="251"/>
-      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.UnconditionalValueDerefDataflowFactory" totalMilliseconds="30" invocations="114" avgMicrosecondsPerInvocation="268" maxMicrosecondsPerInvocation="1548" standardDeviationMircosecondsPerInvocation="349"/>
-      <ClassProfile name="edu.umd.cs.findbugs.ba.npe.NullDerefAndRedundantComparisonFinder" totalMilliseconds="25" invocations="114" avgMicrosecondsPerInvocation="226" maxMicrosecondsPerInvocation="1379" standardDeviationMircosecondsPerInvocation="249"/>
-      <ClassProfile name="edu.umd.cs.findbugs.detect.FormatStringChecker" totalMilliseconds="23" invocations="14" avgMicrosecondsPerInvocation="1643" maxMicrosecondsPerInvocation="21657" standardDeviationMircosecondsPerInvocation="5552"/>
-      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.CFGFactory" totalMilliseconds="19" invocations="116" avgMicrosecondsPerInvocation="165" maxMicrosecondsPerInvocation="571" standardDeviationMircosecondsPerInvocation="133"/>
-      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.ClassDataAnalysisEngine" totalMilliseconds="17" invocations="520" avgMicrosecondsPerInvocation="33" maxMicrosecondsPerInvocation="232" standardDeviationMircosecondsPerInvocation="21"/>
-      <ClassProfile name="edu.umd.cs.findbugs.detect.FindNoSideEffectMethods" totalMilliseconds="17" invocations="67" avgMicrosecondsPerInvocation="258" maxMicrosecondsPerInvocation="2227" standardDeviationMircosecondsPerInvocation="400"/>
-      <ClassProfile name="edu.umd.cs.findbugs.detect.FieldItemSummary" totalMilliseconds="16" invocations="67" avgMicrosecondsPerInvocation="247" maxMicrosecondsPerInvocation="2375" standardDeviationMircosecondsPerInvocation="392"/>
-      <ClassProfile name="edu.umd.cs.findbugs.OpcodeStack$JumpInfoFactory" totalMilliseconds="13" invocations="217" avgMicrosecondsPerInvocation="62" maxMicrosecondsPerInvocation="616" standardDeviationMircosecondsPerInvocation="70"/>
+      <ClassProfile name="de.tobject.findbugs.builder.FindBugs2Eclipse" totalMilliseconds="344" invocations="2" avgMicrosecondsPerInvocation="172417" maxMicrosecondsPerInvocation="184647" standardDeviationMircosecondsPerInvocation="12236"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.ClassInfoAnalysisEngine" totalMilliseconds="315" invocations="939" avgMicrosecondsPerInvocation="336" maxMicrosecondsPerInvocation="26778" standardDeviationMircosecondsPerInvocation="1233"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindNoSideEffectMethods" totalMilliseconds="157" invocations="134" avgMicrosecondsPerInvocation="1173" maxMicrosecondsPerInvocation="13752" standardDeviationMircosecondsPerInvocation="1931"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FieldItemSummary" totalMilliseconds="151" invocations="134" avgMicrosecondsPerInvocation="1133" maxMicrosecondsPerInvocation="12891" standardDeviationMircosecondsPerInvocation="1914"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.IsNullValueDataflowFactory" totalMilliseconds="148" invocations="226" avgMicrosecondsPerInvocation="658" maxMicrosecondsPerInvocation="26260" standardDeviationMircosecondsPerInvocation="2090"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.ValueNumberDataflowFactory" totalMilliseconds="143" invocations="250" avgMicrosecondsPerInvocation="572" maxMicrosecondsPerInvocation="18588" standardDeviationMircosecondsPerInvocation="1544"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.UnconditionalValueDerefDataflowFactory" totalMilliseconds="131" invocations="224" avgMicrosecondsPerInvocation="587" maxMicrosecondsPerInvocation="23899" standardDeviationMircosecondsPerInvocation="2124"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.TypeDataflowFactory" totalMilliseconds="128" invocations="249" avgMicrosecondsPerInvocation="515" maxMicrosecondsPerInvocation="8500" standardDeviationMircosecondsPerInvocation="1078"/>
+      <ClassProfile name="edu.umd.cs.findbugs.ba.npe.NullDerefAndRedundantComparisonFinder" totalMilliseconds="118" invocations="224" avgMicrosecondsPerInvocation="526" maxMicrosecondsPerInvocation="25498" standardDeviationMircosecondsPerInvocation="1772"/>
+      <ClassProfile name="edu.umd.cs.findbugs.OpcodeStack$JumpInfoFactory" totalMilliseconds="106" invocations="495" avgMicrosecondsPerInvocation="215" maxMicrosecondsPerInvocation="3616" standardDeviationMircosecondsPerInvocation="335"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.CFGFactory" totalMilliseconds="96" invocations="226" avgMicrosecondsPerInvocation="426" maxMicrosecondsPerInvocation="14114" standardDeviationMircosecondsPerInvocation="1086"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.ClassDataAnalysisEngine" totalMilliseconds="89" invocations="941" avgMicrosecondsPerInvocation="94" maxMicrosecondsPerInvocation="25788" standardDeviationMircosecondsPerInvocation="843"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindRefComparison$SpecialTypeAnalysis" totalMilliseconds="71" invocations="193" avgMicrosecondsPerInvocation="370" maxMicrosecondsPerInvocation="8529" standardDeviationMircosecondsPerInvocation="792"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.JavaClassAnalysisEngine" totalMilliseconds="69" invocations="185" avgMicrosecondsPerInvocation="375" maxMicrosecondsPerInvocation="21230" standardDeviationMircosecondsPerInvocation="2165"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.MethodGenFactory" totalMilliseconds="55" invocations="226" avgMicrosecondsPerInvocation="244" maxMicrosecondsPerInvocation="35132" standardDeviationMircosecondsPerInvocation="2329"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.NoteDirectlyRelevantTypeQualifiers" totalMilliseconds="51" invocations="134" avgMicrosecondsPerInvocation="385" maxMicrosecondsPerInvocation="5429" standardDeviationMircosecondsPerInvocation="702"/>
+      <ClassProfile name="edu.umd.cs.findbugs.util.TopologicalSort" totalMilliseconds="50" invocations="898" avgMicrosecondsPerInvocation="55" maxMicrosecondsPerInvocation="17368" standardDeviationMircosecondsPerInvocation="582"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindSelfComparison" totalMilliseconds="46" invocations="32" avgMicrosecondsPerInvocation="1453" maxMicrosecondsPerInvocation="35135" standardDeviationMircosecondsPerInvocation="6080"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindRefComparison" totalMilliseconds="43" invocations="32" avgMicrosecondsPerInvocation="1371" maxMicrosecondsPerInvocation="27989" standardDeviationMircosecondsPerInvocation="4842"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.ConstantDataflowFactory" totalMilliseconds="41" invocations="226" avgMicrosecondsPerInvocation="184" maxMicrosecondsPerInvocation="4432" standardDeviationMircosecondsPerInvocation="419"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.CalledMethods" totalMilliseconds="33" invocations="134" avgMicrosecondsPerInvocation="251" maxMicrosecondsPerInvocation="3505" standardDeviationMircosecondsPerInvocation="452"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FunctionsThatMightBeMistakenForProcedures" totalMilliseconds="33" invocations="134" avgMicrosecondsPerInvocation="251" maxMicrosecondsPerInvocation="5926" standardDeviationMircosecondsPerInvocation="636"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.ExplicitSerialization" totalMilliseconds="32" invocations="134" avgMicrosecondsPerInvocation="244" maxMicrosecondsPerInvocation="8201" standardDeviationMircosecondsPerInvocation="1051"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.BuildObligationPolicyDatabase" totalMilliseconds="32" invocations="134" avgMicrosecondsPerInvocation="243" maxMicrosecondsPerInvocation="2972" standardDeviationMircosecondsPerInvocation="445"/>
     </FindBugsProfile>
   </FindBugsSummary>
   <ClassFeatures></ClassFeatures>
   <History>
-    <AppVersion sequence="0" timestamp="1420395164668" release="" codeSize="0" numClasses="0"/>
-    <AppVersion sequence="1" timestamp="1420395164673" release="" codeSize="1787" numClasses="32"/>
-    <AppVersion sequence="2" timestamp="1420395492225" release="" codeSize="1790" numClasses="32"/>
-    <AppVersion sequence="3" timestamp="1420395507078" release="" codeSize="278" numClasses="4"/>
+    <AppVersion sequence="0" timestamp="1420398483262" release="" codeSize="0" numClasses="0"/>
   </History>
 </BugCollection>

@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testrun name="MainTests" project="WebServer" tests="4" started="4" failures="0" errors="0" ignored="0">
-  <testsuite name="com.vvs.webserver.unittest.webserver.MainTests" time="0.0">
-    <testcase name="testMainInvalidNumber" classname="com.vvs.webserver.unittest.webserver.MainTests" time="0.0"/>
-    <testcase name="testMainNull" classname="com.vvs.webserver.unittest.webserver.MainTests" time="0.0"/>
-    <testcase name="testMainInvalidNumberOfParams0" classname="com.vvs.webserver.unittest.webserver.MainTests" time="0.0"/>
-    <testcase name="testMainInvalidNumberOfParamsl" classname="com.vvs.webserver.unittest.webserver.MainTests" time="0.0"/>
-  </testsuite>
-</testrun>
