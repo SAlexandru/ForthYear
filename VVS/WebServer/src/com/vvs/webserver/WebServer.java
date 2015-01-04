@@ -7,6 +7,7 @@ import java.net.Socket;
 import java.net.SocketAddress;
 import java.nio.file.Path;
 import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
@@ -20,6 +21,7 @@ public class WebServer implements AutoCloseable {
 	private ServerSocket server_;
 	private Thread mainThread_;
 	private ThreadPoolExecutor pool_;
+	private int maxNumberOfThreads_ = 2;
 	private WebServerState state_ = WebServerState.STOPPED;
 	
 	private class RequestSolver implements Runnable {
@@ -45,9 +47,10 @@ public class WebServer implements AutoCloseable {
 					String method = request.getHttpMethod();
 					OutputStream out = s_.getOutputStream();
 					
-					System.out.println(Thread.currentThread().getId() + ": " + request.getRequest());
-					
-					if (HttpUtility.isConnectMethod(method)) {
+					if ("CLOSE".equals(request.getHttpMethod())) {
+						stop();
+					}
+					else if (HttpUtility.isConnectMethod(method)) {
 						HttpUtility.sendConnect(out);
 					}
 					else if (HttpUtility.isTraceMethod(method)) {
@@ -57,8 +60,9 @@ public class WebServer implements AutoCloseable {
 							new HttpGetResponse(request, base_).send(out);
 					}
 					
-					return;
-					
+					if (request.isInvalid() || s_.isClosed() || !s_.getKeepAlive()) {
+						return;
+					}
 				}
 			}
 			catch (IOException e) {
@@ -83,11 +87,13 @@ public class WebServer implements AutoCloseable {
 	 *   The maximumNumberOfThreads will be set to 10 (or whatever number you added)
 	 *   The backlog will have a default value of 100
 	 */
-	public WebServer(ServerSocket socket, Path path, int maxNumberOfThreads) {
+	public WebServer(ServerSocket socket, Path path, Path maintenance, int maxNumberOfThreads) {
 		base_   = path;
 		server_ = socket;
+		maintenance_ = maintenance;
+		maxNumberOfThreads_ = maxNumberOfThreads;
 		pool_ = new ThreadPoolExecutor(/*core*/ 2, 
-				   					   /*max*/ maxNumberOfThreads, 
+				   					   /*max*/ maxNumberOfThreads_, 
 				   					   /*keepAlive*/ 10,
 				   					   TimeUnit.SECONDS,
 				   					   new LinkedBlockingQueue<>()
@@ -138,12 +144,14 @@ public class WebServer implements AutoCloseable {
 	
 	public void bind(SocketAddress endpoint) throws IOException {
 		stop();
+		server_ = new ServerSocket();
 		server_.bind(endpoint);
 		start();
 	}
 	
 	public void bind(SocketAddress endpoint, int backlog) throws IOException {
 		stop();
+		server_ = new ServerSocket();
 		server_.bind(endpoint, backlog);
 		start();
 	}
@@ -153,7 +161,18 @@ public class WebServer implements AutoCloseable {
 			   mainThread_.isAlive();
 	}
 	
-	public void start() {
+	public void start() throws IOException {
+		if (pool_.isShutdown()) {
+			pool_ = new ThreadPoolExecutor(/*core*/ 2, 
+					   /*max*/ maxNumberOfThreads_, 
+					   /*keepAlive*/ 10,
+					   TimeUnit.SECONDS,
+					   new LinkedBlockingQueue<>()
+					 );
+		}
+		if (server_.isClosed()) {
+			server_ = new ServerSocket(server_.getLocalPort(), 100, server_.getInetAddress());
+		}
 		mainThread_ = new Thread(new Runnable() {
 			@Override
 			public void run() {
@@ -163,9 +182,9 @@ public class WebServer implements AutoCloseable {
 						pool_.execute(new RequestSolver(server_.accept()));
 					}
 
-				} catch (IOException e) {
+				} catch (IOException | RejectedExecutionException e) {
 					return;
-				} finally {
+				}  finally {
 					state_ = WebServerState.STOPPED;
 				}
 			}
@@ -184,7 +203,7 @@ public class WebServer implements AutoCloseable {
 			mainThread_.join();
 		}
 	}
-	
+
 	public void stop() throws IOException {
 		if (null != mainThread_) {
 			mainThread_.interrupt();

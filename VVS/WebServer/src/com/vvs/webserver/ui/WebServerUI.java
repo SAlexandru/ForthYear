@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JPanel;
@@ -25,6 +26,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.io.File;
 import java.io.IOException;
+import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -48,8 +50,8 @@ public class WebServerUI {
 	
 	private WebServer srv;
 	private ServerSocket skt;
-	private Path root = Paths.get("C:/bla");
-	private Path maintenance = Paths.get("C:/bla/maintenance");
+	private Path root = Paths.get("./TestSite");
+	private Path maintenance = Paths.get("./TestSite/maintenance");
 
 	/**
 	 * Launch the application.
@@ -78,7 +80,7 @@ public class WebServerUI {
 			e1.printStackTrace();
 		}
 		
-		srv = new WebServer(skt, root, 10);
+		srv = new WebServer(skt, root, maintenance, 10);
 		
 		initialize();
 	}
@@ -201,8 +203,8 @@ public class WebServerUI {
 						}
 					}
 					
-					lblRootcheck.hide();
-					lblMtncheck.hide();
+					lblRootcheck.setVisible(false);
+					lblMtncheck.setVisible(false);
 				}
 			}
 		});
@@ -290,8 +292,22 @@ public class WebServerUI {
 			public void actionPerformed(ActionEvent e) {
 				// action is pressing enter
 				 String t = txtAddPort.getText();
-				 lblPort.setText(t);
-				 infoPanel.repaint();
+				 try {
+					InetSocketAddress addr = new InetSocketAddress(Integer.parseInt(t));
+					srv.bind(addr, 100);
+					lblPort.setText(t);
+					infoPanel.repaint();
+				} catch (NumberFormatException e1) {
+					JOptionPane.showMessageDialog(frame,
+						    "Invalid port number, please introduce a number!",
+						    "Port",
+						    JOptionPane.ERROR_MESSAGE);
+				} catch (IOException e1) {
+					JOptionPane.showMessageDialog(frame,
+						    "Cannot bind to specified port, please try another!",
+						    "Port",
+						    JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 		
@@ -301,8 +317,6 @@ public class WebServerUI {
 			public void actionPerformed(ActionEvent e) {
 				// action is pressing enter
 				 String t = txtAddRootDir.getText();
-				 System.out.println(t);
-				 System.out.println(t.length());
 				 File newRoot = new File(t);
 				 Boolean isDir = false;
 				 Boolean doesExist = newRoot.exists();
@@ -319,10 +333,11 @@ public class WebServerUI {
 							
 							ImageIcon icon = new ImageIcon("ok.jpg");
 							lblRootcheck.setIcon(icon);
-							lblRootcheck.show();
+							lblRootcheck.setVisible(true);
 						} catch (IOException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
+							ImageIcon icon = new ImageIcon("no.jpg");
+							lblRootcheck.setIcon(icon);
+							lblRootcheck.setVisible(true);
 						}
 					 }
 				 }
@@ -331,7 +346,7 @@ public class WebServerUI {
 				 {
 						ImageIcon icon = new ImageIcon("no.jpg");
 						lblRootcheck.setIcon(icon);
-						lblRootcheck.show();
+						lblRootcheck.setVisible(true);
 				 }
 			}
 		});
@@ -343,8 +358,6 @@ public class WebServerUI {
 				// action is pressing enter
 				 String t = txtAddMtnDir.getText();
 				 
-				 System.out.println(t);
-				 System.out.println(t.length());
 				 File newMtn = new File(t);
 				 Boolean isDir = false;
 				 Boolean doesExist = newMtn.exists();
@@ -356,11 +369,17 @@ public class WebServerUI {
 					 if (isDir)
 					 {
 						maintenance = Paths.get(t);
-						srv.setMaintenancePath(maintenance);
+						try {
+							srv.setMaintenancePath(maintenance);
+							ImageIcon icon = new ImageIcon("ok.jpg");
+							lblMtncheck.setIcon(icon);
+							lblMtncheck.setVisible(true);
+						} catch (IOException e1) {
+							ImageIcon icon = new ImageIcon("no.jpg");
+							lblMtncheck.setIcon(icon);
+							lblMtncheck.setVisible(true);
+						}
 						
-						ImageIcon icon = new ImageIcon("ok.jpg");
-						lblMtncheck.setIcon(icon);
-						lblMtncheck.show();
 					 }
 				 }
 				 
@@ -368,7 +387,7 @@ public class WebServerUI {
 				 {
 						ImageIcon icon = new ImageIcon("no.jpg");
 						lblMtncheck.setIcon(icon);
-						lblMtncheck.show();
+						lblMtncheck.setVisible(true);
 				 }
 			}
 		});
@@ -396,10 +415,10 @@ public class WebServerUI {
 		});
 		
 		lblRootcheck = new JLabel("");
-		lblRootcheck.hide();
+		lblRootcheck.setVisible(false);
 		
 		lblMtncheck = new JLabel("");
-		lblMtncheck.hide();
+		lblMtncheck.setVisible(false);
 		GroupLayout gl_panel_2 = new GroupLayout(configPanel);
 		gl_panel_2.setHorizontalGroup(
 			gl_panel_2.createParallelGroup(Alignment.LEADING)

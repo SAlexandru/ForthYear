@@ -1,24 +1,56 @@
 package com.vvs.webserver;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.nio.file.FileSystems;
+import java.nio.file.Path;
 
 public class Main {
 	public static void main(String[] args) {
-		ServerSocket s = null;
+		int port;
+		Path base;
+		Path maintenance;
+		
 		try {
-
-			s = new ServerSocket(8011, 100);
-		} catch (IOException e) {
-			e.printStackTrace();
+			port = Integer.parseInt(args[0]);
+			base = FileSystems.getDefault().getPath(args[1]);
+			maintenance = FileSystems.getDefault().getPath(args[2]);
+			
+			File b = base.toFile(), m = maintenance.toFile();
+			
+			if (port < 1025 || port > 65535) {
+				throw new Exception ("port number must be between 1024 and 65535");
+			}
+			if (!b.exists() || !m.exists() || !b.isDirectory() || !m.isDirectory()) {
+				throw new Exception ("base path and maitenance path must be real path to folders!");
+			}
 		}
-		WebServer server = new WebServer(s, FileSystems.getDefault().getPath("./TestSite/"), 10);
-		server.start();
+		catch (Exception e) {
+			System.out.println("Usage: java Main port basePath maitenancePath");
+			System.out.println("Error: " + e.getMessage());
+			return ;
+		}
+		
+		ServerSocket s = null;
+		
+		try {
+			s = new ServerSocket(port, 100);
+		} catch (IOException e) {
+			System.out.println("Cannot listen to the port you specified");
+		}
+		
+		WebServer server = new WebServer(s, base, maintenance, 10);
+		try {
+			server.start();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		
 		try {
 			server.join();
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+			System.out.println("server was interrupted");
 		}
 		finally {
 			try {

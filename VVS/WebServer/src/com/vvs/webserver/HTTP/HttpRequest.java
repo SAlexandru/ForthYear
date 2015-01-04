@@ -9,12 +9,12 @@ import java.util.NoSuchElementException;
 import java.util.StringTokenizer;
 
 public class HttpRequest {
-	private String httpMethod_;
-	private String httpPath_;
-	private String protocol_;
-	private String request_;
-	private String host;
-	private String fullHttpPath_;
+	private String httpMethod_ = "";
+	private String httpPath_ = "";
+	private String protocol_ = "";
+	private String request_ = "";
+	private String host = "";
+	private String fullHttpPath_ = ""; 
 	private boolean invalidRequest_ = false;
 	
 	public HttpRequest (InputStream in) throws IOException, IllegalArgumentException {
@@ -38,6 +38,9 @@ public class HttpRequest {
 		try {
 			StringTokenizer tokenizer = new StringTokenizer(request.toString());
 			httpMethod_ = tokenizer.nextToken();
+			if ("CLOSE".equals(httpMethod_)) {
+				return;
+			}
 			httpPath_ = tokenizer.nextToken();
 			protocol_ = tokenizer.nextToken();
 			
