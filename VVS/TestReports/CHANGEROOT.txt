@@ -1,0 +1,8 @@
+<notes><passed>True</passed><type>Content: </type><assertion>Start server</assertion></notes>
+<notes><passed>True</passed><type>Content: </type><assertion>lbl:./TestSite</assertion></notes>
+<notes><passed>True</passed><type>Content: </type><assertion>lbl:/Users/salexandru/Desktop</assertion></notes>
+<notes><passed>True</passed><type>Content: </type><assertion>JPanel_3</assertion></notes>
+<notes><passed>True</passed><type>Content: </type><assertion>JPanel_3</assertion></notes>
+<notes><passed>True</passed><type>Content: </type><assertion>JOptionPane_0</assertion></notes>
+<notes><passed>True</passed><type>Content: </type><assertion>lbl:/Users/salexandru/Desktop</assertion></notes>
+<notes><passed>True</passed><type>Content: </type><assertion>lbl:/Users/salexandru/Downloads</assertion></notes>

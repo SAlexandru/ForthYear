@@ -1,0 +1,4 @@
+<notes><passed>True</passed><type>Content: </type><assertion>Start server</assertion></notes>
+<notes><passed>True</passed><type>Content: </type><assertion>Stop server</assertion></notes>
+<notes><passed>True</passed><type>Content: </type><assertion>Switch to maintenance mode</assertion></notes>
+<notes><passed>True</passed><type>Content: </type><assertion>Switch to maintenance mode</assertion></notes>

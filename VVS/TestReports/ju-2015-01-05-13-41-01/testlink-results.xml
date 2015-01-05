@@ -1,0 +1,27 @@
+<?xml version="1.0"  encoding="UTF-8"?>
+<results>
+<!-- Project name: 'WebServerUITesting' - Report dir: 'ju-2015-01-05-13-41-01' - START -->
+<!-- Testsuite name: 'AllTests' - START -->
+  <testcase external_id="ChangeMaintenanceDir" >
+  <result>p</result>
+  <notes></notes>
+  </testcase>
+  <testcase external_id="ChangePort" >
+  <result>p</result>
+  <notes></notes>
+  </testcase>
+  <testcase external_id="ChangeRoot" >
+  <result>p</result>
+  <notes></notes>
+  </testcase>
+  <testcase external_id="NormalCheckUp" >
+  <result>p</result>
+  <notes></notes>
+  </testcase>
+  <testcase external_id="StartStopServer" >
+  <result>p</result>
+  <notes></notes>
+  </testcase>
+<!-- Testsuite name: 'AllTests' - END -->
+<!-- Project name: 'WebServerUITesting' - Report dir: 'ju-2015-01-05-13-41-01' - END -->
+</results>

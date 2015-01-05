@@ -1,0 +1,13 @@
+<notes><passed>True</passed><type>Content: </type><assertion>Stop server</assertion></notes>
+<notes><passed>True</passed><type>Content: </type><assertion>lbl:127.0.0.1</assertion></notes>
+<notes><passed>True</passed><type>Content: </type><assertion>lbl:8011</assertion></notes>
+<notes><passed>True</passed><type>Content: </type><assertion>lbl:10008</assertion></notes>
+<notes><passed>True</passed><type>Content: </type><assertion>Start server</assertion></notes>
+<notes><passed>True</passed><type>Content: </type><assertion>lbl:10008</assertion></notes>
+<notes><passed>True</passed><type>Content: </type><assertion>lbl:8011</assertion></notes>
+<notes><passed>True</passed><type>Content: </type><assertion>Start server</assertion></notes>
+<notes><passed>True</passed><type>Content: </type><assertion>Stop server</assertion></notes>
+<notes><passed>True</passed><type>Content: </type><assertion>lbl:8011</assertion></notes>
+<notes><passed>True</passed><type>Content: </type><assertion>lbl:127.0.0.1</assertion></notes>
+<notes><passed>True</passed><type>Content: </type><assertion>Stop server</assertion></notes>
+<notes><passed>True</passed><type>Content: </type><assertion>Start server</assertion></notes>

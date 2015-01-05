@@ -1,0 +1,20 @@
+<notes><passed>True</passed><type>Content: </type><assertion>Start server</assertion></notes>
+<notes><passed>True</passed><type>Content: </type><assertion>lbl:WebServer control</assertion></notes>
+<notes><passed>True</passed><type>Content: </type><assertion>JPanel_1</assertion></notes>
+<notes><passed>True</passed><type>Content: </type><assertion>lbl:WebServer info</assertion></notes>
+<notes><passed>True</passed><type>Content: </type><assertion>WebServer control</assertion></notes>
+<notes><passed>True</passed><type>Content: </type><assertion>lbl:Server listening on port</assertion></notes>
+<notes><passed>True</passed><type>Content: </type><assertion>lbl:Web root directory</assertion></notes>
+<notes><passed>True</passed><type>Content: </type><assertion>lbl:Maintenance directory</assertion></notes>
+<notes><passed>True</passed><type>Content: </type><assertion>lbl:WebServer configuration</assertion></notes>
+<notes><passed>True</passed><type>Content: </type><assertion>lbl:WebServer info</assertion></notes>
+<notes><passed>True</passed><type>Content: </type><assertion>lbl:Server status</assertion></notes>
+<notes><passed>True</passed><type>Content: </type><assertion>lbl:Server address</assertion></notes>
+<notes><passed>True</passed><type>Content: </type><assertion>lbl:Server listening port</assertion></notes>
+<notes><passed>True</passed><type>Content: </type><assertion>lbl:Root Dir</assertion></notes>
+<notes><passed>True</passed><type>Content: </type><assertion>lbl:Maintenance Dir</assertion></notes>
+<notes><passed>True</passed><type>Content: </type><assertion>lbl:Stopped</assertion></notes>
+<notes><passed>True</passed><type>Content: </type><assertion>Switch to maintenance mode</assertion></notes>
+<notes><passed>True</passed><type>Content: </type><assertion>JPanel_3</assertion></notes>
+<notes><passed>True</passed><type>Content: </type><assertion>SubmitConfig</assertion></notes>
+<notes><passed>True</passed><type>Content: </type><assertion>SaveConfig</assertion></notes>

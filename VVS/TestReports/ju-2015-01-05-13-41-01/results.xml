@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<test projectname='WebServerUITesting' reportdir='ju-2015-01-05-13-41-01' >
+<testsuite name="AllTests" >
+  <testcase name="ChangeMaintenanceDir" status="0" time="2.464" >
+  </testcase>
+  <testcase name="ChangePort" status="0" time="4.2" >
+  </testcase>
+  <testcase name="ChangeRoot" status="0" time="7.562" >
+  </testcase>
+  <testcase name="NormalCheckUp" status="0" time="3.852" >
+  </testcase>
+  <testcase name="StartStopServer" status="0" time="3.714" >
+  </testcase>
+</testsuite>
+</test>

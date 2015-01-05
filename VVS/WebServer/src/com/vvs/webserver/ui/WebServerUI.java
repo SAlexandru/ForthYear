@@ -25,14 +25,24 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.NoSuchElementException;
+import java.util.Scanner;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class WebServerUI {
-
+	private File f_;
+	private String ip_ = "127.0.0.1";
+	private String port_ = "8011";
+	private String basePath_ = "./TestSize";
+	private String maintenancePath_ = "./TestSite/maintenance";
 	private JFrame frame;
 	private JTextField txtAddPort;
 	private JTextField txtAddRootDir;
@@ -50,8 +60,13 @@ public class WebServerUI {
 	
 	private WebServer srv;
 	private ServerSocket skt;
-	private Path root = Paths.get("./TestSite");
-	private Path maintenance = Paths.get("./TestSite/maintenance");
+	private Path root_ = Paths.get("./TestSite");
+	private Path maintenance_ = Paths.get("./TestSite/maintenance");
+	private JLabel lblRoodDir;
+	private JLabel lblRValue;
+	private JLabel lblMaintenanceDir;
+	private JLabel lblMValue;
+	private JButton btnSave;
 
 	/**
 	 * Launch the application.
@@ -71,16 +86,43 @@ public class WebServerUI {
 
 	/**
 	 * Create the application.
+	 * @throws Exception 
 	 */
-	public WebServerUI() {
+	public WebServerUI() throws Exception {
+		f_ = new File("configurationFile");
+		if (!f_.exists()) {
+			if (!f_.createNewFile()) {
+				throw new RuntimeException("Cannot create configuration file");
+			}
+		}
+		try (Scanner s = new Scanner(f_)) {
+			ip_ = s.nextLine();
+			port_ = s.nextLine();
+			Integer.parseInt(port_);
+			basePath_ = s.nextLine();
+			root_ = Paths.get(basePath_).toAbsolutePath().normalize();
+			File r = root_.toFile();
+			if (!r.exists() || !r.isDirectory()) {
+				throw new Exception("While reading config file: Root path must be a valid directory path");
+			}
+			maintenancePath_ = s.nextLine();
+			maintenance_ = Paths.get(maintenancePath_).toAbsolutePath().normalize();
+			File m = maintenance_.toFile();
+			if (!m.exists() || !m.isDirectory()) {
+				throw new Exception("While reading config file: Maintenace path must be a valid directory path");
+			}
+		}
+		catch (NoSuchElementException e)
+		{
+			
+		}
 		try {
-			skt = new ServerSocket(10008,100);
+			skt = new ServerSocket(Integer.parseInt(port_), 100);
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		
-		srv = new WebServer(skt, root, maintenance, 10);
+		srv = new WebServer(skt, root_, maintenance_, 10);
 		
 		initialize();
 	}
@@ -91,85 +133,24 @@ public class WebServerUI {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 606, 581);
 
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		infoPanel = new JPanel();
 		frame.getContentPane().add(infoPanel, BorderLayout.WEST);
 		
-		JLabel lblInfo = new JLabel("WebServer info:");
-		lblInfo.setHorizontalAlignment(SwingConstants.CENTER);
-		
-		JLabel lblServerStatus_1 = new JLabel("Server status:");
-		
-		JLabel lblNewLabel = new JLabel("Server address:");
-		
-		JLabel lblServerListeningPort = new JLabel("Server listening port:");
-		
-		lblNewServerStatus = new JLabel("Stopped");
-		lblNewServerStatus.setHorizontalAlignment(SwingConstants.LEFT);
-		
-		lblNewAddr = new JLabel("127.0.0.1");
-		lblNewAddr.setHorizontalAlignment(SwingConstants.LEFT);
-		
-		lblPort = new JLabel("10008");
-		GroupLayout gl_panel = new GroupLayout(infoPanel);
-		gl_panel.setHorizontalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel.createSequentialGroup()
-					.addGap(5)
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblInfo, GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
-						.addGroup(gl_panel.createSequentialGroup()
-							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblServerListeningPort)
-								.addComponent(lblNewLabel)
-								.addComponent(lblServerStatus_1))
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-									.addGroup(gl_panel.createSequentialGroup()
-										.addComponent(lblNewServerStatus, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.RELATED, 4, Short.MAX_VALUE))
-									.addComponent(lblNewAddr, GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE))
-								.addComponent(lblPort, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE))))
-					.addContainerGap())
-		);
-		gl_panel.setVerticalGroup(
-			gl_panel.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_panel.createSequentialGroup()
-					.addGap(5)
-					.addComponent(lblInfo, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblServerStatus_1)
-						.addComponent(lblNewServerStatus))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblNewLabel)
-						.addComponent(lblNewAddr))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblServerListeningPort)
-						.addComponent(lblPort))
-					.addGap(163))
-		);
-		infoPanel.setLayout(gl_panel);
-		
-		togglePanel = new JPanel();
-		frame.getContentPane().add(togglePanel, BorderLayout.EAST);
+		JLabel lblWebserverControl = new JLabel("WebServer control:");
+		lblWebserverControl.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		btnToggleButton = new JButton("Start server");
 		btnToggleButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// start server, change text of button
 				if(btnToggleButton == e.getSource())
 				{
 					if(lblNewServerStatus.getText().equals("Stopped"))
 					{
-						System.out.println("stopped, now starting");
-						// server was turned on. Clicking the button again would stop the server.
+						System.out.println("now starting");
 						btnToggleButton.setText("Stop server");
 						if(chckbxMode.isSelected())
 							lblNewServerStatus.setText("Maintenance");
@@ -181,15 +162,13 @@ public class WebServerUI {
 							srv.setState(WebServerState.RUNNING);
 							chckbxMode.setEnabled(true);
 						} catch (IOException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 					}
 					else
 					if(lblNewServerStatus.getText().equals("Running") || lblNewServerStatus.getText().equals("Maintenance"))
 					{
-						System.out.println("running, now stopping");
-						// server is turned off. Clicking again should start the server
+						System.out.println("now stopping");
 						btnToggleButton.setText("Start server");
 						lblNewServerStatus.setText("Stopped");
 						togglePanel.repaint();
@@ -198,7 +177,6 @@ public class WebServerUI {
 							srv.setState(WebServerState.STOPPED);
 							chckbxMode.setEnabled(false);
 						} catch (IOException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 					}
@@ -209,76 +187,173 @@ public class WebServerUI {
 			}
 		});
 		
-		JLabel lblWebserverControl = new JLabel("WebServer control:");
-		lblWebserverControl.setHorizontalAlignment(SwingConstants.CENTER);
-		
 		chckbxMode = new JCheckBox("Switch to maintenance mode");
 		chckbxMode.setEnabled(false);
 		chckbxMode.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
-				// if ItemEvent.DESELECTED;
 				if(e.getStateChange() == ItemEvent.SELECTED)
 				{
-					// server is now entering maintenance mode
 					lblNewServerStatus.setText("Maintenance");
 					chckbxMode.setSelected(true);
 					try {
 						srv.setState(WebServerState.MAINTENANCE);
 					} catch (IOException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 				}
 				else
 				if(e.getStateChange() == ItemEvent.DESELECTED)
 				{
-					// server is now entering maintenance mode
 					lblNewServerStatus.setText("Running");
 					chckbxMode.setSelected(false);
 					try {
 						srv.setState(WebServerState.RUNNING);
 					} catch (IOException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 				}
 			}
 		});
+		GroupLayout gl_panel = new GroupLayout(infoPanel);
+		gl_panel.setHorizontalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGap(28)
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+								.addComponent(btnToggleButton, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblWebserverControl, GroupLayout.PREFERRED_SIZE, 148, GroupLayout.PREFERRED_SIZE)))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(chckbxMode, GroupLayout.PREFERRED_SIZE, 236, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
+		gl_panel.setVerticalGroup(
+			gl_panel.createParallelGroup(Alignment.TRAILING)
+				.addGroup(Alignment.LEADING, gl_panel.createSequentialGroup()
+					.addGap(14)
+					.addComponent(lblWebserverControl)
+					.addGap(40)
+					.addComponent(btnToggleButton)
+					.addGap(42)
+					.addComponent(chckbxMode)
+					.addContainerGap(221, Short.MAX_VALUE))
+		);
+		infoPanel.setLayout(gl_panel);
+		
+		togglePanel = new JPanel();
+		frame.getContentPane().add(togglePanel, BorderLayout.CENTER);
+		
+		JLabel lblInfo = new JLabel("WebServer info:");
+		lblInfo.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		JLabel lblServerStatus_1 = new JLabel("Server status:");
+		
+		lblNewServerStatus = new JLabel("Stopped");
+		lblNewServerStatus.setHorizontalAlignment(SwingConstants.LEFT);
+		
+		JLabel lblNewLabel = new JLabel("Server address:");
+		
+		lblNewAddr = new JLabel(ip_);
+		lblNewAddr.setHorizontalAlignment(SwingConstants.LEFT);
+		
+		JLabel lblServerListeningPort = new JLabel("Server listening port:");
+		
+		lblPort = new JLabel(port_);
+		
+		lblRoodDir = new JLabel("Root Dir:");
+		
+		lblRValue = new JLabel("./TestSite");
+		lblRValue.setText(root_.toString());
+		
+		lblMaintenanceDir = new JLabel("Maintenance Dir:");
+		
+		lblMValue = new JLabel("./TestSite/maintenace");
+		lblMValue.setText(maintenance_.toString());
+		
+		btnSave = new JButton("SaveConfig");
+		btnSave.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					PrintWriter writer = new PrintWriter(f_);
+					writer.println(ip_);
+					writer.println(port_);
+					writer.println(basePath_);
+					writer.println(maintenancePath_);
+					writer.flush();
+					writer.close();
+				} catch (FileNotFoundException e1) {
+					JOptionPane.showMessageDialog(frame,
+						    "Cannot find configuration file!",
+						    "ConfigFile",
+						    JOptionPane.ERROR_MESSAGE);
+				}
+				
+			}
+		});
 		GroupLayout gl_panel_1 = new GroupLayout(togglePanel);
 		gl_panel_1.setHorizontalGroup(
-			gl_panel_1.createParallelGroup(Alignment.LEADING)
+			gl_panel_1.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_panel_1.createSequentialGroup()
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel_1.createSequentialGroup()
 							.addContainerGap()
 							.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_panel_1.createSequentialGroup()
-									.addGap(10)
-									.addComponent(btnToggleButton, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE))
-								.addComponent(lblWebserverControl, GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)))
-						.addGroup(Alignment.TRAILING, gl_panel_1.createSequentialGroup()
-							.addGap(14)
-							.addComponent(chckbxMode, GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)))
-					.addContainerGap())
+								.addComponent(lblNewLabel)
+								.addComponent(lblServerStatus_1)
+								.addComponent(lblServerListeningPort)
+								.addComponent(lblRoodDir, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblMaintenanceDir))
+							.addGap(18)
+							.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblMValue)
+								.addComponent(lblRValue)
+								.addComponent(lblPort, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblNewAddr, GroupLayout.PREFERRED_SIZE, 79, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblNewServerStatus, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE)))
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addGap(77)
+							.addComponent(btnSave))
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addGap(76)
+							.addComponent(lblInfo, GroupLayout.PREFERRED_SIZE, 222, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		gl_panel_1.setVerticalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_1.createSequentialGroup()
-					.addGap(5)
-					.addComponent(lblWebserverControl)
-					.addGap(12)
-					.addComponent(btnToggleButton)
-					.addPreferredGap(ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
-					.addComponent(chckbxMode)
-					.addContainerGap())
+					.addContainerGap()
+					.addComponent(lblInfo, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
+					.addGap(29)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblServerStatus_1)
+						.addComponent(lblNewServerStatus))
+					.addGap(26)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblNewAddr)
+						.addComponent(lblNewLabel))
+					.addGap(26)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblPort)
+						.addComponent(lblServerListeningPort))
+					.addGap(18)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblRoodDir)
+						.addComponent(lblRValue))
+					.addGap(18)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblMaintenanceDir)
+						.addComponent(lblMValue))
+					.addGap(18)
+					.addComponent(btnSave)
+					.addContainerGap(26, Short.MAX_VALUE))
 		);
 		togglePanel.setLayout(gl_panel_1);
 		
 		configPanel = new JPanel();
 		frame.getContentPane().add(configPanel, BorderLayout.SOUTH);
-		
-		JLabel lblSrvConfig = new JLabel("WebServer configuration:");
-		lblSrvConfig.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		JLabel lblNewLabel_1 = new JLabel("Server listening on port:");
 		
@@ -290,12 +365,12 @@ public class WebServerUI {
 		txtAddPort.setColumns(10);
 		txtAddPort.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// action is pressing enter
 				 String t = txtAddPort.getText();
 				 try {
 					InetSocketAddress addr = new InetSocketAddress(Integer.parseInt(t));
 					srv.bind(addr, 100);
 					lblPort.setText(t);
+					port_ = t;
 					infoPanel.repaint();
 				} catch (NumberFormatException e1) {
 					JOptionPane.showMessageDialog(frame,
@@ -315,12 +390,10 @@ public class WebServerUI {
 		txtAddRootDir.setColumns(10);
 		txtAddRootDir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// action is pressing enter
 				 String t = txtAddRootDir.getText();
 				 File newRoot = new File(t);
 				 Boolean isDir = false;
 				 Boolean doesExist = newRoot.exists();
-				 // show validator label
 				 if (doesExist)
 				 {
 					 System.out.println("Exists");
@@ -328,9 +401,10 @@ public class WebServerUI {
 					 if (isDir)
 					 {
 						 try {
-							root = Paths.get(t);
-							srv.setBaseDirectory(root);
-							
+							root_ = Paths.get(t).toAbsolutePath().normalize();
+							srv.setBaseDirectory(root_);
+							basePath_ = root_.toString();
+							lblRValue.setText(basePath_);
 							ImageIcon icon = new ImageIcon("ok.jpg");
 							lblRootcheck.setIcon(icon);
 							lblRootcheck.setVisible(true);
@@ -355,22 +429,22 @@ public class WebServerUI {
 		txtAddMtnDir.setColumns(10);
 		txtAddMtnDir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// action is pressing enter
 				 String t = txtAddMtnDir.getText();
 				 
 				 File newMtn = new File(t);
 				 Boolean isDir = false;
 				 Boolean doesExist = newMtn.exists();
-				 // show validator label
 				 if (doesExist)
 				 {
 					 System.out.println("Exists");
 					 isDir = newMtn.isDirectory();
 					 if (isDir)
 					 {
-						maintenance = Paths.get(t);
+						maintenance_ = Paths.get(t).toAbsolutePath().normalize();
 						try {
-							srv.setMaintenancePath(maintenance);
+							srv.setMaintenancePath(maintenance_);
+							maintenancePath_ = maintenance_.toString();
+							lblMValue.setText(maintenancePath_);
 							ImageIcon icon = new ImageIcon("ok.jpg");
 							lblMtncheck.setIcon(icon);
 							lblMtncheck.setVisible(true);
@@ -419,6 +493,83 @@ public class WebServerUI {
 		
 		lblMtncheck = new JLabel("");
 		lblMtncheck.setVisible(false);
+		
+		JButton btnSubmitconfig = new JButton("SubmitConfig");
+		btnSubmitconfig.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String port  = txtAddPort.getText().trim();
+				String basePath = txtAddRootDir.getText().trim();
+				String maintenancePath = txtAddMtnDir.getText().trim(); 
+				String errorMsg = "";
+				
+				if (!port.isEmpty()) {
+					try {
+						Integer.parseInt(port);
+						port_ = port;
+						InetSocketAddress addr = new InetSocketAddress(Integer.parseInt(port));
+						srv.bind(addr, 100);
+						port_ = port;
+						lblPort.setText(port_);
+						lblPort.repaint();
+					}
+					catch (Exception e1) {
+						errorMsg += e1.getMessage() + "\n";
+					} 
+				}
+				if (!basePath.isEmpty()) {
+					try {
+						File r = Paths.get(basePath).toAbsolutePath().normalize().toFile();
+						if (!r.exists() || !r.isDirectory()) {
+							throw new Exception("Root directory must be a valid path to a directory!");
+						}
+						srv.setBaseDirectory(Paths.get(basePath).toAbsolutePath().normalize());
+						basePath_ = basePath;
+						lblRValue.setText(basePath_);
+						root_ = Paths.get(basePath_).toAbsolutePath().normalize();
+						ImageIcon icon = new ImageIcon("ok.jpg");
+						lblRootcheck.setIcon(icon);
+						lblRootcheck.setVisible(true);
+					}
+					catch (Exception e1) {
+						ImageIcon icon = new ImageIcon("no.jpg");
+						lblRootcheck.setIcon(icon);
+						lblRootcheck.setVisible(true);
+						errorMsg += e1.getMessage() + "\n";
+					}
+				}
+				if (!maintenancePath.isEmpty()) {
+					try {
+						File m = Paths.get(maintenancePath).toAbsolutePath().normalize().toFile();
+						if (!m.exists() || !m.isDirectory()) {
+							throw new Exception("Maitenance directory must be a valid path to a directory!");
+						}
+						srv.setMaintenancePath(Paths.get(maintenancePath).toAbsolutePath().normalize());
+						maintenancePath_ = maintenancePath;
+						lblMValue.setText(maintenancePath_);
+						maintenance_ = Paths.get(maintenancePath_).toAbsolutePath().normalize();
+						ImageIcon icon = new ImageIcon("ok.jpg");
+						lblMtncheck.setIcon(icon);
+						lblMtncheck.setVisible(true);
+					}
+					catch (Exception e1) {
+						errorMsg += e1.getMessage() + "\n";
+						ImageIcon icon = new ImageIcon("no.jpg");
+						lblMtncheck.setIcon(icon);
+						lblMtncheck.setVisible(true);
+					}
+				}
+				if (!errorMsg.isEmpty()) {
+					JOptionPane.showMessageDialog(frame,
+						    errorMsg,
+						    "Configuration",
+						    JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
+		
+		JLabel lblSrvConfig = new JLabel("WebServer configuration:");
+		lblSrvConfig.setHorizontalAlignment(SwingConstants.CENTER);
 		GroupLayout gl_panel_2 = new GroupLayout(configPanel);
 		gl_panel_2.setHorizontalGroup(
 			gl_panel_2.createParallelGroup(Alignment.LEADING)
@@ -449,15 +600,20 @@ public class WebServerUI {
 								.addComponent(lblMtncheck)
 								.addComponent(lblRootcheck)))
 						.addGroup(gl_panel_2.createSequentialGroup()
-							.addGap(65)
-							.addComponent(lblSrvConfig)))
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+							.addGap(189)
+							.addComponent(btnSubmitconfig)))
+					.addContainerGap(194, Short.MAX_VALUE))
+				.addGroup(Alignment.TRAILING, gl_panel_2.createSequentialGroup()
+					.addContainerGap(237, Short.MAX_VALUE)
+					.addComponent(lblSrvConfig)
+					.addGap(212))
 		);
 		gl_panel_2.setVerticalGroup(
 			gl_panel_2.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_2.createSequentialGroup()
+					.addContainerGap()
 					.addComponent(lblSrvConfig)
-					.addGap(11)
+					.addGap(5)
 					.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblNewLabel_1)
 						.addComponent(txtAddPort, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
@@ -473,7 +629,9 @@ public class WebServerUI {
 						.addComponent(txtAddMtnDir, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btnBrowseMtn)
 						.addComponent(lblMtncheck, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE))
-					.addGap(22))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnSubmitconfig)
+					.addContainerGap())
 		);
 		configPanel.setLayout(gl_panel_2);
 	}

@@ -1,0 +1,17 @@
+<notes><passed>True</passed><type>Content: </type><assertion>JPanel_1</assertion></notes>
+<notes><passed>True</passed><type>Content: </type><assertion>WebServer control</assertion></notes>
+<notes><passed>True</passed><type>Content: </type><assertion>JPanel_3</assertion></notes>
+<notes><passed>True</passed><type>Content: </type><assertion>Start server</assertion></notes>
+<notes><passed>True</passed><type>Content: </type><assertion>WebServer control</assertion></notes>
+<notes><passed>True</passed><type>Content: </type><assertion>lbl:10008</assertion></notes>
+<notes><passed>True</passed><type>Content: </type><assertion>lbl:./TestSite</assertion></notes>
+<notes><passed>True</passed><type>Content: </type><assertion>lbl:/Users/salexandru/Library</assertion></notes>
+<notes><passed>True</passed><type>Content: </type><assertion>lbl:./TestSite/maintenance</assertion></notes>
+<notes><passed>True</passed><type>Content: </type><assertion>lbl:/Users/salexandru/Music</assertion></notes>
+<notes><passed>True</passed><type>Content: </type><assertion>JPanel_3</assertion></notes>
+<notes><passed>True</passed><type>Content: </type><assertion>JOptionPane_0</assertion></notes>
+<notes><passed>True</passed><type>Content: </type><assertion>JPanel_3</assertion></notes>
+<notes><passed>True</passed><type>Content: </type><assertion>JOptionPane_0</assertion></notes>
+<notes><passed>True</passed><type>Content: </type><assertion>Start server</assertion></notes>
+<notes><passed>True</passed><type>Content: </type><assertion>JPanel_2</assertion></notes>
+<notes><passed>True</passed><type>Content: </type><assertion>JPanel_3</assertion></notes>
