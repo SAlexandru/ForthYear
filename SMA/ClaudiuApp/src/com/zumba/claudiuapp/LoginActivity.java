@@ -27,10 +27,8 @@ public class LoginActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
 		
-		
-		// ************************************************************************* Test contact
-		Intent intent = new Intent(this, ContactInstructorActivity.class);
-		startActivity(intent);
+		Intent i = new Intent(this, NotificationActivity.class);
+		startActivity(i);
 		
 		Button register = (Button)findViewById(R.id.bRegister);
 		

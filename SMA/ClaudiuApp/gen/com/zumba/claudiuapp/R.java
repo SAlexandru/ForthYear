@@ -75,14 +75,20 @@ public final class R {
         public static final int activity_contact_instructor=0x7f030001;
         public static final int activity_contact_user=0x7f030002;
         public static final int activity_login=0x7f030003;
-        public static final int activity_participants_list=0x7f030004;
-        public static final int activity_register_user=0x7f030005;
-        public static final int activity_show_zumba_types=0x7f030006;
-        public static final int activity_user=0x7f030007;
-        public static final int activity_user_profile=0x7f030008;
+        public static final int activity_new_notifications=0x7f030004;
+        public static final int activity_notification=0x7f030005;
+        public static final int activity_participants_list=0x7f030006;
+        public static final int activity_read_notifications=0x7f030007;
+        public static final int activity_register_user=0x7f030008;
+        public static final int activity_show_zumba_types=0x7f030009;
+        public static final int activity_user=0x7f03000a;
+        public static final int activity_user_profile=0x7f03000b;
     }
     public static final class menu {
-        public static final int register_user=0x7f070000;
+        public static final int new_notifications=0x7f070000;
+        public static final int notification=0x7f070001;
+        public static final int read_notifications=0x7f070002;
+        public static final int register_user=0x7f070003;
     }
     public static final class string {
         public static final int action_settings=0x7f050013;
@@ -104,12 +110,18 @@ public final class R {
         public static final int title_activity_contact_instructor=0x7f050014;
         public static final int title_activity_contact_user=0x7f050012;
         public static final int title_activity_login=0x7f050001;
+        public static final int title_activity_new_notifications=0x7f05001e;
+        public static final int title_activity_notification=0x7f050019;
         public static final int title_activity_participants_list=0x7f050016;
+        public static final int title_activity_read_notifications=0x7f05001d;
         public static final int title_activity_register_user=0x7f050018;
         public static final int title_activity_show_zumba_types=0x7f050017;
         public static final int title_activity_user=0x7f050003;
         public static final int title_activity_user_profile=0x7f050015;
         public static final int title_contact=0x7f050005;
+        public static final int title_section1=0x7f05001a;
+        public static final int title_section2=0x7f05001b;
+        public static final int title_section3=0x7f05001c;
     }
     public static final class style {
         /** 
