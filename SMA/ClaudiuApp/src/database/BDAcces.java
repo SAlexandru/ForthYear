@@ -55,7 +55,6 @@ public abstract class BDAcces {
     
     
     public void putData(String URL, List<NameValuePair> nameValuePairs){
-    	String result="";
     	InputStream isr = null;
     	
     	try{
@@ -68,7 +67,6 @@ public abstract class BDAcces {
     	}
     	catch(Exception e){
     		Log.e("log_tag","Error in http connection "+e.toString());
-    		result = "Could not connect to database.";
     	}
 
     	try{
@@ -79,7 +77,6 @@ public abstract class BDAcces {
     			sb.append(line + "\n");
     		}
     		isr.close();
-    		result = sb.toString();
     	}
     	catch(Exception e){
     		Log.e("log_tag", "Error converting result "+e.toString());

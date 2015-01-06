@@ -4,6 +4,7 @@ import database.BDUtilizatori;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -23,17 +24,22 @@ public class RegisterUserActivity extends Activity {
 		b.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				EditText txtName      = (EditText)v.findViewById(R.id.profileName);
-				EditText txtForname   = (EditText)v.findViewById(R.id.profileForname);
-				EditText txtEMail     = (EditText)v.findViewById(R.id.profileMail);
-				EditText txtPass      = (EditText)v.findViewById(R.id.profilePassword);
-				EditText txtTelephone = (EditText)v.findViewById(R.id.profileTelephone);
+				EditText txtName      = (EditText)findViewById(R.id.profileName);
+				EditText txtForname   = (EditText)findViewById(R.id.profileForname);
+				EditText txtEMail     = (EditText)findViewById(R.id.profileMail);
+				EditText txtPass      = (EditText)findViewById(R.id.profilePassword);
+				EditText txtTelephone = (EditText)findViewById(R.id.profileTelephone);
 				
-				String name      = txtName.getText().toString().trim();
-				String forName   = txtForname.getText().toString().trim();
-				String email  = txtEMail.getText().toString().trim();
-				String password  = txtPass.getText().toString().trim();
-				String telephone = txtTelephone.getText().toString().trim();
+				String name = "", forName = "", email = "", password = "", telephone = "";
+				try {
+					name = txtName.getText().toString().trim();
+					forName = txtForname.getText().toString().trim();
+					email = txtEMail.getText().toString().trim();
+					password = txtPass.getText().toString().trim();
+					telephone = txtTelephone.getText().toString().trim();
+				} catch (NullPointerException e) {
+					
+				}
 				
 				if (name.isEmpty() || forName.isEmpty() || email.isEmpty() || telephone.isEmpty()) {
 					Toast.makeText(RegisterUserActivity.this,
@@ -49,6 +55,11 @@ public class RegisterUserActivity extends Activity {
 					
 				}
 				else {
+					Log.d("claudiuapp", "name: " + name);
+					Log.d("claudiuapp", "forname: " + forName);
+					Log.d("claudiuapp", "email: " + email);
+					Log.d("claudiuapp", "password: " + password);
+					Log.d("claudiuapp", "telephone: " + telephone);
 					BDUtilizatori utilizatori = new BDUtilizatori();
 					utilizatori.introducereUtilizator(name, 
 													  forName, 
@@ -59,7 +70,7 @@ public class RegisterUserActivity extends Activity {
 													 );
 					Toast.makeText(RegisterUserActivity.this,
 							   	   "You were register. Now please log in", 
-							   	   Toast.LENGTH_LONG
+							   	   Toast.LENGTH_SHORT
 							  	  ).show();
 					
 					Intent i = new Intent(RegisterUserActivity.this, LoginActivity.class);

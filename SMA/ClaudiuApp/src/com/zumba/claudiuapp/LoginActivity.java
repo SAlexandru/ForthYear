@@ -6,7 +6,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -29,45 +32,44 @@ public class LoginActivity extends Activity {
 		Intent intent = new Intent(this, ContactInstructorActivity.class);
 		startActivity(intent);
 		
+		Button register = (Button)findViewById(R.id.bRegister);
+		
+		register.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(LoginActivity.this, RegisterUserActivity.class);
+				startActivity(i);
+			}
+		});
+		
+		Button blogin = (Button)findViewById(R.id.bLogin);
+		blogin.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				EditText eUserName = (EditText)findViewById(R.id.eUserName);
+				EditText ePassword = (EditText)findViewById(R.id.ePassword);
+				
+				
+				String userName = eUserName.getText().toString().trim();
+				String password = ePassword.getText().toString().trim();
+				
+				Log.d("claudiuapp", "username: " + userName);
+				Log.d("claudiuapp", "password: " + password);
+				if (userName.isEmpty() || password.isEmpty()) {
+					Toast.makeText(LoginActivity.this, 
+							       "Please enter both username and password", 
+							       Toast.LENGTH_LONG
+							       ).show();
+				}
+				else {
+					doLogin(userName, password);
+				}
+			}			
+		});
+		
 		
 		
 		loggedUserFile = getSharedPreferences(loggedUser, Context.MODE_PRIVATE);
-	}
-	
-	
-	public void clicked(View view) {
-		EditText eUserName = (EditText)findViewById(R.id.eUserName);
-		EditText ePassword = (EditText)findViewById(R.id.ePassword);
-		
-		String userName = eUserName.getText().toString().trim();
-		String password = ePassword.getText().toString().trim();
-		
-		if (userName.isEmpty() || password.isEmpty()) {
-			Toast.makeText(this, 
-					       "Please enter both username and password", 
-					       Toast.LENGTH_LONG
-					       ).show();
-		}
-		
-		//password = DigestUtils.sha256Hex(password);
-		
-		switch (view.getId()) {
-			case R.id.bRegister :
-				doRegister(userName, password);
-			case R.id.bLogin:
-				doLogin(userName, password);
-			default:
-				Toast.makeText(this, 
-							   "Something went wrong, please try again later!", 
-							   Toast.LENGTH_LONG
-							   ).show();
-		}
-	}
-
-	private void doRegister(String userName, String password) {
-		Intent i = new Intent(this, RegisterUserActivity.class);
-		startActivity(i);
-		
 	}
 
 	private void doLogin(String userName, String password) {
@@ -76,6 +78,7 @@ public class LoginActivity extends Activity {
 		 */
 		int loggedIn = new BDUtilizatori().logareMailParola(userName, password);
 		
+		Log.d("claudiuapp", "loggedIn: " + loggedIn);
 		
 		if (-1 != loggedIn) {
 			loggedUserFile.edit().putString("username", userName);
@@ -84,11 +87,13 @@ public class LoginActivity extends Activity {
 			
 			if (1 == loggedIn) {
 				Intent i = new Intent(this, AdminActivity.class);
+				i.putExtra("USER_ID", 0); //aici cum fac ???
 				startActivity(i);
 				
 			}
 			else {
 				Intent i = new Intent(this, UserActivity.class);
+				i.putExtra("USER_ID", 0); //aici cum fac ???
 				startActivity(i);
 			}
 		}
