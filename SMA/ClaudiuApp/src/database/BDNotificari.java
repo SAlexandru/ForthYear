@@ -26,13 +26,14 @@ public class BDNotificari extends BDAcces {
 	public void notificariMaiNoiDecatData(Timestamp data){
 		getData("http://zumbatimisoara.com/AppZumbaPHPScripts/getNotificationsNewerThanDate.php?date="+(data.getTime()*1000));
 	}
-	public void introducereNotificare(int id, Timestamp data, String titlu, String mesaj){
+	public void introducereNotificare(int id, Timestamp data, String titlu, String mesaj, NotificationType type){
 		
 		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 	    nameValuePairs.add(new BasicNameValuePair("id",String.valueOf(id)));
 	    nameValuePairs.add(new BasicNameValuePair("data",String.valueOf(data.getTime()*1000)));
 	    nameValuePairs.add(new BasicNameValuePair("titlu",titlu));
 	    nameValuePairs.add(new BasicNameValuePair("mesaj",mesaj));
+	    nameValuePairs.add(new BasicNameValuePair("tip",type.toString()));
 	    
 		putData("http://zumbatimisoara.com/AppZumbaPHPScripts/addNotification.php",nameValuePairs);
 	}
@@ -48,7 +49,9 @@ public class BDNotificari extends BDAcces {
     			Notificare n = new Notificare(json.getInt("ID"),
     										  new Timestamp(json.getLong("Data")),
     										  json.getString("Titlu"),
-    										  json.getString("Mesaj"));
+    										  json.getString("Mesaj"),
+    										  NotificationType.valueOf(json.getString("Tip"))
+    										 );
     			notificari.add(n);
     		}
     	}

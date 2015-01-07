@@ -9,6 +9,7 @@ import com.zumba.claudiuapp.utils.ExpandableTextView;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,13 +51,20 @@ public class CustomNotificationListAdapter extends ArrayAdapter<Notificare> {
 			titleView.setText(msg.getTitlu());
 			msgView.setText(msg.getMesaj());
 			
+			Log.d("notification type", msg.getNotificationType().toString());
 			switch(msg.getNotificationType()) {
 				case INFO:
-					imgView.setImageResource(R.drawable.info);
+					Log.d("notification type", "R.drawable.info");
+					imgView.setImageResource(R.drawable.info); 
+					break;
 				case URGENT:
+					Log.d("notification type", "R.drawable.urgent");
 					imgView.setImageResource(R.drawable.urgent);
+					break;
 				case WARNING:
+					Log.d("notification type", "R.drawable.warning");
 					imgView.setImageResource(R.drawable.warning);
+					break;
 			}
 		}
 		

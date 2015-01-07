@@ -1,6 +1,8 @@
 package com.zumba.claudiuapp.notification;
 
 import com.zumba.claudiuapp.R;
+import com.zumba.claudiuapp.notification.admin.SendNotification;
+import com.zumba.claudiuapp.notification.admin.SentNotifications;
 
 import database.BDUtilizatori;
 import android.content.Intent;
@@ -36,7 +38,7 @@ public class NotificationActivity extends TabActivity {
 						 .setIndicator("Music Notification");
 		
 		Intent allMissedNotif = new Intent(this, NewSongs.class);
-		TabSpec tabSpecAllMissedNotif = tabHost.newTabSpec("Songs Notifications").setContent(musicNotif);
+		TabSpec tabSpecAllMissedNotif = tabHost.newTabSpec("Songs Notifications");
 		tabSpecAllMissedNotif.setContent(allMissedNotif)
 						 //.setIndicator("All Missed Notification", resources.getDrawable(R.drawable.<<icon_id>>);
 						 .setIndicator("All Missed Notification");
@@ -59,16 +61,30 @@ public class NotificationActivity extends TabActivity {
 		Bundle b = getIntent().getExtras();
 		int user_id = b.getInt("USER_ID");
 		
-		BDUtilizatori utilizatori = new BDUtilizatori();
-		utilizatori.utilizatorDupaID(user_id);
+		BDUtilizatori bd = new BDUtilizatori();
+		bd.utilizatorDupaID(user_id);
 		
-		if (0 == utilizatori.getUtilizatori().get(0).getE_instructor()) {
-			createTabs();
+		if (1 == 1) {//bd.getUtilizatori().get(0).getE_instructor()) {
+			createAdminTabs();
 		}
 		else {
 			createTabs();
 		}
+	}
+
+	private void createAdminTabs() {
+		//Resources ressources = getResources(); 
+		TabHost tabHost = getTabHost(); 
+		Intent sendNotification = new Intent(this, SendNotification.class);
+		TabSpec tabSpecSendNotfication = tabHost.newTabSpec("Send Notification").setContent(sendNotification);
+		tabSpecSendNotfication.setIndicator("Send Notification");
 		
+		Intent sentNotification = new Intent(this, SentNotifications.class);
+		TabSpec tabSpecSentNotfication = tabHost.newTabSpec("Sent Notification").setContent(sentNotification);
+		tabSpecSentNotfication.setIndicator("Sent Notification");
 		
+		tabHost.addTab(tabSpecSendNotfication);
+		tabHost.addTab(tabSpecSentNotfication);
+		tabHost.setCurrentTab(0);
 	}
 }

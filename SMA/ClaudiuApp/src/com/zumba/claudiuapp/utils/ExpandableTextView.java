@@ -14,7 +14,7 @@ import android.widget.TextView;
  * Date: 9/7/13 - 3:33 AM
  */
 public class ExpandableTextView extends TextView {
-    private static final int DEFAULT_TRIM_LENGTH = 200;
+    private static final int DEFAULT_TRIM_LENGTH = 20;
     private static final String ELLIPSIS = ".....";
  
     private CharSequence originalText;

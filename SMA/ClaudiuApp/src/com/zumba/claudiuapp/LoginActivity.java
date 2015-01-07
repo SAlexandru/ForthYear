@@ -30,6 +30,7 @@ public class LoginActivity extends Activity {
 		setContentView(R.layout.activity_login);
 		
 		Intent i = new Intent(this, NotificationActivity.class);
+		i.putExtra("USER_ID", 0); //aici cum fac ???
 		startActivity(i);
 		
 		Button register = (Button)findViewById(R.id.bRegister);
