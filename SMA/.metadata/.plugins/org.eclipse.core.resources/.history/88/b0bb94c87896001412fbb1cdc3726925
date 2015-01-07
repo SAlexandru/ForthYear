@@ -1,0 +1,20 @@
+package com.zumba.claudiuapp.notification.admin;
+
+import com.zumba.claudiuapp.R;
+import com.zumba.claudiuapp.R.id;
+import com.zumba.claudiuapp.R.layout;
+import com.zumba.claudiuapp.R.menu;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+
+public class SendNotification extends Activity {
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_send_notification);
+	}
+}

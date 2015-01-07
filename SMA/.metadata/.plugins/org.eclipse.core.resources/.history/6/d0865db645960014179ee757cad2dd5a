@@ -1,0 +1,65 @@
+package com.zumba.claudiuapp.notification;
+
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.Map.Entry;
+import java.util.Set;
+import java.util.TreeSet;
+
+import android.content.Context;
+import android.content.SharedPreferences;
+
+public class OldNotifications implements Iterable<NotifMessages> {
+	private static final String FILENAME = "OldNotificationsFile";
+	
+	private SharedPreferences file;
+	private Set<NotifMessages> oldNotif;
+	
+	private static class SingletonOldNotifications {
+		public static final OldNotifications instance = new OldNotifications();
+	}
+	
+	private OldNotifications () {
+		oldNotif = new TreeSet<>(Collections.reverseOrder());
+		
+	}
+	
+	private synchronized OldNotifications setContenxt (Context context) {
+		file = context.getSharedPreferences(FILENAME, Context.MODE_PRIVATE);
+		
+		/*
+		 *	should create a way for lazy initialization 
+		 */
+		for (Entry<String, ?> line: file.getAll().entrySet()) {
+			try {
+				oldNotif.add(new NotifMessages(line.getKey()));
+			}
+			catch (IllegalArgumentException e) {
+				//someone has corrupted the file
+				//asume that no values are valid
+				file.edit().clear();
+				file.edit().commit();
+				oldNotif.clear();
+				break;
+			}
+		}
+		
+		return this;
+	}
+	
+	public OldNotifications getInstance(Context context) {
+		return SingletonOldNotifications.instance.setContenxt(context);
+	}
+	
+	public int getNumberOfNotif() {return oldNotif.size();}
+	
+	public NotifMessages getOldestNotif() {return oldNotif.iterator().next();}
+	
+	@Override
+	public Iterator<NotifMessages> iterator() {return oldNotif.iterator();}
+	
+	
+	
+	
+
+}

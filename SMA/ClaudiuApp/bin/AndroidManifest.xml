@@ -13,7 +13,7 @@
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name"
+        android:label="ZumbaApp"
         android:theme="@style/AppTheme" >
         <activity
             android:name=".LoginActivity"
@@ -57,16 +57,32 @@
             android:label="@string/title_activity_register_user" >
         </activity>
         <activity
-            android:name=".NotificationActivity"
+            android:name=".notification.NotificationActivity"
             android:label="@string/title_activity_notification" >
         </activity>
         <activity
-            android:name=".ReadNotifications"
+            android:name=".notification.ReadNotifications"
             android:label="@string/title_activity_read_notifications" >
         </activity>
         <activity
-            android:name=".NewNotifications"
+            android:name=".notification.NewNotifications"
             android:label="@string/title_activity_new_notifications" >
+        </activity>
+        <activity
+            android:name=".notification.NewSongs"
+            android:label="@string/title_activity_new_songs" >
+        </activity>
+        <activity
+            android:name=".notification.AllMissedNotif"
+            android:label="@string/title_activity_all_missed_notif" >
+        </activity>
+        <activity
+            android:name=".notification.admin.SendNotification"
+            android:label="@string/title_activity_send_notification" >
+        </activity>
+        <activity
+            android:name="com.zumba.claudiuapp.notification.admin.SentNotifications"
+            android:label="@string/title_activity_sent_notifications" >
         </activity>
     </application>
 

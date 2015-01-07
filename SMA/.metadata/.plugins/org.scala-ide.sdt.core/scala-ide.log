@@ -77,3 +77,5 @@
 2014-12-31 14:05:22,501 ERROR [main] - System.err - Warning: NLS unused message: CommitCommentArea_4 in: org.tigris.subversion.subclipse.ui.messages
 2014-12-31 14:05:22,501 ERROR [main] - System.err - Warning: NLS unused message: CommitCommentArea_5 in: org.tigris.subversion.subclipse.ui.messages
 2014-12-31 14:05:22,501 ERROR [main] - System.err - Warning: NLS unused message: CommitCommentArea_6 in: org.tigris.subversion.subclipse.ui.messages
+2015-01-07 09:11:28,318 ERROR [main] - System.err - [Fatal Error] :69:11: The element type "accom.zumba.claudiuapp.notification.NewNotifications" must be terminated by the matching end-tag "</accom.zumba.claudiuapp.notification.NewNotifications>".
+2015-01-07 16:09:59,376 ERROR [main] - System.err - [Fatal Error] :71:11: The element type "activity" must be terminated by the matching end-tag "</activity>".

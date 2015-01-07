@@ -32,5 +32,9 @@
     <string name="title_section3">Section 3</string>
     <string name="title_activity_read_notifications">ReadNotifications</string>
     <string name="title_activity_new_notifications">NewNotifications</string>
+    <string name="title_activity_new_songs">NewSongs</string>
+    <string name="title_activity_all_missed_notif">AllMissedNotif</string>
+    <string name="title_activity_send_notification">SendNotification</string>
+    <string name="title_activity_sent_notifications">SentNotifications</string>
 
 </resources>

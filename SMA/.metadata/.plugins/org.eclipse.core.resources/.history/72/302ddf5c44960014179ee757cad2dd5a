@@ -1,0 +1,47 @@
+package com.zumba.claudiuapp.notification;
+
+import java.sql.Timestamp;
+import java.util.Comparator;
+import java.util.NoSuchElementException;
+import java.util.StringTokenizer;
+
+public class NotifMessages implements Comparable<NotifMessages> {
+	private String    title_;
+	private String    message_;
+	private Timestamp timestamp_;
+
+	/*
+	 *  the string must contain three tokens (as defined by StringTokenizer): token1 token2 token3
+	 *  token1 -- timestamp as defined by java.sql.Timestamp
+	 *  token2 -- a valid title, max length of 20 and minimum 5
+	 *  token3 -- the message its self, max length of 180 and a minimum of 10
+	 */
+	public NotifMessages(String value) {
+		StringTokenizer tokenizer = new StringTokenizer(value);
+		
+		try {
+			timestamp_ = Timestamp.valueOf(tokenizer.nextToken());
+			title_ = tokenizer.nextToken();
+			if (title_.length() > 20 || title_.length() < 5) {
+				throw new IllegalArgumentException ("title too short or too long");
+			}
+			message_ = tokenizer.nextToken();
+			if (message_.length() > 180 || message_.length() < 10) {
+				throw new IllegalArgumentException ("message too short or too long");
+			}
+		}
+		catch (NoSuchElementException e) {
+			throw new IllegalArgumentException(e.getMessage());
+		}
+	}
+	
+	public String     getMessage()   {return message_;}
+	public String     getTitle()     {return title_;}
+	public Timestamp  getTimestamp() {return timestamp_;}
+
+	@Override
+	public int compareTo(NotifMessages another) {
+		return timestamp_.after(another.getTimestamp())
+	}
+
+}

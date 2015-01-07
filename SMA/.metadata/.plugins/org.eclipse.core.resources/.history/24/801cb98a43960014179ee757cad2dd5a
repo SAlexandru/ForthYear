@@ -1,0 +1,21 @@
+package com.zumba.claudiuapp.notification;
+
+import java.sql.Timestamp;
+import java.util.StringTokenizer;
+
+public class NotifMessages {
+	private String    title_;
+	private String    message_;
+	private Timestamp timestamp_;
+
+	/*
+	 *  the string must contain three tokens (as defined by StringTokenizer): token1 token2 token3
+	 *  token1 -- timestamp as defined by java.sql.Timestamp
+	 *  token2 -- a valid title, max length of 20
+	 *  token3 -- the message its self, max length of 180
+	 */
+	public NotifMessages(String value) {
+		StringTokenizer tokenizer = new StringTokenizer(value);
+	}
+
+}

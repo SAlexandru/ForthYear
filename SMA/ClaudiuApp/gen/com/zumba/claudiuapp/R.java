@@ -9,6 +9,14 @@ package com.zumba.claudiuapp;
 
 public final class R {
     public static final class attr {
+        /** <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int trimLength=0x7f010000;
     }
     public static final class dimen {
         /** 
@@ -25,11 +33,14 @@ public final class R {
     }
     public static final class drawable {
         public static final int ic_launcher=0x7f020000;
+        public static final int info=0x7f020001;
+        public static final int urgent=0x7f020002;
+        public static final int warning=0x7f020003;
     }
     public static final class id {
         public static final int bLogin=0x7f080019;
         public static final int bRegister=0x7f080018;
-        public static final int button1=0x7f080029;
+        public static final int button1=0x7f08002a;
         public static final int buttonSaveInstructor=0x7f08000d;
         public static final int ePassword=0x7f080017;
         public static final int eUserName=0x7f080015;
@@ -40,55 +51,68 @@ public final class R {
         public static final int editTextContactPhotoLink=0x7f08000b;
         public static final int editTextContactSite=0x7f080009;
         public static final int editTextContactTelefon=0x7f080007;
-        public static final int editTextProfileMail=0x7f080026;
-        public static final int editTextProfileName=0x7f080024;
-        public static final int editTextProfilePass=0x7f080027;
-        public static final int editTextProfileTelephone=0x7f080028;
-        public static final int editTextfProfileForname=0x7f080025;
+        public static final int editTextProfileMail=0x7f080027;
+        public static final int editTextProfileName=0x7f080025;
+        public static final int editTextProfilePass=0x7f080028;
+        public static final int editTextProfileTelephone=0x7f080029;
+        public static final int editTextfProfileForname=0x7f080026;
+        public static final int icon=0x7f08002b;
         public static final int imageViewContact=0x7f080012;
         public static final int imageViewContactInstructor=0x7f08000c;
         public static final int linearLayout1=0x7f080013;
         public static final int linearLayout2=0x7f080016;
-        public static final int profileForname=0x7f08001c;
-        public static final int profileMail=0x7f08001e;
-        public static final int profileName=0x7f08001a;
-        public static final int profilePassword=0x7f080020;
-        public static final int profileTelephone=0x7f080022;
-        public static final int register=0x7f080023;
+        public static final int msgLine=0x7f08002c;
+        public static final int newNList=0x7f08001a;
+        public static final int profileForname=0x7f08001d;
+        public static final int profileMail=0x7f08001f;
+        public static final int profileName=0x7f08001b;
+        public static final int profilePassword=0x7f080021;
+        public static final int profileTelephone=0x7f080023;
+        public static final int register=0x7f080024;
         public static final int textView1=0x7f080014;
         public static final int textView13=0x7f080000;
         public static final int textView15=0x7f080002;
         public static final int textView17=0x7f080006;
         public static final int textView19=0x7f080008;
-        public static final int textView2=0x7f08001b;
+        public static final int textView2=0x7f08001c;
         public static final int textView20=0x7f08000a;
-        public static final int textView3=0x7f08001d;
-        public static final int textView4=0x7f08001f;
-        public static final int textView5=0x7f080021;
+        public static final int textView3=0x7f08001e;
+        public static final int textView4=0x7f080020;
+        public static final int textView5=0x7f080022;
         public static final int textViewContactAddress=0x7f08000f;
         public static final int textViewContactInstructor=0x7f08000e;
         public static final int textViewContactSite=0x7f080011;
         public static final int textViewContactTelephone=0x7f080010;
+        public static final int titleLine=0x7f08002d;
     }
     public static final class layout {
         public static final int activity_admin=0x7f030000;
-        public static final int activity_contact_instructor=0x7f030001;
-        public static final int activity_contact_user=0x7f030002;
-        public static final int activity_login=0x7f030003;
-        public static final int activity_new_notifications=0x7f030004;
-        public static final int activity_notification=0x7f030005;
-        public static final int activity_participants_list=0x7f030006;
-        public static final int activity_read_notifications=0x7f030007;
-        public static final int activity_register_user=0x7f030008;
-        public static final int activity_show_zumba_types=0x7f030009;
-        public static final int activity_user=0x7f03000a;
-        public static final int activity_user_profile=0x7f03000b;
+        public static final int activity_all_missed_notif=0x7f030001;
+        public static final int activity_contact_instructor=0x7f030002;
+        public static final int activity_contact_user=0x7f030003;
+        public static final int activity_login=0x7f030004;
+        public static final int activity_new_notifications=0x7f030005;
+        public static final int activity_new_songs=0x7f030006;
+        public static final int activity_notification=0x7f030007;
+        public static final int activity_participants_list=0x7f030008;
+        public static final int activity_read_notifications=0x7f030009;
+        public static final int activity_register_user=0x7f03000a;
+        public static final int activity_send_notification=0x7f03000b;
+        public static final int activity_sent_notifications=0x7f03000c;
+        public static final int activity_show_zumba_types=0x7f03000d;
+        public static final int activity_user=0x7f03000e;
+        public static final int activity_user_profile=0x7f03000f;
+        public static final int news_notification_row=0x7f030010;
     }
     public static final class menu {
-        public static final int new_notifications=0x7f070000;
-        public static final int notification=0x7f070001;
-        public static final int read_notifications=0x7f070002;
-        public static final int register_user=0x7f070003;
+        public static final int all_missed_notif=0x7f070000;
+        public static final int new_notifications=0x7f070001;
+        public static final int new_songs=0x7f070002;
+        public static final int notification=0x7f070003;
+        public static final int read_notifications=0x7f070004;
+        public static final int register_user=0x7f070005;
+        public static final int send_notification=0x7f070006;
+        public static final int sent_notifications=0x7f070007;
     }
     public static final class string {
         public static final int action_settings=0x7f050013;
@@ -107,14 +131,18 @@ public final class R {
         public static final int site_contact=0x7f050009;
         public static final int telephone_contact=0x7f050008;
         public static final int title_activity_admin=0x7f050004;
+        public static final int title_activity_all_missed_notif=0x7f050020;
         public static final int title_activity_contact_instructor=0x7f050014;
         public static final int title_activity_contact_user=0x7f050012;
         public static final int title_activity_login=0x7f050001;
         public static final int title_activity_new_notifications=0x7f05001e;
+        public static final int title_activity_new_songs=0x7f05001f;
         public static final int title_activity_notification=0x7f050019;
         public static final int title_activity_participants_list=0x7f050016;
         public static final int title_activity_read_notifications=0x7f05001d;
         public static final int title_activity_register_user=0x7f050018;
+        public static final int title_activity_send_notification=0x7f050021;
+        public static final int title_activity_sent_notifications=0x7f050022;
         public static final int title_activity_show_zumba_types=0x7f050017;
         public static final int title_activity_user=0x7f050003;
         public static final int title_activity_user_profile=0x7f050015;
@@ -151,4 +179,33 @@ public final class R {
          */
         public static final int AppTheme=0x7f060001;
     }
+    public static final class styleable {
+        /** Attributes that can be used with a ExpandableTextView.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #ExpandableTextView_trimLength com.zumba.claudiuapp:trimLength}</code></td><td></td></tr>
+           </table>
+           @see #ExpandableTextView_trimLength
+         */
+        public static final int[] ExpandableTextView = {
+            0x7f010000
+        };
+        /**
+          <p>This symbol is the offset where the {@link com.zumba.claudiuapp.R.attr#trimLength}
+          attribute's value can be found in the {@link #ExpandableTextView} array.
+
+
+          <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.zumba.claudiuapp:trimLength
+        */
+        public static final int ExpandableTextView_trimLength = 0;
+    };
 }

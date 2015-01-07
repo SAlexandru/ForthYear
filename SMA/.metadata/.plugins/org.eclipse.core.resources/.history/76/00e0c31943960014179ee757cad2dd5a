@@ -1,0 +1,9 @@
+package com.zumba.claudiuapp.notification;
+
+public class NotifMessages {
+
+	public NotifMessages(String value) {
+		// TODO Auto-generated constructor stub
+	}
+
+}

@@ -1,5 +1,7 @@
 package com.zumba.claudiuapp;
 
+import com.zumba.claudiuapp.notification.NotificationActivity;
+
 import database.BDUtilizatori;
 import android.app.Activity;
 import android.content.Context;
