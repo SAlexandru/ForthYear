@@ -1,5 +1,0 @@
-package com.zumba.claudiuapp.notification;
-
-public enum NotificationType {
-
-}

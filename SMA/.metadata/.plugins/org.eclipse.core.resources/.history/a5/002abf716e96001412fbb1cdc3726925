@@ -1,7 +1,0 @@
-package com.zumba.claudiuapp.notification;
-
-public enum NotificationType {
-	INFO,
-	URGENT,
-	WARNING
-}
