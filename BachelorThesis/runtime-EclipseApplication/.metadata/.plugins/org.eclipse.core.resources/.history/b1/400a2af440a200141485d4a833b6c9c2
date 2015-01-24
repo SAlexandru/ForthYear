@@ -1,0 +1,26 @@
+import java.util.List;
+
+import xmetamodel.XMyAnnotation;
+
+import com.salexandru.corex.metaAnnotation.GroupBuilder;
+import com.salexandru.corex.metaAnnotation.PropertyComputer;
+
+import myAnnotation.MyAnnotation;
+import myAnnotation.MyAnnotation2;
+
+@PropertyComputer(entityType = MyAnnotation.class)
+@GroupBuilder(enitityType = MyAnnotation.class, elementType = MyAnnotation2.class)
+public class Main {
+	public double compute(XMyAnnotation x) {
+		return 0;
+	}
+	
+	public List<MyAnnotation> buildGroup(MyAnnotation2 entity) {
+		return null;
+	}
+	
+	public static void main(String[] args) {
+		System.out.println("Hello World!");
+	}
+
+}

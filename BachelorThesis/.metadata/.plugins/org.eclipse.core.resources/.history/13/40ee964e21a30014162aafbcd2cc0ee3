@@ -1,0 +1,10 @@
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Target;
+
+import com.salexandru.corex.metaAnnotation.GroupBuilder;
+
+
+@GroupBuilder
+public class B {
+
+}

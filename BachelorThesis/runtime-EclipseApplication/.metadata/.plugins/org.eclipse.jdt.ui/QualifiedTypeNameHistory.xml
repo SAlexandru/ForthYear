@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="annotation.MyAnnotation2"/>
+<fullyQualifiedTypeName name="annotation.MyAnnotation"/>
+<fullyQualifiedTypeName name="xmetamodel.properties.XMyAnnotation"/>
+<fullyQualifiedTypeName name="myAnnotation.MyAnnotation"/>
+<fullyQualifiedTypeName name="xmetamodel.XMyAnnotation"/>
+<fullyQualifiedTypeName name="myAnnotation.MyAnnotation2"/>
+<fullyQualifiedTypeName name="com.salexandru.corex.metaAnnotation.GroupBuilder"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="java.lang.annotation.Target"/>
+<fullyQualifiedTypeName name="java.lang.annotation.ElementType"/>
+<fullyQualifiedTypeName name="com.salexandru.corex.metaAnnotation.IPropertyComputer"/>
+<fullyQualifiedTypeName name="com.salexandru.corex.PropertyComputer"/>
+<fullyQualifiedTypeName name="com.salexandru.corex.IPropertyComputer"/>
+<fullyQualifiedTypeName name="com.salexandru.corex.Entity"/>
+<fullyQualifiedTypeName name="com.salexandru.corex.interfaces.IPropertyComputer"/>
+<fullyQualifiedTypeName name="com.salexandru.corex.metaAnnotation.Entity"/>
+<fullyQualifiedTypeName name="com.salexandru.corex.metaAnnotation.PropertyComputer"/>
+<fullyQualifiedTypeName name="java.util.Iterator"/>
+<fullyQualifiedTypeName name="com.salexandru.corex.interfaces.Group"/>
+<fullyQualifiedTypeName name="xmetamodel.XCode"/>
+</qualifiedTypeNameHistroy>

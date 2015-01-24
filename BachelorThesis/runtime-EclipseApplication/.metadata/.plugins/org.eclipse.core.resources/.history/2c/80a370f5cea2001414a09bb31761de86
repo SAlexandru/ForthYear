@@ -1,0 +1,13 @@
+package metamodel.specification.properties.classes;
+
+import com.salexandru.corex.metaAnnotation.PropertyComputer;
+
+import metamodel.specification.entities.Class;
+
+public class NoOfMethods {
+
+	public double compute(XClass x) {
+		return 0;
+	}
+	
+}

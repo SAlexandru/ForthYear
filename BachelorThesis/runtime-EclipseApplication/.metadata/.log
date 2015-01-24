@@ -1,0 +1,171 @@
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2015-01-23 13:57:38.071
+!MESSAGE com.salexandru.corex.interfaces.IPropertyComputer<XCode>
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2015-01-23 13:58:25.952
+!MESSAGE com.salexandru.corex.interfaces.IPropertyComputer<XCode>
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2015-01-23 13:58:30.141
+!MESSAGE com.salexandru.corex.interfaces.IPropertyComputer<XCode>
+!SESSION 2015-01-23 14:01:04.410 -----------------------------------------------
+eclipse.buildId=4.4.1.M20140925-0400
+java.version=1.8.0_25
+java.vendor=Oracle Corporation
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=en_US
+Framework arguments:  -product org.eclipse.platform.ide
+Command-line arguments:  -product org.eclipse.platform.ide -data /Users/salexandru/Desktop/Projects/Corex/runtime-EclipseApplication -dev file:/Users/salexandru/Desktop/Projects/.metadata/.plugins/org.eclipse.pde.core/Eclipse Application/dev.properties -os macosx -ws cocoa -arch x86_64 -consoleLog
+
+!ENTRY org.eclipse.core.net 1 0 2015-01-23 14:01:08.499
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2015-01-23 14:01:21.369
+!MESSAGE [XCode]
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2015-01-23 14:01:36.437
+!MESSAGE [XCode]
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2015-01-23 14:01:36.438
+!MESSAGE [Iterator<java.lang.String>]
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2015-01-23 14:02:30.864
+!MESSAGE [XCode]
+!SESSION 2015-01-23 15:27:49.135 -----------------------------------------------
+eclipse.buildId=4.4.1.M20140925-0400
+java.version=1.8.0_25
+java.vendor=Oracle Corporation
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=en_US
+Framework arguments:  -product org.eclipse.platform.ide
+Command-line arguments:  -product org.eclipse.platform.ide -data /Users/salexandru/Desktop/Projects/Corex/runtime-EclipseApplication -dev file:/Users/salexandru/Desktop/Projects/.metadata/.plugins/org.eclipse.pde.core/Eclipse Application/dev.properties -os macosx -ws cocoa -arch x86_64 -consoleLog
+
+!ENTRY org.eclipse.core.net 1 0 2015-01-23 15:27:53.036
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+!SESSION 2015-01-23 15:37:35.799 -----------------------------------------------
+eclipse.buildId=4.4.1.M20140925-0400
+java.version=1.8.0_25
+java.vendor=Oracle Corporation
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=en_US
+Framework arguments:  -product org.eclipse.platform.ide
+Command-line arguments:  -product org.eclipse.platform.ide -data /Users/salexandru/Desktop/Projects/Corex/runtime-EclipseApplication -dev file:/Users/salexandru/Desktop/Projects/.metadata/.plugins/org.eclipse.pde.core/Eclipse Application/dev.properties -os macosx -ws cocoa -arch x86_64 -consoleLog
+
+!ENTRY org.eclipse.core.net 1 0 2015-01-23 15:37:39.838
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+!SESSION 2015-01-23 15:38:54.628 -----------------------------------------------
+eclipse.buildId=4.4.1.M20140925-0400
+java.version=1.8.0_25
+java.vendor=Oracle Corporation
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=en_US
+Framework arguments:  -product org.eclipse.platform.ide
+Command-line arguments:  -product org.eclipse.platform.ide -data /Users/salexandru/Desktop/Projects/Corex/runtime-EclipseApplication -dev file:/Users/salexandru/Desktop/Projects/.metadata/.plugins/org.eclipse.pde.core/Eclipse Application/dev.properties -os macosx -ws cocoa -arch x86_64 -consoleLog
+
+!ENTRY org.eclipse.core.net 1 0 2015-01-23 15:38:58.883
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+!SESSION 2015-01-23 15:46:42.735 -----------------------------------------------
+eclipse.buildId=4.4.1.M20140925-0400
+java.version=1.8.0_25
+java.vendor=Oracle Corporation
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=en_US
+Framework arguments:  -product org.eclipse.platform.ide
+Command-line arguments:  -product org.eclipse.platform.ide -data /Users/salexandru/Desktop/Projects/Corex/runtime-EclipseApplication -dev file:/Users/salexandru/Desktop/Projects/.metadata/.plugins/org.eclipse.pde.core/Eclipse Application/dev.properties -os macosx -ws cocoa -arch x86_64 -consoleLog
+
+!ENTRY org.eclipse.core.net 1 0 2015-01-23 15:46:47.072
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+!SESSION 2015-01-23 15:51:37.373 -----------------------------------------------
+eclipse.buildId=4.4.1.M20140925-0400
+java.version=1.8.0_25
+java.vendor=Oracle Corporation
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=en_US
+Framework arguments:  -product org.eclipse.platform.ide
+Command-line arguments:  -product org.eclipse.platform.ide -data /Users/salexandru/Desktop/Projects/Corex/runtime-EclipseApplication -dev file:/Users/salexandru/Desktop/Projects/.metadata/.plugins/org.eclipse.pde.core/Eclipse Application/dev.properties -os macosx -ws cocoa -arch x86_64 -consoleLog
+
+!ENTRY org.eclipse.core.net 1 0 2015-01-23 15:51:41.595
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+!SESSION 2015-01-23 15:52:36.278 -----------------------------------------------
+eclipse.buildId=4.4.1.M20140925-0400
+java.version=1.8.0_25
+java.vendor=Oracle Corporation
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=en_US
+Framework arguments:  -product org.eclipse.platform.ide
+Command-line arguments:  -product org.eclipse.platform.ide -data /Users/salexandru/Desktop/Projects/Corex/runtime-EclipseApplication -dev file:/Users/salexandru/Desktop/Projects/.metadata/.plugins/org.eclipse.pde.core/Eclipse Application/dev.properties -os macosx -ws cocoa -arch x86_64 -consoleLog
+
+!ENTRY org.eclipse.core.net 1 0 2015-01-23 15:52:40.265
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2015-01-23 15:52:48.919
+!MESSAGE Source file already created: /ToTest/.apt_generated/xmetamodel/XXCode.java
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2015-01-23 15:52:48.920
+!MESSAGE Source file already created: /ToTest/.apt_generated/xmetamodel/XXCode.java
+!SESSION 2015-01-23 15:55:57.274 -----------------------------------------------
+eclipse.buildId=4.4.1.M20140925-0400
+java.version=1.8.0_25
+java.vendor=Oracle Corporation
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=en_US
+Framework arguments:  -product org.eclipse.platform.ide
+Command-line arguments:  -product org.eclipse.platform.ide -data /Users/salexandru/Desktop/Projects/Corex/runtime-EclipseApplication -dev file:/Users/salexandru/Desktop/Projects/.metadata/.plugins/org.eclipse.pde.core/Eclipse Application/dev.properties -os macosx -ws cocoa -arch x86_64 -consoleLog
+
+!ENTRY org.eclipse.core.net 1 0 2015-01-23 15:56:01.419
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2015-01-23 15:56:22.183
+!MESSAGE Source file already created: /ToTest/.apt_generated/xmetamodel/XXCode.java
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2015-01-23 15:56:22.183
+!MESSAGE Source file already created: /ToTest/.apt_generated/xmetamodel/XXCode.java
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2015-01-23 15:56:22.199
+!MESSAGE Source file already created: /ToTest/.apt_generated/xmetamodel/XXCode.java
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2015-01-23 15:56:22.199
+!MESSAGE Source file already created: /ToTest/.apt_generated/xmetamodel/XXCode.java
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2015-01-23 15:57:08.776
+!MESSAGE Source file already created: /ToTest/.apt_generated/xmetamodel/XXXCode.java
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2015-01-23 15:57:08.776
+!MESSAGE Source file already created: /ToTest/.apt_generated/xmetamodel/XXXCode.java
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2015-01-23 15:57:08.784
+!MESSAGE Source file already created: /ToTest/.apt_generated/xmetamodel/XXXCode.java
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2015-01-23 15:57:08.784
+!MESSAGE Source file already created: /ToTest/.apt_generated/xmetamodel/XXXCode.java
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2015-01-23 15:57:11.677
+!MESSAGE Source file already created: /ToTest/.apt_generated/xmetamodel/XXXCode.java
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2015-01-23 15:57:11.677
+!MESSAGE Source file already created: /ToTest/.apt_generated/xmetamodel/XXXCode.java
+!SESSION 2015-01-23 15:58:03.817 -----------------------------------------------
+eclipse.buildId=4.4.1.M20140925-0400
+java.version=1.8.0_25
+java.vendor=Oracle Corporation
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=en_US
+Framework arguments:  -product org.eclipse.platform.ide
+Command-line arguments:  -product org.eclipse.platform.ide -data /Users/salexandru/Desktop/Projects/Corex/runtime-EclipseApplication -dev file:/Users/salexandru/Desktop/Projects/.metadata/.plugins/org.eclipse.pde.core/Eclipse Application/dev.properties -os macosx -ws cocoa -arch x86_64 -consoleLog
+
+!ENTRY org.eclipse.core.net 1 0 2015-01-23 15:58:07.922
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2015-01-23 15:58:17.395
+!MESSAGE Source file already created: /ToTest/.apt_generated/xmetamodel/XXCode.java
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2015-01-23 15:58:17.396
+!MESSAGE Source file already created: /ToTest/.apt_generated/xmetamodel/XXCode.java
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2015-01-23 15:58:23.065
+!MESSAGE Source file already created: /ToTest/.apt_generated/xmetamodel/XCode.java
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2015-01-23 15:58:23.065
+!MESSAGE Source file already created: /ToTest/.apt_generated/xmetamodel/XCode.java
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2015-01-23 15:58:23.075
+!MESSAGE Source file already created: /ToTest/.apt_generated/xmetamodel/XCode.java
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2015-01-23 15:58:23.076
+!MESSAGE Source file already created: /ToTest/.apt_generated/xmetamodel/XCode.java
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2015-01-23 15:58:30.871
+!MESSAGE Source file already created: /ToTest/.apt_generated/xmetamodel/XCode.java
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2015-01-23 15:58:30.871
+!MESSAGE Source file already created: /ToTest/.apt_generated/xmetamodel/XCode.java

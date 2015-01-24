@@ -1,0 +1,27 @@
+package main;
+
+
+import xmetamodel.properties.XMyAnnotation;
+
+import com.salexandru.corex.metaAnnotation.GroupBuilder;
+import com.salexandru.corex.metaAnnotation.PropertyComputer;
+
+import annotation.MyAnnotation;
+import annotation.MyAnnotation2;
+
+@PropertyComputer(entityType = MyAnnotation.class)
+@GroupBuilder(groupEnitityType = MyAnnotation2.class,
+			  groupElementsType = MyAnnotation.class)
+
+
+public class Main {
+	public double compute (XMyAnnotation x) {
+		return 0;
+	}
+
+	public static void main(String[] args) {
+		System.out.println("Hello World!");
+
+	}
+
+}

@@ -1,0 +1,11 @@
+package xmetamodel.groups;
+
+import java.util.List;
+
+import xmetamodel.properties.*;
+import MyAnnotation;
+
+public interface XGMyAnnotation2 {
+    List<MyAnnotation> groupBuilder();
+}
+

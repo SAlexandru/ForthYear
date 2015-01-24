@@ -1,0 +1,17 @@
+import xmetamodel.XMyAnnotation;
+
+import com.salexandru.corex.metaAnnotation.PropertyComputer;
+
+import myAnnotation.MyAnnotation;
+
+@PropertyComputer(entityType = MyAnnotation.class)
+public class Main {
+	public double compute(MyAnnotation x) {
+		return 0;
+	}
+	
+	public static void main(String[] args) {
+		System.out.println("Hello World!");
+	}
+
+}

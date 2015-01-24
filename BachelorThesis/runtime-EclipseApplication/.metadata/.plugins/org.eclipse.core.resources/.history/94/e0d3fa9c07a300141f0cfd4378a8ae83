@@ -1,0 +1,9 @@
+package xmetamodel
+import java.util.List;
+import package java.security.acl, Java Platform API Specification, version 1.8;
+
+public interface XXCode {
+	double Main();
+	Group<> buildGroup();
+	Object getUnderlyingObject();
+}

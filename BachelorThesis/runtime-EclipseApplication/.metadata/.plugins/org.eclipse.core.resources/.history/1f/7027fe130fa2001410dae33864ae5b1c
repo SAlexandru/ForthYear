@@ -1,0 +1,14 @@
+import myAnnotation.MyAnnotation;
+import myAnnotation.MyAnnotation2;
+
+import com.salexandru.corex.metaAnnotation.GroupBuilder;
+import com.salexandru.corex.metaAnnotation.PropertyComputer;
+
+
+@PropertyComputer ()
+
+public class Main {
+	public static void main(String[] args) {
+		System.out.println("Hello World!");
+	}
+}

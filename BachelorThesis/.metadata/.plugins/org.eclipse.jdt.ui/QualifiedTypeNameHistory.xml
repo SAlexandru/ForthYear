@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="com.salexandru.corex.metaAnnotation.PropertyComputer"/>
+<fullyQualifiedTypeName name="com.salexandru.corex.interfaces.IPropertyComputer"/>
+<fullyQualifiedTypeName name="com.salexandru.corex.metaAnnotation.GroupBuilder"/>
+<fullyQualifiedTypeName name="com.salexandru.corex.interfaces.IGroupBuilder"/>
+<fullyQualifiedTypeName name="xmetamodel.XCode"/>
+<fullyQualifiedTypeName name="xmetamodel.XClass"/>
+</qualifiedTypeNameHistroy>

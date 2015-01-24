@@ -1,0 +1,250 @@
+!SESSION 2015-01-23 18:44:10.452 -----------------------------------------------
+eclipse.buildId=4.4.1.M20140925-0400
+java.version=1.8.0_25
+java.vendor=Oracle Corporation
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=en_US
+Framework arguments:  -product org.eclipse.platform.ide
+Command-line arguments:  -product org.eclipse.platform.ide -data /Users/salexandru/Desktop/Projects/ForthYear/BachelorThesis -dev file:/Users/salexandru/Desktop/Projects/.metadata/.plugins/org.eclipse.pde.core/Eclipse Application/dev.properties -os macosx -ws cocoa -arch x86_64 -consoleLog
+
+!ENTRY org.eclipse.core.net 1 0 2015-01-23 18:44:14.360
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+!SESSION 2015-01-23 18:47:08.538 -----------------------------------------------
+eclipse.buildId=4.4.1.M20140925-0400
+java.version=1.8.0_25
+java.vendor=Oracle Corporation
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=en_US
+Framework arguments:  -product org.eclipse.platform.ide
+Command-line arguments:  -product org.eclipse.platform.ide -data /Users/salexandru/Desktop/Projects/ForthYear/BachelorThesis -dev file:/Users/salexandru/Desktop/Projects/.metadata/.plugins/org.eclipse.pde.core/Eclipse Application/dev.properties -os macosx -ws cocoa -arch x86_64 -consoleLog
+
+!ENTRY org.eclipse.core.net 1 0 2015-01-23 18:47:12.364
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+
+!ENTRY org.tigris.subversion.clientadapter.javahl 1 0 2015-01-23 18:57:31.344
+!MESSAGE Failed to load JavaHL Library.
+These are the errors that were encountered:
+no libsvnjavahl-1 in java.library.path
+no svnjavahl-1 in java.library.path
+no svnjavahl in java.library.path
+java.library.path = /Users/salexandru/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2015-01-23 18:57:36.091
+!MESSAGE Source file already created: /ToTest/.apt_generated/xmetamodel/XCode.java
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2015-01-23 18:57:36.092
+!MESSAGE Source file already created: /ToTest/.apt_generated/xmetamodel/XCode.java
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2015-01-23 18:58:21.908
+!MESSAGE Source file already created: /ToTest/.apt_generated/xmetamodel/XCode.java
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2015-01-23 18:58:21.913
+!MESSAGE Source file already created: /ToTest/.apt_generated/xmetamodel/XCode.java
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2015-01-23 18:59:22.713
+!MESSAGE Source file already created: /ToTest/.apt_generated/xmetamodel/XClass.java
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2015-01-23 18:59:22.713
+!MESSAGE Source file already created: /ToTest/.apt_generated/xmetamodel/XClass.java
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2015-01-23 18:59:22.719
+!MESSAGE Source file already created: /ToTest/.apt_generated/xmetamodel/XClass.java
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2015-01-23 18:59:22.719
+!MESSAGE Source file already created: /ToTest/.apt_generated/xmetamodel/XClass.java
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2015-01-23 18:59:39.419
+!MESSAGE Source file already created: /ToTest/.apt_generated/xmetamodel/XClass.java
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2015-01-23 18:59:39.420
+!MESSAGE Source file already created: /ToTest/.apt_generated/xmetamodel/XClass.java
+
+!ENTRY org.eclipse.jdt.apt.core 4 1 2015-01-23 19:01:28.560
+!MESSAGE Unable to commit working copy to disk: XCode.java
+!STACK 1
+Java Model Exception: Java Model Status [Operation not supported for specified element type(s):XCode.java [in xmetamodel [in .apt_generated [in ToTest]]]]
+	at org.eclipse.jdt.internal.core.JavaModelOperation.runOperation(JavaModelOperation.java:785)
+	at org.eclipse.jdt.internal.core.CompilationUnit.commitWorkingCopy(CompilationUnit.java:391)
+	at org.eclipse.jdt.apt.core.internal.generatedfile.CompilationUnitHelper.commitNewContents(CompilationUnitHelper.java:41)
+	at org.eclipse.jdt.apt.core.internal.generatedfile.GeneratedFileManager.saveCompilationUnit(GeneratedFileManager.java:1500)
+	at org.eclipse.jdt.apt.core.internal.generatedfile.GeneratedFileManager.generateFileDuringBuild(GeneratedFileManager.java:542)
+	at org.eclipse.jdt.internal.apt.pluggable.core.filer.IdeJavaSourceOutputStream.close(IdeJavaSourceOutputStream.java:67)
+	at sun.nio.cs.StreamEncoder.implClose(StreamEncoder.java:320)
+	at sun.nio.cs.StreamEncoder.close(StreamEncoder.java:149)
+	at java.io.OutputStreamWriter.close(OutputStreamWriter.java:233)
+	at java.io.BufferedWriter.close(BufferedWriter.java:266)
+	at java.io.PrintWriter.close(PrintWriter.java:339)
+	at com.salexandru.codeGeneration.XPropertyGenarator.generate(XPropertyGenarator.java:33)
+	at com.salexandru.corex.annotationProcessor.XAnnotationProcessor.process(XAnnotationProcessor.java:71)
+	at org.eclipse.jdt.internal.compiler.apt.dispatch.RoundDispatcher.handleProcessor(RoundDispatcher.java:139)
+	at org.eclipse.jdt.internal.compiler.apt.dispatch.RoundDispatcher.round(RoundDispatcher.java:121)
+	at org.eclipse.jdt.internal.compiler.apt.dispatch.BaseAnnotationProcessorManager.processAnnotations(BaseAnnotationProcessorManager.java:159)
+	at org.eclipse.jdt.internal.apt.pluggable.core.dispatch.IdeAnnotationProcessorManager.processAnnotations(IdeAnnotationProcessorManager.java:134)
+	at org.eclipse.jdt.internal.compiler.Compiler.processAnnotations(Compiler.java:818)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:434)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:367)
+	at org.eclipse.jdt.internal.core.builder.BatchImageBuilder.compile(BatchImageBuilder.java:179)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:304)
+	at org.eclipse.jdt.internal.core.builder.BatchImageBuilder.build(BatchImageBuilder.java:61)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildAll(JavaBuilder.java:256)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:175)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:206)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:246)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:299)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:302)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:358)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:381)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:143)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:241)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+!SUBENTRY 1 org.eclipse.jdt.core 4 967 2015-01-23 19:01:28.563
+!MESSAGE Operation not supported for specified element type(s):XCode.java [in xmetamodel [in .apt_generated [in ToTest]]]
+
+!ENTRY org.eclipse.core.resources 4 2 2015-01-23 19:01:28.569
+!MESSAGE Problems occurred when invoking code from plug-in: "org.eclipse.core.resources".
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.jdt.internal.compiler.ReadManager.run(ReadManager.java:174)
+	at java.lang.Thread.run(Thread.java:745)
+
+!ENTRY org.eclipse.core.resources 4 75 2015-01-23 19:01:28.577
+!MESSAGE Errors occurred during the build.
+!SUBENTRY 1 org.eclipse.jdt.core 4 75 2015-01-23 19:01:28.577
+!MESSAGE Errors running builder 'Java Builder' on project 'ToTest'.
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.jdt.internal.compiler.ReadManager.run(ReadManager.java:174)
+	at java.lang.Thread.run(Thread.java:745)
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2015-01-23 19:01:28.726
+!MESSAGE Source file already created: /ToTest/.apt_generated/xmetamodel/XClass.java
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2015-01-23 19:01:28.727
+!MESSAGE Source file already created: /ToTest/.apt_generated/xmetamodel/XClass.java
+!SESSION 2015-01-23 19:04:05.470 -----------------------------------------------
+eclipse.buildId=4.4.1.M20140925-0400
+java.version=1.8.0_25
+java.vendor=Oracle Corporation
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=en_US
+Framework arguments:  -product org.eclipse.platform.ide
+Command-line arguments:  -product org.eclipse.platform.ide -data /Users/salexandru/Desktop/Projects/ForthYear/BachelorThesis -dev file:/Users/salexandru/Desktop/Projects/.metadata/.plugins/org.eclipse.pde.core/Eclipse Application/dev.properties -os macosx -ws cocoa -arch x86_64 -consoleLog
+
+!ENTRY org.eclipse.core.net 1 0 2015-01-23 19:04:10.418
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2015-01-23 19:08:01.879
+!MESSAGE Source file already created: /ToTest/.apt_generated/xmetamodel/XClass.java
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2015-01-23 19:08:01.888
+!MESSAGE Source file already created: /ToTest/.apt_generated/xmetamodel/XClass.java
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2015-01-23 19:08:01.924
+!MESSAGE Source file already created: /ToTest/.apt_generated/xmetamodel/XClass.java
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2015-01-23 19:08:01.926
+!MESSAGE Source file already created: /ToTest/.apt_generated/xmetamodel/XClass.java
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2015-01-23 19:09:15.070
+!MESSAGE Source file already created: /ToTest/.apt_generated/xmetamodel/XCode.java
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2015-01-23 19:09:15.071
+!MESSAGE Source file already created: /ToTest/.apt_generated/xmetamodel/XCode.java
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2015-01-23 19:09:15.082
+!MESSAGE Source file already created: /ToTest/.apt_generated/xmetamodel/XCode.java
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2015-01-23 19:09:15.083
+!MESSAGE Source file already created: /ToTest/.apt_generated/xmetamodel/XCode.java
+!SESSION 2015-01-23 19:16:43.718 -----------------------------------------------
+eclipse.buildId=4.4.1.M20140925-0400
+java.version=1.8.0_25
+java.vendor=Oracle Corporation
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=en_US
+Framework arguments:  -product org.eclipse.platform.ide
+Command-line arguments:  -product org.eclipse.platform.ide -data /Users/salexandru/Desktop/Projects/ForthYear/BachelorThesis -dev file:/Users/salexandru/Desktop/Projects/.metadata/.plugins/org.eclipse.pde.core/Eclipse Application/dev.properties -os macosx -ws cocoa -arch x86_64 -consoleLog
+
+!ENTRY org.eclipse.core.net 1 0 2015-01-23 19:16:47.330
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2015-01-23 19:20:44.213
+!MESSAGE Source file already created: /ToTest/.apt_generated/xmetamodel/XCode.java
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2015-01-23 19:20:44.229
+!MESSAGE Source file already created: /ToTest/.apt_generated/xmetamodel/XCode.java
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2015-01-23 19:20:48.447
+!MESSAGE Source file already created: /ToTest/.apt_generated/xmetamodel/XCode.java
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2015-01-23 19:20:48.448
+!MESSAGE Source file already created: /ToTest/.apt_generated/xmetamodel/XCode.java
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2015-01-23 19:21:03.877
+!MESSAGE Source file already created: /ToTest/.apt_generated/xmetamodel/XCode.java
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2015-01-23 19:21:03.878
+!MESSAGE Source file already created: /ToTest/.apt_generated/xmetamodel/XCode.java
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2015-01-23 19:21:03.897
+!MESSAGE Source file already created: /ToTest/.apt_generated/xmetamodel/XCode.java
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2015-01-23 19:21:03.897
+!MESSAGE Source file already created: /ToTest/.apt_generated/xmetamodel/XCode.java
+!SESSION 2015-01-23 19:21:46.935 -----------------------------------------------
+eclipse.buildId=4.4.1.M20140925-0400
+java.version=1.8.0_25
+java.vendor=Oracle Corporation
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=en_US
+Framework arguments:  -product org.eclipse.platform.ide
+Command-line arguments:  -product org.eclipse.platform.ide -data /Users/salexandru/Desktop/Projects/ForthYear/BachelorThesis -dev file:/Users/salexandru/Desktop/Projects/.metadata/.plugins/org.eclipse.pde.core/Eclipse Application/dev.properties -os macosx -ws cocoa -arch x86_64 -consoleLog
+
+!ENTRY org.eclipse.core.net 1 0 2015-01-23 19:21:51.556
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2015-01-23 19:21:58.711
+!MESSAGE Source file already created: /ToTest/.apt_generated/xmetamodel/XClass.java
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2015-01-23 19:21:58.725
+!MESSAGE Source file already created: /ToTest/.apt_generated/xmetamodel/XClass.java
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2015-01-23 19:23:10.023
+!MESSAGE Source file already created: /ToTest/.apt_generated/xmetamodel/XCode.java
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2015-01-23 19:23:10.024
+!MESSAGE Source file already created: /ToTest/.apt_generated/xmetamodel/XCode.java
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2015-01-23 19:23:10.036
+!MESSAGE Source file already created: /ToTest/.apt_generated/xmetamodel/XCode.java
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2015-01-23 19:23:10.037
+!MESSAGE Source file already created: /ToTest/.apt_generated/xmetamodel/XCode.java
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2015-01-23 19:23:19.410
+!MESSAGE Source file already created: /ToTest/.apt_generated/xmetamodel/XClass.java
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2015-01-23 19:23:19.410
+!MESSAGE Source file already created: /ToTest/.apt_generated/xmetamodel/XClass.java
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2015-01-23 19:23:58.388
+!MESSAGE Source file already created: /ToTest/.apt_generated/xmetamodel/XCode.java
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2015-01-23 19:23:58.388
+!MESSAGE Source file already created: /ToTest/.apt_generated/xmetamodel/XCode.java
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2015-01-23 19:30:53.276
+!MESSAGE Source file already created: /ToTest/.apt_generated/xmetamodel/XCode.java
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2015-01-23 19:30:53.277
+!MESSAGE Source file already created: /ToTest/.apt_generated/xmetamodel/XCode.java
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2015-01-23 19:30:58.454
+!MESSAGE Source file already created: /ToTest/.apt_generated/xmetamodel/XClass.java
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2015-01-23 19:30:58.455
+!MESSAGE Source file already created: /ToTest/.apt_generated/xmetamodel/XClass.java
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2015-01-23 19:31:10.544
+!MESSAGE Source file already created: /ToTest/.apt_generated/xmetamodel/XClass.java
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2015-01-23 19:31:10.544
+!MESSAGE Source file already created: /ToTest/.apt_generated/xmetamodel/XClass.java

@@ -1,0 +1,18 @@
+package metamodel.specification.properties.methods;
+
+import xmetamodel.properties.XMethod;
+import metamodel.specification.entities.Method;
+
+import com.salexandru.corex.metaAnnotation.PropertyComputer;
+
+@PropertyComputer(entityType=Method.class)
+public class Cyclo {
+
+	public double compute(XMethod x) {
+		x.Cyclo();
+		Double d;
+		d = new Double(1);
+		return 0;
+	}
+	
+}

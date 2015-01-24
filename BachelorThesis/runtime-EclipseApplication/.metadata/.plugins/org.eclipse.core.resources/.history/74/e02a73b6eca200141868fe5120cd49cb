@@ -1,0 +1,21 @@
+import com.salexandru.corex.Entity;
+import com.salexandru.corex.IPropertyComputer;
+import com.salexandru.corex.PropertyComputer;
+
+@PropertyComputer
+public class Main implements IPropertyComputer<@Entity String>{
+	public static void main(String[] args) {
+		System.out.println("Hello World!");
+	}
+
+	@Override
+	public double compute(String entity) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+}
+
+
+
+
+

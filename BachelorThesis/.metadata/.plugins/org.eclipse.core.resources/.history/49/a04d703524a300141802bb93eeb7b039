@@ -1,0 +1,8 @@
+package xmetamodel;
+import com.salexandru.corex.interfaces.XEntity;
+import com.salexandru.corex.interfaces.Group;
+
+public interface XCode extends XEntity {
+	double main();
+	Object getUnderlyingObject();
+}

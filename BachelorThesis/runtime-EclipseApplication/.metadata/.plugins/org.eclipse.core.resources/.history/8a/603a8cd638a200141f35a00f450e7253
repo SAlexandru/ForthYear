@@ -1,0 +1,10 @@
+package xmetamodel;
+
+import java.util.List;
+
+public interface XMyAnnotation {
+    double Main();
+    List<XMyAnnotation> getGroup();
+    Object getUnderlyingObject();
+}
+

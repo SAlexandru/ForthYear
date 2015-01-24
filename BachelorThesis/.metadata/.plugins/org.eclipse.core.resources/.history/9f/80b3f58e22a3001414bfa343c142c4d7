@@ -1,0 +1,8 @@
+package xmetamodel;
+import com.salexandru.corex.interfaces.Group;
+
+public interface XCode {
+	double main();
+	Group<XClass> b();
+	Object getUnderlyingObject();
+}

@@ -1,0 +1,9 @@
+package xmetamodel;
+import java.util.List;
+import com.salexandru.corex.interfaces.Group;;
+
+public interface XXCode {
+	double Main();
+	Group<XXCode> buildGroup();
+	Object getUnderlyingObject();
+}
