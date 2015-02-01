@@ -1,9 +1,0 @@
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Target;
-
-import com.salexandru.corex.metaAnnotation.PropertyComputer;
-
-@PropertyComputer
-public class A implements IPropertyComputer<XClass> {
-
-}
