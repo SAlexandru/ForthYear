@@ -1,0 +1,12 @@
+package xmetamodel;
+import com.salexandru.corex.interfaces.XEntity;
+import com.salexandru.corex.interfaces.Group;
+
+public interface XClass extends XEntity {
+/**
+null
+*/
+public java.lang.Integer a();
+
+Object getUnderlyingObject();
+}

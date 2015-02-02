@@ -20,6 +20,11 @@ public class Main extends AbstractProcessor implements IPropertyComputer<Double,
 	public static void main(String[] args) {
 		System.out.println("Hello World!");
 		XCode a = null;
+		System.out.println("ana are mere");
+		System.out.println("ana are mere");
+		
+		
+		Integer x;
 	}
 	
 	@Override

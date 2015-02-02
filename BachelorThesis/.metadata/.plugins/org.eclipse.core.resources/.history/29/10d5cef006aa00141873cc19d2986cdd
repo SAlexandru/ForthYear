@@ -1,0 +1,41 @@
+package xmetamodel.implementation;
+
+import xmetamodel.*;
+import com.salexandru.corex.interfaces.Group;
+import src.Main;
+import src.B;
+
+
+public class XCodeImpl implements XCode {
+    private Object underlyingObj_;
+
+    public static final Main Main_INSTANCE = new Main();
+    public static final B B_INSTANCE = new B();
+
+
+    public XCodeImpl(Object underlyingObj) {
+        underlyingObj_ = underlyingObj;
+    }
+    @Override
+    public Object getUnderlyingObject() {
+        return underlyingObj_;
+    }
+@Override
+public java.lang.Double main() {
+    return Main_INSTANCE.compute(this);
+}
+@Override
+public Group<XClass> b() {
+    return B_INSTANCE.buildGroup(this);
+}
+    public boolean equals(Object obj) {
+        if (null == obj || !(obj instanceof XCodeImpl)) {
+           return false;
+        }
+        XCodeImpl iObj = (XCodeImpl)obj;
+        if (null == underlyingObj_ || null == iObj.getUnderlyingObject()) {
+           return true;
+        }
+        return underlyingObj_.equals(iObj);
+    }
+}

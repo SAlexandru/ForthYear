@@ -6,4 +6,5 @@
 <fullyQualifiedTypeName name="com.salexandru.corex.interfaces.IPropertyComputer"/>
 <fullyQualifiedTypeName name="xmetamodel.XClass"/>
 <fullyQualifiedTypeName name="xmetamodel.XCode"/>
+<fullyQualifiedTypeName name="com.salexandru.corex.interfaces.XEntity"/>
 </qualifiedTypeNameHistroy>

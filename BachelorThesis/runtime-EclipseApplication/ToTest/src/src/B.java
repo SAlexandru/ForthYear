@@ -13,7 +13,6 @@ import com.salexandru.corex.metaAnnotation.GroupBuilder;
  *	mama are mere :D
  *
  */
-
 public class B implements IGroupBuilder<XClass, XCode> {
 	@Override
 	public Group<XClass> buildGroup(XCode entity) {

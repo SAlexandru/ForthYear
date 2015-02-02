@@ -1,0 +1,36 @@
+package xmetamodel.factory;
+
+import java.util.Collections;
+import java.util.Set;
+
+import com.salexandru.corex.interfaces.XEntity;
+
+import xmetamodel.*;
+import xmetamodel.implementation.*;
+
+public class FactoryMethod {
+   private LRUCache<XEntity, Boolean> lruCache_;
+   public FactoryMethod() {
+       lruCache_ = new LRUCache<XEntity, Boolean>(1000);
+   }
+   public FactoryMethod(int capacity) {
+       lruCache_ = new LRUCache<XEntity, Boolean>(1000);
+   }
+   public void clearCache() {lruCache_.clear();}
+   public XClass createXClass(Object obj) {
+       XEntity instance = lruCache_.
+        if (null == instance) {
+           instance = new XClassImpl(obj);
+           lruCache_.add(instance);
+        }
+        return (XClass)instance;
+    }
+   public XCode createXCode(Object obj) {
+       XEntity instance = lruCache_.get(obj);
+        if (null == instance) {
+           instance = new XCodeImpl(obj);
+           lruCache_.add(instance);
+        }
+        return (XCode)instance;
+    }
+}
