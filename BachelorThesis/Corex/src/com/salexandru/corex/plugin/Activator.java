@@ -1,7 +1,5 @@
 package com.salexandru.corex.plugin;
 
-import org.eclipse.core.resources.IResourceChangeEvent;
-import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceDescription;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -26,19 +24,14 @@ public class Activator extends AbstractUIPlugin {
 	public Activator() {
 		plugin = this;
 		
-		IResourceChangeListener iRChangeL = (IResourceChangeEvent e) -> {
-			IWorkspace workspace = ResourcesPlugin.getWorkspace();
-			final IWorkspaceDescription description = workspace.getDescription();
-			description.setAutoBuilding(false);
-			try {
-				workspace.setDescription(description);
-			} catch (CoreException e1) {
-				
-			}
-		};
 		IWorkspace workspace = ResourcesPlugin.getWorkspace();
-		workspace.addResourceChangeListener(iRChangeL, IResourceChangeEvent.POST_CHANGE);
-		iRChangeL.resourceChanged(null);
+		final IWorkspaceDescription description = workspace.getDescription();
+		description.setAutoBuilding(false);
+		try {
+			workspace.setDescription(description);
+		} catch (CoreException e1) {
+			
+		}
 	}
 
 	public static Activator getInstance() {

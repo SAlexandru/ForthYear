@@ -7,7 +7,6 @@ import java.util.Map;
 
 import javax.annotation.processing.Filer;
 import javax.lang.model.type.TypeMirror;
-
 import com.salexandru.corex.interfaces.XEntity;
 
 public class XPropertyGenarator {

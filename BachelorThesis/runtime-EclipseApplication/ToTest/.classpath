@@ -8,7 +8,7 @@
 			<attribute name="optional" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="src" path=".apt_generated">
+	<classpathentry kind="src" path=".apt_genrated">
 		<attributes>
 			<attribute name="optional" value="true"/>
 		</attributes>

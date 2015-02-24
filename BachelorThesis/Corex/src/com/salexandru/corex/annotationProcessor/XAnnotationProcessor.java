@@ -1,6 +1,7 @@
 package com.salexandru.corex.annotationProcessor;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,6 +14,14 @@ import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.TypeElement;
 import javax.tools.Diagnostic.Kind;
+import javax.tools.JavaFileObject;
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.Path;
+import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.jdt.core.JavaCore;
 
 import com.salexandru.codeGeneration.XComputer;
 import com.salexandru.codeGeneration.XGroupBuilder;
@@ -58,6 +67,20 @@ public class XAnnotationProcessor extends AbstractProcessor {
 		processingEnv.getMessager().printMessage(Kind.ERROR, msg);
 	}
 	
+	public IJavaProject getJavaProject() {
+		try {
+			JavaFileObject jObj = processingEnv.getFiler().createSourceFile("CorexToTest");
+			IWorkspace workspace= ResourcesPlugin.getWorkspace();    
+			IPath location= Path.fromOSString(jObj.toUri().getPath()); 
+			IFile ifile= workspace.getRoot().getFileForLocation(location);
+			return JavaCore.create(ifile).getJavaProject();
+		}
+		catch (Exception e) {
+			printError(e.getMessage() + ":\n" + Arrays.deepToString(e.getStackTrace()));
+		}
+		return null;
+	}
+	
 	@Override
 	public boolean process(Set<? extends TypeElement> annotations,
 			RoundEnvironment roundEnv) {
@@ -84,6 +107,7 @@ public class XAnnotationProcessor extends AbstractProcessor {
 			}
 			else {
 				TypeElement tElem = (TypeElement)elem;
+				
 				if (tElem.getSimpleName().equals(tElem.getQualifiedName())) {
 					printError (elem, "Class must be in a named package not in the default one!");
 					continue;

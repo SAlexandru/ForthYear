@@ -7,4 +7,13 @@
 			<java6processor class="com.salexandru.corex.annotationProcessor.XAnnotationProcessor"/>
 		</java6processors>
 	</extension>
+ <extension
+       point="org.eclipse.ui.propertyPages">
+    <page
+          class="com.salexandru.corex.preferencepage.CorexPropertyPage"
+          id="Corex.page1"
+          name="Corex"
+          objectClass="org.eclipse.jdt.core.IJavaProject">
+    </page>
+ </extension>
 </plugin>
