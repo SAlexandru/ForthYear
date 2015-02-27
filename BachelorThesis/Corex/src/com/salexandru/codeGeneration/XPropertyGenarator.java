@@ -2,11 +2,13 @@ package com.salexandru.codeGeneration;
 
 import java.io.IOException;
 import java.io.Writer;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.processing.Filer;
 import javax.lang.model.type.TypeMirror;
+
 import com.salexandru.corex.interfaces.XEntity;
 
 public class XPropertyGenarator {
@@ -38,6 +40,10 @@ public class XPropertyGenarator {
 		generateFactory(filer);
 	}
 	
+	public Collection<XPropertyComputer> getPropertyComputers() {
+		return properties_.values();
+	}
+	
 	public void generateImpl(Filer filer) throws IOException {
 		for (XPropertyComputer pc: properties_.values()) {
 			Writer out = filer.createSourceFile(pc.getQualifiedNameImpl()).openWriter();
@@ -65,7 +71,7 @@ public class XPropertyGenarator {
 		out.write("   }\n");
 		out.write("   public void clearCache() {lruCache_.clear();}\n");
 		for (XPropertyComputer pc: properties_.values()) {
-			out.write(String.format("   public %1$s create%1$s(Object obj) {\n", pc.getName()));
+			out.write(String.format("   public %1$s create%1$s(%2$s obj) {\n", pc.getName(), pc.getUnderlyingType()));
 			out.write("       XEntity instance = lruCache_.get(obj);\n");
 			out.write("        if (null == instance) {\n");
 			out.write("           instance = new " + pc.getNameImpl() + "(obj);\n");

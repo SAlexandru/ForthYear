@@ -12,6 +12,7 @@ public class XPropertyComputer {
 	private TypeMirror propertie_;
 	private List<XComputer> computers_;
 	private List<XGroupBuilder> groupBuilders_;
+	private String underlyingType_;
 	
 	public final static String PREFIX = "X";
 	public final static String PACKAGE = "xmetamodel";
@@ -46,8 +47,16 @@ public class XPropertyComputer {
 		computers_.add(computer);
 	}
 	
+	public String getUnderlyingType() {
+		return underlyingType_;
+	}
+	
 	public void addGroupBuilder (XGroupBuilder gb) {
 		groupBuilders_.add(gb);
+	}
+	
+	public void setUnderlyingType(String type) {
+		underlyingType_ = type;
 	}
 	
 	public List<XGroupBuilder> getBuilders() {return groupBuilders_;}
@@ -66,7 +75,7 @@ public class XPropertyComputer {
 		}
 		s.append("\n\n");
 		s.append("public class " + getNameImpl() + " implements " + getName() + " {\n");
-		s.append("    private Object underlyingObj_;\n\n");
+		s.append("    private " + underlyingType_ + " underlyingObj_;\n\n");
 		for (XComputer computer: computers_) {
 			s.append(String.format("    public static final %1$s %1$s_INSTANCE = new %1$s();\n", computer.getName()));
 		}
@@ -75,11 +84,11 @@ public class XPropertyComputer {
 			
 		}
 		s.append("\n\n");
-		s.append("    public " + getNameImpl() + "(Object underlyingObj) {\n");
+		s.append("    public " + getNameImpl() + "(" + underlyingType_ + " underlyingObj) {\n");
 		s.append("        underlyingObj_ = underlyingObj;\n");
 		s.append("    }\n");
 		s.append("    @Override\n");
-		s.append("    public Object getUnderlyingObject() {\n");
+		s.append("    public " + underlyingType_ +" getUnderlyingObject() {\n");
 		s.append("        return underlyingObj_;\n");
 		s.append("    }\n");
 		for (XComputer computer: computers_) {
@@ -125,7 +134,7 @@ public class XPropertyComputer {
 			s.append(gb.generateSignature());
 			s.append("\n");
 		}
-		s.append("Object getUnderlyingObject();\n");
+		s.append(underlyingType_ + " getUnderlyingObject();\n");
 		s.append("}\n");
 		
 		return s.toString();

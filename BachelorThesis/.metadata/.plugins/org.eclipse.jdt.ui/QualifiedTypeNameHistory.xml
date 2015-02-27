@@ -7,4 +7,5 @@
 <fullyQualifiedTypeName name="xmetamodel.XClass"/>
 <fullyQualifiedTypeName name="xmetamodel.XCode"/>
 <fullyQualifiedTypeName name="com.salexandru.corex.interfaces.XEntity"/>
+<fullyQualifiedTypeName name="org.eclipse.jdt.core.IJavaProject"/>
 </qualifiedTypeNameHistroy>

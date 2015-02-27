@@ -626,6 +626,13 @@ public class CorexFieldEditor extends FieldEditor {
 		setPresentsDefaultValue(false);
 		int index = table_.getSelectionIndex();
 		if (index >= 0) {
+			try {
+				pref_.remove(table_.getItem(index).getText(0));
+				pref_.flush();
+			}
+			catch (BackingStoreException e) {
+				e.printStackTrace();
+			}
 			table_.remove(index);
 			selectionChanged();
 		}

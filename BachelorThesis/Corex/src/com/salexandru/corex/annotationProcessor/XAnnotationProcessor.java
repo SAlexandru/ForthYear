@@ -15,16 +15,21 @@ import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.TypeElement;
 import javax.tools.Diagnostic.Kind;
 import javax.tools.JavaFileObject;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
+import org.osgi.service.prefs.BackingStoreException;
+import org.eclipse.core.runtime.preferences.IEclipsePreferences;
+import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 
 import com.salexandru.codeGeneration.XComputer;
 import com.salexandru.codeGeneration.XGroupBuilder;
+import com.salexandru.codeGeneration.XPropertyComputer;
 import com.salexandru.codeGeneration.XPropertyGenarator;
 import com.salexandru.corex.metaAnnotation.GroupBuilder;
 import com.salexandru.corex.metaAnnotation.PropertyComputer;
@@ -89,6 +94,24 @@ public class XAnnotationProcessor extends AbstractProcessor {
 		}
 		processPropertyComputer(roundEnv);
 		processGroupBuilder(roundEnv);
+	
+		IJavaProject jProject = getJavaProject();
+		if (null != jProject) {
+			IEclipsePreferences pref = InstanceScope.INSTANCE.getNode(jProject.getElementName());
+			for (XPropertyComputer p: xProperties_.getPropertyComputers()) {
+				p.setUnderlyingType(pref.get(p.getName(), "Object"));
+				if (null == pref.get(p.getName(), null)) {
+					try {
+						pref.put(p.getName(), "Object");
+						pref.flush();
+					}
+				    catch (BackingStoreException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+		}
 		
 		try {
 			xProperties_.generate(processingEnv.getFiler());

@@ -1,6 +1,5 @@
 package gui;
 
-public class GuiController
-	{
-	
-	}
+public class GuiController {
+
+}

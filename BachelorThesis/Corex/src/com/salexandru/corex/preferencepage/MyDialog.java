@@ -72,8 +72,10 @@ public class MyDialog extends Dialog {
 	browse.addSelectionListener(new SelectionAdapter() {
 		@Override
 		public void widgetSelected(SelectionEvent e) {
+			//IJavaElement jdtCore =  JavaCore.create(resource);
 			IJavaSearchScope jScope = SearchEngine.createJavaSearchScope(new IJavaElement[] {jProject_});
-			FilteredTypesSelectionDialog types = new FilteredTypesSelectionDialog(null, false,  null, jScope, IJavaSearchConstants.CLASS);
+		
+			FilteredTypesSelectionDialog types = new FilteredTypesSelectionDialog(null, false,  null, jScope, IJavaSearchConstants.TYPE);
 			types.setTitle("Java search title");
 			if (null != javaClassTxt_.getText() && !javaClassTxt_.getText().trim().isEmpty()) {
 				try {
