@@ -16,4 +16,15 @@
           objectClass="org.eclipse.jdt.core.IJavaProject">
     </page>
  </extension>
+ <extension
+       point="org.eclipse.ui.views">
+    <view
+          category="org.eclipse.jdt.ui.java"
+          class="com.salexandru.corex.view.CorexView"
+          icon="download.jpeg"
+          id="CorexView"
+          name="Corex"
+          restorable="true">
+    </view>
+ </extension>
 </plugin>

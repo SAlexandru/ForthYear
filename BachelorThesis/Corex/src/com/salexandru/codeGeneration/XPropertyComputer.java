@@ -13,8 +13,7 @@ public class XPropertyComputer {
 	private List<XComputer> computers_;
 	private List<XGroupBuilder> groupBuilders_;
 	private String underlyingType_;
-	
-	public final static String PREFIX = "X";
+
 	public final static String PACKAGE = "xmetamodel";
 	public final static String PACKAGE_IMPL = "xmetamodel.implementation";
 	
