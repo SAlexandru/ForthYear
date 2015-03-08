@@ -8,7 +8,6 @@ public class CorexView extends ViewPart {
 	@Override
 	public void createPartControl(Composite parent) {
 		// TODO Auto-generated method stub
-        String mamaAreMere = "BA MERE";
 	}
 
 	@Override

@@ -1,8 +1,0 @@
-package xmetamodel.properties;
-
-import xmetamodel.groups.*;
-public interface XMyAnnotation {
-    Object getGroup();
-    Object getUnderlyingObject();
-}
-

@@ -1,0 +1,17 @@
+<project name="Patrools">
+
+	<target name="build.customized.jmondrian">
+		<jar basedir="../jMondrian/bin/" destfile="./lib/jmondrian/jmondrian.jar"/>
+	</target>
+		
+	<target name="build.customized.wala">
+		<jar destfile="./lib/wala/wala.custombuild.jar">
+			<fileset dir="../com.ibm.wala.cast.java.jdt/bin"/>
+			<fileset dir="../com.ibm.wala.cast/bin"/>
+			<fileset dir="../com.ibm.wala.cast.java/bin"/>
+			<fileset dir="../com.ibm.wala.core/bin"/>
+			<fileset dir="../com.ibm.wala.shrike/bin"/>
+			<fileset dir="../com.ibm.wala.ide/bin"/>
+		</jar>
+	</target>
+</project>

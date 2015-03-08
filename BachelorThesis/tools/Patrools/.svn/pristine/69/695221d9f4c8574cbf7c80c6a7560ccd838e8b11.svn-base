@@ -1,0 +1,54 @@
+<project name="Patrools">
+
+	<target name="build.customized.jmondrian">
+		<jar basedir="../jMondrian/bin/" destfile="./lib/jmondrian/jmondrian.jar"/>
+	</target>
+		
+	<target name="build.customized.wala">
+		<jar destfile="./lib/wala/wala.custombuild.jar">
+			<fileset dir="../com.ibm.wala.cast.java.jdt/bin"/>
+			<fileset dir="../com.ibm.wala.cast/bin"/>
+			<fileset dir="../com.ibm.wala.cast.java/bin"/>
+			<fileset dir="../com.ibm.wala.core/bin"/>
+			<fileset dir="../com.ibm.wala.shrike/bin"/>
+			<fileset dir="../com.ibm.wala.ide/bin"/>
+		</jar>
+	</target>
+	
+	<target name="build.customized.codepro">
+		<delete dir="./lib/codepro/codepro.core"/>
+		<copy todir="./lib/codepro/codepro.core">
+			<fileset dir="../CodePro/bin">
+				<filename name="lrg/common/**/*.class"/>				
+			</fileset>
+			<fileset dir="../CodePro/bin">
+				<filename name="lrg/insider/plugins/**/*.class"/>				
+			</fileset>
+			<fileset dir="../CodePro/bin">
+				<filename name="plugins/*.class"/>				
+			</fileset>
+			<fileset dir="../CodePro/bin">
+				<filename name="lrg/insider/visualizations/*.class"/>				
+			</fileset>
+			<fileset dir="../CodePro/bin">
+				<filename name="startup/*.class"/>				
+			</fileset>
+			<fileset dir="../CodePro/bin">
+				<filename name="codepro/preferences/*.class"/>				
+			</fileset>
+			<fileset dir="../CodePro/bin">
+				<filename name="view/IStatusLineUpdater.class"/>				
+			</fileset>
+			<fileset dir="../CodePro/bin">
+				<filename name="plugins/actions/HelpAction.class"/>				
+			</fileset>
+			<fileset dir="../CodePro/bin">
+				<filename name="codepro/actions/ProjectDependencyAction.class"/>				
+			</fileset>
+			<fileset dir="../CodePro/bin">
+				<filename name="graph/*.class"/>				
+			</fileset>
+		</copy>
+	</target>
+
+</project>

@@ -27,4 +27,11 @@
           restorable="true">
     </view>
  </extension>
+ <extension
+       point="org.eclipse.jdt.core.classpathContainerInitializer">
+    <classpathContainerInitializer
+          class="com.salexandru.corex.plugin.CorexLibraryAdder"
+          id="com.salexandru.corex.plugin.CorexLibraryAdder">
+    </classpathContainerInitializer>
+ </extension>
 </plugin>

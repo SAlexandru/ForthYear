@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: InsiderViewer
+Bundle-SymbolicName: InsiderViewer;singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Vendor: LRG
+Fragment-Host: Patrools;bundle-version="0.5.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ClassPath: .

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         id="patrools.popupmenu"
+         name="PatroolsMenu"
+         point="org.eclipse.ui.popupMenus">
+      <!--<objectContribution
+            adaptable="true"
+            id="patrools.objectContribution1"
+            objectClass="org.eclipse.jdt.core.IMethod">
+         <action
+               class="lrg.patrools.actions.PatroolsTestAction"
+               id="Patrools.action2"
+               label="PatroolsTest"
+               menubarPath="additions">
+         </action>
+      </objectContribution>-->
+      <objectContribution
+            adaptable="true"
+            id="patrools.th"
+            objectClass="org.eclipse.jdt.core.IType">
+         <menu
+               icon="res/ico/gd.png"
+               id="patrools.thmenu"
+               label="Type Highlighting ..."
+               path="additions">
+            <groupMarker
+                  name="content">
+            </groupMarker>
+         </menu>
+         <action
+               class="lrg.patrools.actions.GroupDiscriminationActionLargest"
+               id="Patrools.action4"
+               label="Group Discrimination (Top 8 Largest)"
+               menubarPath="patrools.thmenu/content">
+         </action>
+         <action
+               class="lrg.patrools.actions.GroupDiscriminationActionPrevalent"
+               id="Patrools.action3"
+               label="Group Discrimination (Top 8 Prevalent)"
+               menubarPath="patrools.thmenu/content">
+         </action>
+         <action
+               class="lrg.patrools.actions.LevelOfAbstractionAction"
+               id="Patrools.action2"
+               label="Level of Abstraction"
+               menubarPath="patrools.thmenu/content">
+         </action>
+      </objectContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            allowMultiple="false"
+            class="lrg.patrools.visualizations.view.PatroolsVisualizationView"
+            icon="res/ico/gd.png"
+            id="patrools.view"
+            name="Patrools"
+            restorable="false">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.ui.startup">
+      <startup></startup>
+   </extension>
+
+</plugin>

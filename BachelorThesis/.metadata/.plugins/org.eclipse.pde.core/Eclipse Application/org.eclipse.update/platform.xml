@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<config date="1425129871020" transient="false" version="3.0">
+<config date="1425799943518" transient="false" version="3.0">
 <site enabled="true" policy="USER-EXCLUDE" updateable="true" url="platform:/base/">
-<feature id="org.eclipse.cdt" url="features/org.eclipse.cdt_8.5.0.201409172108/" version="8.5.0.201409172108">
-</feature>
 <feature id="org.eclipse.ecf.filetransfer.httpclient4.feature" url="features/org.eclipse.ecf.filetransfer.httpclient4.feature_3.9.1.v20140827-1444/" version="3.9.1.v20140827-1444">
 </feature>
 <feature id="org.eclipse.help" plugin-identifier="org.eclipse.help.base" url="features/org.eclipse.help_2.0.103.v20150204-1700/" version="2.0.103.v20150204-1700">
@@ -21,8 +19,6 @@
 </feature>
 <feature id="org.tigris.subversion.clientadapter.feature" plugin-identifier="org.tigris.subversion.clientadapter" url="features/org.tigris.subversion.clientadapter.feature_1.10.3/" version="1.10.3">
 </feature>
-<feature id="org.eclipse.cdt.gnu.build" url="features/org.eclipse.cdt.gnu.build_8.5.0.201409172108/" version="8.5.0.201409172108">
-</feature>
 <feature id="org.eclipse.wst.xml_core.feature" url="features/org.eclipse.wst.xml_core.feature_3.6.1.v201409111852/" version="3.6.1.v201409111852">
 </feature>
 <feature id="org.eclipse.egit" url="features/org.eclipse.egit_3.4.1.201406201815-r/" version="3.4.1.201406201815-r">
@@ -36,8 +32,6 @@
 <feature id="org.eclipse.wst.ws_wsdl15.feature" url="features/org.eclipse.wst.ws_wsdl15.feature_1.5.400.v201405061938/" version="1.5.400.v201405061938">
 </feature>
 <feature id="org.eclipse.ecf.core.ssl.feature" url="features/org.eclipse.ecf.core.ssl.feature_1.0.0.v20140827-1444/" version="1.0.0.v20140827-1444">
-</feature>
-<feature id="org.eclipse.cdt.platform" url="features/org.eclipse.cdt.platform_8.5.0.201409172108/" version="8.5.0.201409172108">
 </feature>
 <feature id="org.eclipse.mylyn.commons.identity" plugin-identifier="org.eclipse.mylyn.commons.core" url="features/org.eclipse.mylyn.commons.identity_1.5.0.v20140702-2248/" version="1.5.0.v20140702-2248">
 </feature>
@@ -81,8 +75,6 @@
 </feature>
 <feature id="org.eclipse.equinox.p2.core.feature.source" url="features/org.eclipse.equinox.p2.core.feature.source_1.3.0.v20140523-0116/" version="1.3.0.v20140523-0116">
 </feature>
-<feature id="com.android.ide.eclipse.traceview.feature" plugin-identifier="com.android.ide.eclipse.traceview" url="features/com.android.ide.eclipse.traceview.feature_23.0.4.1468518/" version="23.0.4.1468518">
-</feature>
 <feature id="org.eclipse.jst.ws.axis2tools_sdk.feature" url="features/org.eclipse.jst.ws.axis2tools_sdk.feature_1.1.0.v200905242110-31-84D2INsLdYIIAIfZoNpmVE_SE/" version="1.1.0.v200905242110-31-84D2INsLdYIIAIfZoNpmVE_SE">
 </feature>
 <feature id="org.eclipse.jdt" url="features/org.eclipse.jdt_3.10.0.v20140925-0400/" version="3.10.0.v20140925-0400">
@@ -95,8 +87,6 @@
 </feature>
 <feature id="org.eclipse.platform.source" url="features/org.eclipse.platform.source_4.4.2.v20150204-1700/" version="4.4.2.v20150204-1700">
 </feature>
-<feature id="com.android.ide.eclipse.ddms.feature" plugin-identifier="com.android.ide.eclipse.ddms" url="features/com.android.ide.eclipse.ddms.feature_23.0.4.1468518/" version="23.0.4.1468518">
-</feature>
 <feature id="org.eclipse.contribution.xref" url="features/org.eclipse.contribution.xref_2.2.4.e44x-20141218-0900/" version="2.2.4.e44x-20141218-0900">
 </feature>
 <feature id="org.eclipse.pde.source" url="features/org.eclipse.pde.source_3.10.0.v20140925-0400/" version="3.10.0.v20140925-0400">
@@ -104,8 +94,6 @@
 <feature id="com.mountainminds.eclemma.feature" plugin-identifier="com.mountainminds.eclemma.ui" url="features/com.mountainminds.eclemma.feature_2.3.2.201409141915/" version="2.3.2.201409141915">
 </feature>
 <feature id="org.eclipse.wb.swt.feature" plugin-identifier="org.eclipse.wb.swt" url="features/org.eclipse.wb.swt.feature_1.7.0.r44x201405021519/" version="1.7.0.r44x201405021519">
-</feature>
-<feature id="com.android.ide.eclipse.ndk.feature" url="features/com.android.ide.eclipse.ndk.feature_23.0.4.1468518/" version="23.0.4.1468518">
 </feature>
 <feature id="org.eclipse.emf.ecore" url="features/org.eclipse.emf.ecore_2.10.2.v20150123-0348/" version="2.10.2.v20150123-0348">
 </feature>
@@ -128,8 +116,6 @@
 <feature id="org.eclipse.jgit" url="features/org.eclipse.jgit_3.4.1.201406201815-r/" version="3.4.1.201406201815-r">
 </feature>
 <feature id="org.eclipse.mylyn.wikitext_feature" plugin-identifier="org.eclipse.mylyn.wikitext.core" url="features/org.eclipse.mylyn.wikitext_feature_2.2.0.v20140905-1515/" version="2.2.0.v20140905-1515">
-</feature>
-<feature id="com.android.ide.eclipse.adt.feature" plugin-identifier="com.android.ide.eclipse.adt" url="features/com.android.ide.eclipse.adt.feature_23.0.4.1468518/" version="23.0.4.1468518">
 </feature>
 <feature id="org.eclipse.jst.ws.axis2tools.feature" plugin-identifier="org.eclipse.jst.ws.axis2.ui" url="features/org.eclipse.jst.ws.axis2tools.feature_1.1.0.v200905242110-78-FBpDZRDE6FdPdLYYe/" version="1.1.0.v200905242110-78-FBpDZRDE6FdPdLYYe">
 </feature>
@@ -171,6 +157,8 @@
 </feature>
 <feature id="edu.umd.cs.findbugs.plugin.eclipse" url="features/edu.umd.cs.findbugs.plugin.eclipse_3.0.0.20140706-2cfb468/" version="3.0.0.20140706-2cfb468">
 </feature>
+<feature id="net.sf.jdtdecompiler.feature" url="features/net.sf.jdtdecompiler.feature_3.4.0.v20090220/" version="3.4.0.v20090220">
+</feature>
 <feature id="org.eclipse.mylyn.commons" plugin-identifier="org.eclipse.mylyn.commons.core" url="features/org.eclipse.mylyn.commons_3.13.0.v20140704-2323/" version="3.13.0.v20140704-2323">
 </feature>
 <feature id="org.eclipse.epp.package.common.feature" url="features/org.eclipse.epp.package.common.feature_4.4.1.20140925-1820/" version="4.4.1.20140925-1820">
@@ -201,8 +189,6 @@
 </feature>
 <feature id="org.eclipse.mylyn.reviews.feature" plugin-identifier="org.eclipse.mylyn.reviews.core" url="features/org.eclipse.mylyn.reviews.feature_2.4.0.v20140902-1709/" version="2.4.0.v20140902-1709">
 </feature>
-<feature id="com.android.ide.eclipse.gldebugger.feature" url="features/com.android.ide.eclipse.gldebugger.feature_23.0.4.1468518/" version="23.0.4.1468518">
-</feature>
 <feature id="net.java.dev.jna" url="features/net.java.dev.jna_4.1.0.v20140626_1915/" version="4.1.0.v20140626_1915">
 </feature>
 <feature id="org.eclipse.mylyn.hudson" plugin-identifier="org.eclipse.mylyn.builds.core" url="features/org.eclipse.mylyn.hudson_1.5.0.v20140702-2228/" version="1.5.0.v20140702-2228">
@@ -223,11 +209,11 @@
 </feature>
 <feature id="org.eclipse.wst.ws_core.feature" url="features/org.eclipse.wst.ws_core.feature_3.6.0.v201405061938/" version="3.6.0.v201405061938">
 </feature>
+<feature id="jd.ide.eclipse.feature" plugin-identifier="jd.ide.eclipse" url="features/jd.ide.eclipse.feature_0.1.5/" version="0.1.5">
+</feature>
 <feature id="org.eclipse.equinox.p2.rcp.feature.source" url="features/org.eclipse.equinox.p2.rcp.feature.source_1.2.0.v20140523-0116/" version="1.2.0.v20140523-0116">
 </feature>
 <feature id="org.eclipse.wst.server_adapters.feature" url="features/org.eclipse.wst.server_adapters.feature_3.2.400.v20140501_1027-7L3FJPCcNBHRBuJmLBVNB/" version="3.2.400.v20140501_1027-7L3FJPCcNBHRBuJmLBVNB">
-</feature>
-<feature id="org.eclipse.cdt.gdb" url="features/org.eclipse.cdt.gdb_8.5.0.201409172108/" version="8.5.0.201409172108">
 </feature>
 <feature id="org.eclipse.wst.common_ui.feature" url="features/org.eclipse.wst.common_ui.feature_3.6.1.v201409111444/" version="3.6.1.v201409111444">
 </feature>
@@ -237,8 +223,6 @@
 </feature>
 <feature id="org.eclipse.ecf.filetransfer.httpclient4.ssl.feature" url="features/org.eclipse.ecf.filetransfer.httpclient4.ssl.feature_1.0.0.v20140827-1444/" version="1.0.0.v20140827-1444">
 </feature>
-<feature id="com.android.ide.eclipse.hierarchyviewer.feature" plugin-identifier="com.android.ide.eclipse.hierarchyviewer" url="features/com.android.ide.eclipse.hierarchyviewer.feature_23.0.4.1468518/" version="23.0.4.1468518">
-</feature>
 <feature id="org.eclipse.wst.ws_userdoc.feature" url="features/org.eclipse.wst.ws_userdoc.feature_3.1.400.v201405061938/" version="3.1.400.v201405061938">
 </feature>
 <feature id="org.eclipse.mylyn.java_feature" plugin-identifier="org.eclipse.mylyn.context.core" url="features/org.eclipse.mylyn.java_feature_3.13.0.v20140819-2236/" version="3.13.0.v20140819-2236">
@@ -246,8 +230,6 @@
 <feature id="org.scala-ide.sdt.dev.feature" url="features/org.scala-ide.sdt.dev.feature_4.1.0.nightly-2_11-201502270650-82bdc95/" version="4.1.0.nightly-2_11-201502270650-82bdc95">
 </feature>
 <feature id="org.eclipse.mylyn.team_feature" plugin-identifier="org.eclipse.mylyn.context.core" url="features/org.eclipse.mylyn.team_feature_3.13.0.v20140702-2225/" version="3.13.0.v20140702-2225">
-</feature>
-<feature id="org.eclipse.cdt.gnu.dsf" url="features/org.eclipse.cdt.gnu.dsf_8.5.0.201409172108/" version="8.5.0.201409172108">
 </feature>
 <feature id="org.tigris.subversion.subclipse.mylyn" url="features/org.tigris.subversion.subclipse.mylyn_3.0.0/" version="3.0.0">
 </feature>
@@ -296,10 +278,6 @@
 <feature id="org.tigris.subversion.subclipse.graph.feature" plugin-identifier="org.tigris.subversion.subclipse.graph" url="features/org.tigris.subversion.subclipse.graph.feature_1.1.1/" version="1.1.1">
 </feature>
 <feature id="org.tmatesoft.svnkit" url="features/org.tmatesoft.svnkit_1.8.7.r10376_v20141223_2131/" version="1.8.7.r10376_v20141223_2131">
-</feature>
-<feature id="org.eclipse.cdt.gnu.debug" url="features/org.eclipse.cdt.gnu.debug_8.5.0.201409172108/" version="8.5.0.201409172108">
-</feature>
-<feature id="org.eclipse.cdt.native" url="features/org.eclipse.cdt.native_8.5.0.201409172108/" version="8.5.0.201409172108">
 </feature>
 <feature id="org.eclipse.wst.jsdt.feature" plugin-identifier="org.eclipse.wst.jsdt.ui" url="features/org.eclipse.wst.jsdt.feature_1.6.100.v201409111605/" version="1.6.100.v201409111605">
 </feature>
