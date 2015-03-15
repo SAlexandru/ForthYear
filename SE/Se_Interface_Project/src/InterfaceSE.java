@@ -17,11 +17,10 @@ import java.util.List;
 
 import javax.swing.JButton;
 
-
 public class InterfaceSE extends JFrame {
 
 	private JPanel contentPane;
-
+	private List<List<JRadioButton>> groupsOfButtons = new ArrayList<List<JRadioButton>>();
 	/**
 	 * Launch the application.
 	 */
@@ -42,6 +41,7 @@ public class InterfaceSE extends JFrame {
 	 * Create the frame.
 	 */
 	public InterfaceSE() {
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -50,9 +50,39 @@ public class InterfaceSE extends JFrame {
 		JScrollPane scrollPane = new JScrollPane(contentPane);
 		contentPane.setLayout(new GridLayout(70, 0, 0, 0));
 		
+		createTitle();
+		
+		createFirstQuestion();
+		
+		createSecondQuestion();
+		
+		createThirdQuestion();
+		
+		createFourthQuestion();
+		
+		createFifthQuestion();
+		
+		createSixthQuestion();
+		
+		createSeventhQuestion();	
+		
+		createEigthQuestion();
+		
+		createNinthQuestion();	
+		
+		createTenthQuestion();
+
+		createSubmitButton();
+		
+		setContentPane(scrollPane);
+	}
+	
+	private void createTitle() {
 		JLabel lblNewLabel_9 = new JLabel("TODO: add title *with glitter*");
 		contentPane.add(lblNewLabel_9);
-		
+	}
+	
+	private void createFirstQuestion() {
 		JLabel lblNewLabel = new JLabel("1.What is your age?");
 		Font font = lblNewLabel.getFont();
 		Font boldFont = new Font(font.getFontName(), Font.BOLD, font.getSize() + 5);
@@ -75,12 +105,21 @@ public class InterfaceSE extends JFrame {
 		contentPane.add(rdbtnNewRadioButton_4);
 		
 		ButtonGroup bg = new ButtonGroup();
-		bg.add(rdbtnNewRadioButton_1);
-		bg.add(rdbtnNewRadioButton_2);
-		bg.add(rdbtnNewRadioButton_3);
-		bg.add(rdbtnNewRadioButton_4);
-		bg.add(rdbtnNewRadioButton);
+		List<JRadioButton> firstQuestionGroup = new ArrayList<JRadioButton>();
+		firstQuestionGroup.add(rdbtnNewRadioButton_1);
+		firstQuestionGroup.add(rdbtnNewRadioButton_2);
+		firstQuestionGroup.add(rdbtnNewRadioButton_3);
+		firstQuestionGroup.add(rdbtnNewRadioButton_4);
+		firstQuestionGroup.add(rdbtnNewRadioButton);
 		
+		groupsOfButtons.add(firstQuestionGroup);
+		
+		for (JRadioButton jRadioButton : firstQuestionGroup) {
+			bg.add(jRadioButton);
+		}
+	}
+	
+	private void createSecondQuestion() {
 		JLabel lblNewLabel_1 = new JLabel("2.Which group contains the first letter of your name?");
 		Font font1 = lblNewLabel_1.getFont();
 		Font boldFont1 = new Font(font1.getFontName(), Font.BOLD, font1.getSize() + 5);
@@ -103,12 +142,22 @@ public class InterfaceSE extends JFrame {
 		contentPane.add(rdbtnWz);
 		
 		ButtonGroup bg2 = new ButtonGroup();
-		bg2.add(rdbtnAh);
-		bg2.add(rdbtnIm);
-		bg2.add(rdbtnNr);
-		bg2.add(rdbtnSv);
-		bg2.add(rdbtnWz);
 		
+		List<JRadioButton> secondQuestionGroup = new ArrayList<JRadioButton>();
+		secondQuestionGroup.add(rdbtnAh);
+		secondQuestionGroup.add(rdbtnIm);
+		secondQuestionGroup.add(rdbtnNr);
+		secondQuestionGroup.add(rdbtnSv);
+		secondQuestionGroup.add(rdbtnWz);
+		
+		groupsOfButtons.add(secondQuestionGroup);
+		
+		for (JRadioButton jRadioButton : secondQuestionGroup) {
+			bg2.add(jRadioButton);
+		}
+	}
+	
+	private void createThirdQuestion() {
 		JLabel lblWhatIsYour = new JLabel("3.What is your drink of choice?");
 		Font font2 = lblWhatIsYour.getFont();
 		Font boldFont2 = new Font(font2.getFontName(), Font.BOLD, font2.getSize() + 5);
@@ -131,13 +180,22 @@ public class InterfaceSE extends JFrame {
 		contentPane.add(rdbtnNewRadioButton_9);
 		
 		ButtonGroup bg3 = new ButtonGroup();
-		bg3.add(rdbtnNewRadioButton_5);
-		bg3.add(rdbtnNewRadioButton_6);
-		bg3.add(rdbtnNewRadioButton_7);
-		bg3.add(rdbtnNewRadioButton_8);
-		bg3.add(rdbtnNewRadioButton_9);
 		
+		List<JRadioButton> thirdQuestionGroup = new ArrayList<JRadioButton>();
+		thirdQuestionGroup.add(rdbtnNewRadioButton_5);
+		thirdQuestionGroup.add(rdbtnNewRadioButton_6);
+		thirdQuestionGroup.add(rdbtnNewRadioButton_7);
+		thirdQuestionGroup.add(rdbtnNewRadioButton_8);
+		thirdQuestionGroup.add(rdbtnNewRadioButton_9);
+
+		groupsOfButtons.add(thirdQuestionGroup);
 		
+		for (JRadioButton jRadioButton : thirdQuestionGroup) {
+			bg3.add(jRadioButton);
+		}
+	}
+	
+	private void createFourthQuestion() {
 		JLabel lblNewLabel_2 = new JLabel("4.What kind of movie do you most enjoy watching?");
 		Font font3 = lblNewLabel_2.getFont();
 		Font boldFont3 = new Font(font3.getFontName(), Font.BOLD, font3.getSize() + 5);
@@ -160,12 +218,22 @@ public class InterfaceSE extends JFrame {
 		contentPane.add(rdbtnNewRadioButton_14);
 		
 		ButtonGroup bg4 = new ButtonGroup();
-		bg4.add(rdbtnNewRadioButton_10);
-		bg4.add(rdbtnNewRadioButton_11);
-		bg4.add(rdbtnNewRadioButton_12);
-		bg4.add(rdbtnNewRadioButton_13);
-		bg4.add(rdbtnNewRadioButton_14);
 		
+		List<JRadioButton> fourthQuestionGroup = new ArrayList<JRadioButton>();
+		fourthQuestionGroup.add(rdbtnNewRadioButton_10);
+		fourthQuestionGroup.add(rdbtnNewRadioButton_11);
+		fourthQuestionGroup.add(rdbtnNewRadioButton_12);
+		fourthQuestionGroup.add(rdbtnNewRadioButton_13);
+		fourthQuestionGroup.add(rdbtnNewRadioButton_14);
+
+		groupsOfButtons.add(fourthQuestionGroup);
+		
+		for (JRadioButton jRadioButton : fourthQuestionGroup) {
+			bg4.add(jRadioButton);
+		}
+	}
+
+	private void createFifthQuestion() {
 		JLabel lblNewLabel_3 = new JLabel("5.Which of these activities is your MOST favorite?");
 		Font font4 = lblNewLabel_3.getFont();
 		Font boldFont4 = new Font(font4.getFontName(), Font.BOLD, font4.getSize() + 5);
@@ -188,12 +256,22 @@ public class InterfaceSE extends JFrame {
 		contentPane.add(rdbtnNewRadioButton_18);
 		
 		ButtonGroup bg5 = new ButtonGroup();
-		bg5.add(rdbtnNewRadioButton_15);
-		bg5.add(rdbtnNewRadioButton_16);
-		bg5.add(rdbtnNewRadioButton_17);
-		bg5.add(rdbtnNewRadioButton_19);
-		bg5.add(rdbtnNewRadioButton_18);
 		
+		List<JRadioButton> fifthQuestionGroup = new ArrayList<JRadioButton>();
+		fifthQuestionGroup.add(rdbtnNewRadioButton_15);
+		fifthQuestionGroup.add(rdbtnNewRadioButton_16);
+		fifthQuestionGroup.add(rdbtnNewRadioButton_17);
+		fifthQuestionGroup.add(rdbtnNewRadioButton_19);
+		fifthQuestionGroup.add(rdbtnNewRadioButton_18);
+
+		groupsOfButtons.add(fifthQuestionGroup);
+		
+		for (JRadioButton jRadioButton : fifthQuestionGroup) {
+			bg5.add(jRadioButton);
+		}
+	}
+	
+	private void createSixthQuestion() {
 		JLabel lblNewLabel_4 = new JLabel("6.You believe the most important part of life is...");
 		Font font5 = lblNewLabel_4.getFont();
 		Font boldFont5 = new Font(font5.getFontName(), Font.BOLD, font5.getSize() + 5);
@@ -216,12 +294,23 @@ public class InterfaceSE extends JFrame {
 		contentPane.add(rdbtnNewRadioButton_24);
 		
 		ButtonGroup bg6 = new ButtonGroup();
-		bg6.add(rdbtnNewRadioButton_20);
-		bg6.add(rdbtnNewRadioButton_21);
-		bg6.add(rdbtnNewRadioButton_22);
-		bg6.add(rdbtnNewRadioButton_23);
-		bg6.add(rdbtnNewRadioButton_24);
 		
+		List<JRadioButton> sixthQuestionGroup = new ArrayList<JRadioButton>();
+		sixthQuestionGroup.add(rdbtnNewRadioButton_20);
+		sixthQuestionGroup.add(rdbtnNewRadioButton_21);
+		sixthQuestionGroup.add(rdbtnNewRadioButton_22);
+		sixthQuestionGroup.add(rdbtnNewRadioButton_23);
+		sixthQuestionGroup.add(rdbtnNewRadioButton_24);
+
+		groupsOfButtons.add(sixthQuestionGroup);
+		
+		for (JRadioButton jRadioButton : sixthQuestionGroup) {
+			bg6.add(jRadioButton);
+		}
+		
+	}
+	
+	private void createSeventhQuestion() {
 		JLabel lblNewLabel_5 = new JLabel("7.On a windy day, a rooster lays an egg on a roof, which side of the roof does the egg roll down?");
 		Font font6 = lblNewLabel_5.getFont();
 		Font boldFont6 = new Font(font6.getFontName(), Font.BOLD, font6.getSize() + 5);
@@ -244,13 +333,22 @@ public class InterfaceSE extends JFrame {
 		contentPane.add(rdbtnNewRadioButton_29);
 		
 		ButtonGroup bg7 = new ButtonGroup();
-		bg7.add(rdbtnNewRadioButton_25);
-		bg7.add(rdbtnNewRadioButton_26);
-		bg7.add(rdbtnNewRadioButton_27);
-		bg7.add(rdbtnNewRadioButton_28);
-		bg7.add(rdbtnNewRadioButton_29);
 		
+		List<JRadioButton> seventhQuestionGroup = new ArrayList<JRadioButton>();
+		seventhQuestionGroup.add(rdbtnNewRadioButton_25);
+		seventhQuestionGroup.add(rdbtnNewRadioButton_26);
+		seventhQuestionGroup.add(rdbtnNewRadioButton_27);
+		seventhQuestionGroup.add(rdbtnNewRadioButton_28);
+		seventhQuestionGroup.add(rdbtnNewRadioButton_29);
+
+		groupsOfButtons.add(seventhQuestionGroup);
 		
+		for (JRadioButton jRadioButton : seventhQuestionGroup) {
+			bg7.add(jRadioButton);
+		}
+	}
+	
+	private void createEigthQuestion() {
 		JLabel lblNewLabel_6 = new JLabel("8.If a leaf falls to the ground in a forest and no one hears it, does it make a sound?");
 		Font font7= lblNewLabel_6.getFont();
 		Font boldFont7 = new Font(font7.getFontName(), Font.BOLD, font7.getSize() + 5);
@@ -273,12 +371,22 @@ public class InterfaceSE extends JFrame {
 		contentPane.add(rdbtnNewRadioButton_34);
 		
 		ButtonGroup bg8 = new ButtonGroup();
-		bg8.add(rdbtnNewRadioButton_30);
-		bg8.add(rdbtnNewRadioButton_31);
-		bg8.add(rdbtnNewRadioButton_32);
-		bg8.add(rdbtnNewRadioButton_33);
-		bg8.add(rdbtnNewRadioButton_34);
 		
+		List<JRadioButton> eigthQuestionGroup = new ArrayList<JRadioButton>();
+		eigthQuestionGroup.add(rdbtnNewRadioButton_30);
+		eigthQuestionGroup.add(rdbtnNewRadioButton_31);
+		eigthQuestionGroup.add(rdbtnNewRadioButton_32);
+		eigthQuestionGroup.add(rdbtnNewRadioButton_33);
+		eigthQuestionGroup.add(rdbtnNewRadioButton_34);
+
+		groupsOfButtons.add(eigthQuestionGroup);
+		
+		for (JRadioButton jRadioButton : eigthQuestionGroup) {
+			bg8.add(jRadioButton);
+		}
+	}
+	
+	private void createNinthQuestion() {
 		JLabel lblNewLabel_7 = new JLabel("9.If your friends dared to do something completely crazy, you would:");
 		Font font8 = lblNewLabel_7.getFont();
 		Font boldFont8 = new Font(font8.getFontName(), Font.BOLD, font8.getSize() + 5);
@@ -301,12 +409,22 @@ public class InterfaceSE extends JFrame {
 		contentPane.add(rdbtnNewRadioButton_39);
 		
 		ButtonGroup bg9 = new ButtonGroup();
-		bg9.add(rdbtnNewRadioButton_35);
-		bg9.add(rdbtnNewRadioButton_36);
-		bg9.add(rdbtnNewRadioButton_37);
-		bg9.add(rdbtnNewRadioButton_38);
-		bg9.add(rdbtnNewRadioButton_39);
 		
+		List<JRadioButton> ninthQuestionGroup = new ArrayList<JRadioButton>();
+		ninthQuestionGroup.add(rdbtnNewRadioButton_35);
+		ninthQuestionGroup.add(rdbtnNewRadioButton_36);
+		ninthQuestionGroup.add(rdbtnNewRadioButton_37);
+		ninthQuestionGroup.add(rdbtnNewRadioButton_38);
+		ninthQuestionGroup.add(rdbtnNewRadioButton_39);
+
+		groupsOfButtons.add(ninthQuestionGroup);
+		
+		for (JRadioButton jRadioButton : ninthQuestionGroup) {
+			bg9.add(jRadioButton);
+		}
+	}
+	
+	private void createTenthQuestion() {
 		JLabel lblNewLabel_8 = new JLabel("10.What quote do you prefer:");
 		Font font9 = lblNewLabel_8.getFont();
 		Font boldFont9 = new Font(font9.getFontName(), Font.BOLD, font9.getSize() + 5);
@@ -329,26 +447,65 @@ public class InterfaceSE extends JFrame {
 		contentPane.add(rdbtnNewRadioButton_44);
 		
 		ButtonGroup bg10 = new ButtonGroup();
-		bg10.add(rdbtnNewRadioButton_40);
-		bg10.add(rdbtnNewRadioButton_41);
-		bg10.add(rdbtnNewRadioButton_42);
-		bg10.add(rdbtnNewRadioButton_43);
-		bg10.add(rdbtnNewRadioButton_44);
 		
+		List<JRadioButton> tenthQuestionGroup = new ArrayList<JRadioButton>();
+		tenthQuestionGroup.add(rdbtnNewRadioButton_40);
+		tenthQuestionGroup.add(rdbtnNewRadioButton_41);
+		tenthQuestionGroup.add(rdbtnNewRadioButton_42);
+		tenthQuestionGroup.add(rdbtnNewRadioButton_43);
+		tenthQuestionGroup.add(rdbtnNewRadioButton_44);
+
+		groupsOfButtons.add(tenthQuestionGroup);
+		
+		for (JRadioButton jRadioButton : tenthQuestionGroup) {
+			bg10.add(jRadioButton);
+		}
+	}
+	
+	private JButton createSubmitButton() {
 		JButton btnNewButton = new JButton("Submit Answers!");
+		
 		btnNewButton.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				List<String> valuesSelected = new ArrayList<String>();
-				//valuesSelected.add(arg0)
+				List<String> answers = returnAllAnswers();
+				for (String string : answers) {
+					System.out.println(string);
+				}
 			}
 		});
+		
 		contentPane.add(btnNewButton);
-		
-		setContentPane(scrollPane);
-		
-		bg10.getSelection();
+		return btnNewButton;
 	}
-
+	
+	private boolean checkIfAllAnswers() {
+		int answerCounter = 0;
+		for (List<JRadioButton> group : groupsOfButtons) {
+			for (JRadioButton jRadioButton : group) {
+				if(jRadioButton.isSelected()) {
+					answerCounter++;
+				}
+			}
+		}
+		if(answerCounter == 10) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	private List<String> returnAllAnswers() {
+		List<String> answers = new ArrayList<String>();
+		for (List<JRadioButton> group : groupsOfButtons) {
+			for (JRadioButton jRadioButton : group) {
+				if(jRadioButton.isSelected()) {
+					answers.add(jRadioButton.getText());
+				}
+			}
+		}
+		return answers;
+	}
 }
