@@ -1,21 +1,12 @@
-import java.awt.EventQueue;
-import java.awt.Font;
+package com.nickname.ui;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.ButtonGroup;
-import javax.swing.JScrollPane;
-import javax.swing.JLabel;
-import javax.swing.JRadioButton;
-
-import java.awt.GridLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.swing.JButton;
 
 public class InterfaceSE extends JFrame {
 
@@ -43,7 +34,7 @@ public class InterfaceSE extends JFrame {
 	public InterfaceSE() {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(500, 500, 950, 1000);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		
@@ -470,8 +461,13 @@ public class InterfaceSE extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				List<String> answers = returnAllAnswers();
-				for (String string : answers) {
-					System.out.println(string);
+				if (null == answers) {
+					System.out.println("No elements where selected!!");
+				}
+				else {
+					for (String string : answers) {
+						System.out.println(string);
+					}
 				}
 			}
 		});
@@ -493,11 +489,16 @@ public class InterfaceSE extends JFrame {
 			return true;
 		}
 		else {
+			JOptionPane.showMessageDialog(null, "Please select an answer to every question!", "NickName", JOptionPane.ERROR_MESSAGE);
 			return false;
 		}
 	}
 	
 	private List<String> returnAllAnswers() {
+		if (!checkIfAllAnswers()) {
+			return null;
+		}
+
 		List<String> answers = new ArrayList<String>();
 		for (List<JRadioButton> group : groupsOfButtons) {
 			for (JRadioButton jRadioButton : group) {
