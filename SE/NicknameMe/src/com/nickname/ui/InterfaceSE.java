@@ -1,3 +1,6 @@
+package com.nickname.ui;
+
+
 import java.awt.EventQueue;
 import java.awt.Font;
 
