@@ -1,8 +1,12 @@
 package com.nickname.ui;
 
+import java.awt.EventQueue;
+import java.awt.Font;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import java.awt.*;
+
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -461,13 +465,14 @@ public class InterfaceSE extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				List<String> answers = returnAllAnswers();
-				if (null == answers) {
-					System.out.println("No elements where selected!!");
-				}
-				else {
-					for (String string : answers) {
-						System.out.println(string);
-					}
+                if (null == answers) {
+                    JOptionPane.showMessageDialog(null, "Please answer to all questions!", "Error", JOptionPane.ERROR_MESSAGE);
+                    System.out.println("No answers where chosen!");
+                    return;
+                }
+
+				for (String string : answers) {
+					System.out.println(string);
 				}
 			}
 		});
@@ -495,10 +500,9 @@ public class InterfaceSE extends JFrame {
 	}
 	
 	private List<String> returnAllAnswers() {
-		if (!checkIfAllAnswers()) {
-			return null;
-		}
-
+        if (!checkIfAllAnswers()) {
+            return null;
+        }
 		List<String> answers = new ArrayList<String>();
 		for (List<JRadioButton> group : groupsOfButtons) {
 			for (JRadioButton jRadioButton : group) {
