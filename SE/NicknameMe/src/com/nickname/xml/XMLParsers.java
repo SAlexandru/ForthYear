@@ -13,6 +13,7 @@ import java.util.*;
  * Created by salexandru on 3/22/15.
  */
 public class XMLParsers {
+    private List<Rule> rules;
     private Map<String, List<String>> questions;
     private Map<String, List<String>> sets;
 
@@ -27,6 +28,7 @@ public class XMLParsers {
 
         questions = new HashMap<>();
         sets = new HashMap<>();
+        rules = new ArrayList<>();
 
 
         for (int i = 0; i < roots.getLength(); ++i) {
@@ -41,7 +43,31 @@ public class XMLParsers {
 
     }
 
-    private void parseRules (Element rules) {
+    private void parseRules (Element root) {
+        NodeList children = root.getChildNodes();
+
+        if (null == children || 0 == children.getLength()) {
+            return;
+        }
+
+        for (int i = 0; i < children.getLength(); ++i) {
+            NodeList cond = ((Element)children.item(i)).getElementsByTagName("cond");
+            String then = ((Element)children.item(i)).getElementsByTagName("then").item(0).getNodeValue();
+
+            if (null == cond || 0 == cond.getLength()) {
+                continue;
+            }
+
+            Rule x = new Rule();
+
+            x.setThen(then);
+            for (int j = 0; j < cond.getLength(); ++j) {
+                String condTxt = ((Element)cond.item(i)).getChildNodes().item(0).getNodeValue();
+                x.addCond(condTxt);
+            }
+            rules.add(x);
+        }
+
 
     }
 
@@ -92,6 +118,7 @@ public class XMLParsers {
         }
     }
 
+    public List<Rule> getRules() {return rules;}
     public Map<String, List<String>> getQuestions() {return questions;}
     public Map<String, List<String>> getSets()      {return sets;}
 }
