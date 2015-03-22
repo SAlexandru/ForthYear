@@ -12,6 +12,7 @@ public class InterfaceSE extends JFrame {
 
 	private JPanel contentPane;
 	private List<List<JRadioButton>> groupsOfButtons = new ArrayList<List<JRadioButton>>();
+
 	/**
 	 * Launch the application.
 	 */
@@ -32,7 +33,6 @@ public class InterfaceSE extends JFrame {
 	 * Create the frame.
 	 */
 	public InterfaceSE() {
-		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(500, 500, 950, 1000);
 		contentPane = new JPanel();
