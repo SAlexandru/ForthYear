@@ -5,6 +5,7 @@ import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
@@ -19,40 +20,33 @@ public class XMLParsers {
 
     public XMLParsers(String path) throws IOException, SAXException, ParserConfigurationException {
         Document dom = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new File(path));
-        NodeList roots = dom.getDocumentElement().getElementsByTagName("ExpertSystem");
-
-
-        if (null == roots || 0 == roots.getLength()) {
-            return;
-        }
+        
+        dom.getDocumentElement().normalize();
+        
 
         questions = new HashMap<>();
         sets = new HashMap<>();
         rules = new ArrayList<>();
 
-
-        for (int i = 0; i < roots.getLength(); ++i) {
-            Element root = (Element)roots.item(i);
-
-            parseSets((Element)root.getElementsByTagName("Sets").item(0));
-            parseQuestions((Element)root.getElementsByTagName("Questions").item(0));
-            parseRules((Element)root.getElementsByTagName("Rules").item(0));
-        }
-
-
-
+        parseSets((Element)dom.getElementsByTagName("Sets").item(0));
+        parseQuestions((Element)dom.getElementsByTagName("Questions").item(0));
+        parseRules((Element)dom.getElementsByTagName("Rules").item(0));
     }
 
     private void parseRules (Element root) {
-        NodeList children = root.getChildNodes();
+        NodeList children = root.getElementsByTagName("if");
 
         if (null == children || 0 == children.getLength()) {
             return;
         }
 
         for (int i = 0; i < children.getLength(); ++i) {
+        	if (Node.ELEMENT_NODE != children.item(0).getNodeType()) {
+        		continue;
+        	}
+        	
             NodeList cond = ((Element)children.item(i)).getElementsByTagName("cond");
-            String then = ((Element)children.item(i)).getElementsByTagName("then").item(0).getNodeValue();
+            String then = ((Element)children.item(i)).getElementsByTagName("then").item(0).getTextContent();
 
             if (null == cond || 0 == cond.getLength()) {
                 continue;
@@ -62,7 +56,11 @@ public class XMLParsers {
 
             x.setThen(then);
             for (int j = 0; j < cond.getLength(); ++j) {
-                String condTxt = ((Element)cond.item(i)).getChildNodes().item(0).getNodeValue();
+            	if (Node.ELEMENT_NODE != children.item(0).getNodeType()) {
+            		continue;
+            	}
+            	
+                String condTxt = ((Element)cond.item(j)).getChildNodes().item(0).getTextContent();
                 x.addCond(condTxt);
             }
             rules.add(x);
@@ -72,15 +70,19 @@ public class XMLParsers {
     }
 
     private void parseQuestions (Element root) {
-        NodeList children = root.getChildNodes();
+        NodeList children = root.getElementsByTagName("Question");
 
         if (null == children || 0 == children.getLength()) {
             return;
         }
 
         for (int i = 0; i < children.getLength(); ++i) {
+        	if (Node.ELEMENT_NODE != children.item(0).getNodeType()) {
+        		continue;
+        	}
+        	
             Element question = (Element)children.item(i);
-            String text = question.getElementsByTagName("Text").item(0).getNodeValue();
+            String text = question.getElementsByTagName("Text").item(0).getTextContent();
 
             if (!questions.containsKey(text)) {
                 questions.put(text, new ArrayList<>());
@@ -94,27 +96,36 @@ public class XMLParsers {
             List<String> ans = questions.get(text);
 
             for (int j = 0; j < answers.getLength(); ++j) {
-                ans.add(answers.item(i).getNodeValue());
+            	if (Node.ELEMENT_NODE != children.item(0).getNodeType()) {
+            		continue;
+            	}
+            	
+                ans.add(answers.item(j).getTextContent());
             }
         }
     }
 
     private void parseSets (Element root) {
-        NodeList children = root.getChildNodes();
+        NodeList children = root.getElementsByTagName("Set");
 
         if (null == children || 0 == children.getLength()) {
             return;
         }
 
         for (int i = 0; i < children.getLength(); ++i) {
+        	if (Node.ELEMENT_NODE != children.item(0).getNodeType()) {
+        		continue;
+        	}
+        	
             Element set = (Element)children.item(i);
-            String name = set.getElementsByTagName("Name").item(0).getNodeValue();
-            String values = set.getElementsByTagName("Value").item(0).getNodeValue();
+            String name = set.getElementsByTagName("Name").item(0).getTextContent();
+            String values = set.getElementsByTagName("Value").item(0).getTextContent();
 
-            if (!sets.containsKey(set)) {
+            if (!sets.containsKey(name)) {
                 sets.put(name, new ArrayList<>());
             }
-            sets.get(set).addAll(Arrays.asList(values.split(";")));
+            
+            sets.get(name).addAll(Arrays.asList(values.split(";")));
         }
     }
 
