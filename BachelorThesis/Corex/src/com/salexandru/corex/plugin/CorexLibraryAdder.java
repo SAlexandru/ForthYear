@@ -6,7 +6,6 @@ import org.eclipse.jdt.core.ClasspathContainerInitializer;
 import org.eclipse.jdt.core.IJavaProject;
 
 public class CorexLibraryAdder extends ClasspathContainerInitializer {
-
 	@Override
 	public void initialize(IPath containerPath, IJavaProject project)
 			throws CoreException {

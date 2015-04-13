@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Introduce indirection for &apos;A.doAction(...)&apos; in &apos;A&apos;&#x0A;- Original project: &apos;ToTestRefactor&apos;&#x0A;- Original element: &apos;A.doAction(...)&apos;&#x0A;- Method name: &apos;doAction&apos;&#x0A;- Declaring type: &apos;B&apos;&#x0A;- Update references to refactored element" description="Introduce indirection for &apos;doAction&apos;" element1="/src&lt;{B.java[B" flags="589830" id="org.eclipse.jdt.ui.introduce.indirection" input="/src&lt;{A.java[A~doAction~QB;" name="doAction" references="true" stamp="1427443718254" version="1.0"/>
+</session>

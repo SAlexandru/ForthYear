@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/Corex_Feature_1.0.0.jar" id="Corex_Feature" version="1.0.0">
+      <category name="com.salexandru.corex"/>
+   </feature>
+   <category-def name="com.salexandru.corex" label="Corex"/>
+</site>
