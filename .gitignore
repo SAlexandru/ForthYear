@@ -1,8 +1,8 @@
 .* #ignore eveyrhintg
 *.pydevproject
-*/.metadata/*
-*/.recommenders/*
-*/.DS_Store/*
+**/.metadata/*
+**/.recommenders/*
+**/.DS_Store
 .gradle
 bin/
 tmp/
