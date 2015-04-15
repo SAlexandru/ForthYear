@@ -1,0 +1,247 @@
+<ExpertSystem>
+    <Sets>
+        <Set>
+            <Name>sUnder15</Name>
+            <Value>baby boo;bitsy;bon bon;Doodle bug;Kissy-face;McBaby; Mookie-Pookie Bear;Pookie;Facecake;Tweety;Tum-tums;Wuss;Wimpy;Toby;Richie Rich;Teeter-tot;Big faker;Beaver;Potato;Tootsie;</Value>
+        </Set>
+        <Set>
+            <Name>s15_40</Name>
+            <Value>Blossom Butt; cuddly-wuddly; Handsome baby boo; squeezy; McBitchy; Skipper; Snuggles; Slick-cheek; Sugar sunshine sushi; Goodie-goodie; Nugget; Armadillo; MacGyver; Dorky; Relationship King; Vader; Better half; Fluffer-nutter; Hot lips; Love doodle;</Value>
+        </Set>
+        <Set>
+            <Name>sOver40</Name>
+            <Value>Bee's Knees; Dearstone; Huggalump; Marshmallow; McNasty; Num-nums; Skittles; Sugar mama; Pringles; Tooshie; Sir Pet-a-lot; Brick; Deadtastical; All-Grumpy; Raisinskin; Cheese ball; chunky monkey; Hot mama; McSleazy; Sir Limps-a-lot;</Value>
+        </Set>
+        <Set>
+            <Name>sUnder15AndWhiskey</Name>
+            <Value>baby boo;bitsy;Mookie-Pookie Bear;Pookie;Wimpy;Toby;Potato;</Value>
+        </Set>
+        <Set>
+            <Name>s15_40AndWhiskey</Name>
+            <Value></Value>
+        </Set>
+        <Set>
+            <Name>sOver40AndWhiskey</Name>
+            <Value>...</Value>
+        </Set>
+        <Set>
+            <Name>sUnder15AndTonic</Name>
+            <Value>bon bon;Doodle bug;Facecake;Tweety;Richie Rich;Teeter-tot;Tootsie;</Value>
+        </Set>
+        <Set>
+            <Name>s15_40AndTonic</Name>
+            <Value>...</Value>
+        </Set>
+        <Set>
+            <Name>sOver40AndTonic</Name>
+            <Value>...</Value>
+        </Set>
+        <Set>
+            <Name>sUnder15AndCocktail</Name>
+            <Value>Kissy-face;McBaby;Tum-tums;Wuss;Big faker;Beaver;Scooby;</Value>
+        </Set>
+        <Set>
+            <Name>s15_40AndCocktail</Name>
+            <Value>...</Value>
+        </Set>
+        <Set>
+            <Name>sOver40AndCocktail</Name>
+            <Value>...</Value>
+        </Set>
+        <Set>
+            <Name>sUnder15AndAction</Name>
+            <Value>...</Value>
+        </Set>
+        <Set>
+            <Name>s15_40AndAction</Name>
+            <Value>...</Value>
+        </Set>
+        <Set>
+            <Name>sOver40AndAction</Name>
+            <Value>...</Value>
+        </Set>
+        <Set>
+            <Name>sUnder15AndComedy</Name>
+            <Value>...</Value>
+        </Set>
+        <Set>
+            <Name>s15_40AndComedy</Name>
+            <Value>...</Value>
+        </Set>
+        <Set>
+            <Name>sOver40AndComedy</Name>
+            <Value>...</Value>
+        </Set>
+        <Set>
+            <Name>sUnder15AndHorror</Name>
+            <Value>...</Value>
+        </Set>
+        <Set>
+            <Name>s15_40AndHorror</Name>
+            <Value>...</Value>
+        </Set>
+        <Set>
+            <Name>sOver40AndHorror</Name>
+            <Value>...</Value>
+        </Set>
+        <Set>
+            <Name>sUnder15AndGood</Name>
+            <Value>...</Value>
+        </Set>
+        <Set>
+            <Name>s15_40AndGood</Name>
+            <Value>...</Value>
+        </Set>
+        <Set>
+            <Name>sOver40AndGood</Name>
+            <Value>...</Value>
+        </Set>
+        <Set>
+            <Name>sUnder15AndSmile</Name>
+            <Value>...</Value>
+        </Set>
+        <Set>
+            <Name>s15_40AndSmile</Name>
+            <Value>...</Value>
+        </Set>
+        <Set>
+            <Name>sOver40AndSmile</Name>
+            <Value>...</Value>
+        </Set>
+        <Set>
+            <Name>sUnder15AndCrazy</Name>
+            <Value>...</Value>
+        </Set>
+        <Set>
+            <Name>s15_40AndCrazy</Name>
+            <Value>...</Value>
+        </Set>
+        <Set>
+            <Name>sOver40AndCrazy</Name>
+            <Value>...</Value>
+        </Set>
+        <Set>
+            <Name>sUnder15AndRun</Name>
+            <Value>...</Value>
+        </Set>
+        <Set>
+            <Name>s15_40AndRun</Name>
+            <Value>...</Value>
+        </Set>
+        <Set>
+            <Name>sOver40AndRun</Name>
+            <Value>...</Value>
+        </Set>
+        <Set>
+            <Name>sUnder15AndStuff</Name>
+            <Value>...</Value>
+        </Set>
+        <Set>
+            <Name>s15_40AndStuff</Name>
+            <Value>...</Value>
+        </Set>
+        <Set>
+            <Name>sOver40AndStuff</Name>
+            <Value>...</Value>
+        </Set>
+        <Set>
+            <Name>sUnder15AndYolo</Name>
+            <Value>...</Value>
+        </Set>
+        <Set>
+            <Name>s15_40AndYolo</Name>
+            <Value>...</Value>
+        </Set>
+        <Set>
+            <Name>sOver40AndYolo</Name>
+            <Value>...</Value>
+        </Set>
+    </Sets>
+
+    <Questions>
+        <Question>
+            <Text>What is your age?</Text>
+            <Answer>Under 15</Answer>
+            <Answer>Between 15 and 40</Answer>
+            <Answer>Over40</Answer>
+        </Question>
+        <Question>
+            <Text>What is your drink of choice?</Text>
+            <Answer>Whiskey</Answer>
+            <Answer>Gin and Tonic</Answer>
+            <Answer>Cocktail</Answer>
+        </Question>
+        <Question>
+            <Text>What kind of movie do you most enjoy watching?</Text>
+            <Answer>Action</Answer>
+            <Answer>Comedy</Answer>
+            <Answer>Horror</Answer>
+        </Question>
+        <Question>
+            <Text>What quote do you prefer?</Text>
+            <Answer>Good things come in small packages.</Answer>
+            <Answer>One smile can hide a million tears.</Answer>
+            <Answer>I know crazy and I'm not afraid to use it!</Answer>
+        </Question>
+        <Question>
+            <Text>If your friends dared to do something completely crazy, you would:</Text>
+            <Answer>Run away, screaming.</Answer>
+            <Answer>I don't really get dared to do stuff.</Answer>
+            <Answer>Go for it! Yolo, right?</Answer>
+        </Question>
+    </Questions>
+
+    <Rules>
+        <if> <cond>Under 15</cond> <then>sUnder15</then> </if>
+        <if> <cond>Between 15 and 40</cond> <then>s15_25</then> </if>
+        <if> <cond>Over 40</cond> <then>sOver61</then> </if>
+
+        <if> <cond>sUnder15</cond> <cond>Whiskey</cond> <then>sUnder15AndWhiskey</then> </if>
+        <if> <cond>sUnder15</cond><cond>Gin and tonic</cond>  <then>sUnder15AndTonic</then> </if>
+        <if> <cond>sUnder15</cond><cond>Cocktail</cond>  <then>sUnder15AndCocktail</then> </if>
+
+        <if> <cond>s15_40</cond><cond>Whiskey</cond> <then>s15_40AndWhiskey</then> </if>
+        <if> <cond>s15_40</cond><cond>Gin and tonic</cond>  <then>s15_40AndTonic</then> </if>
+        <if> <cond>s15_40</cond><cond>Cocktail</cond>  <then>s15_40AndCocktail</then> </if>
+
+        <if> <cond>sOver40</cond><cond>Whiskey</cond> <then>sOver40AndWhiskey</then> </if>
+        <if> <cond>sOver40</cond><cond>Gin and tonic</cond>  <then>sOver40AndTonic</then> </if>
+        <if> <cond>sOver40</cond><cond>Cocktail</cond>  <then>sOver40AndCocktail</then> </if>
+
+        <if> <cond>sUnder15</cond><cond>Action</cond> <then>sUnder15AndAction</then> </if>
+        <if> <cond>sUnder15</cond><cond>Comedy</cond>  <then>sUnder15AndComedy</then> </if>
+        <if> <cond>sUnder15</cond><cond>Horror</cond>  <then>sUnder15AndHorror</then> </if>
+
+        <if> <cond>s15_40</cond><cond>Action</cond> <then>s15_40AndAction</then> </if>
+        <if> <cond>s15_40</cond><cond>Comedy</cond>  <then>s15_40AndComedy</then> </if>
+        <if> <cond>s15_40</cond><cond>Horror</cond>  <then>s15_40AndHorror</then> </if>
+
+        <if> <cond>sOver40</cond><cond>Action</cond> <then>sOver40AndAction</then> </if>
+        <if> <cond>sOver40</cond><cond>Comedy</cond>  <then>sOver40AndComedy</then> </if>
+        <if> <cond>sOver40</cond><cond>Horror</cond>  <then>sOver40AndHorror</then> </if>
+
+        <if> <cond>sUnder15</cond><cond>Good things come in small packages.</cond> <then>sUnder15AndGood</then> </if>
+        <if> <cond>sUnder15</cond><cond>One smile can hide a million tears.</cond>  <then>sUnder15AndSmile</then> </if>
+        <if> <cond>sUnder15</cond><cond>I know crazy and I'm not afraid to use it!</cond>  <then>sUnder15AndCrazy</then> </if>
+
+        <if> <cond>s15_40</cond><cond>Good things come in small packages.</cond> <then>s15_40AndGood</then> </if>
+        <if> <cond>s15_40</cond><cond>One smile can hide a million tears.</cond>  <then>s15_40AndSmile</then> </if>
+        <if> <cond>s15_40</cond><cond>I know crazy and I'm not afraid to use it!</cond>  <then>s15_40AndCrazy</then> </if>
+
+        <if> <cond>sOver40</cond><cond>Good things come in small packages.</cond> <then>sOver40AndGood</then> </if>
+        <if> <cond>sOver40</cond><cond>One smile can hide a million tears.</cond>  <then>sOver40AndSmile</then> </if>
+        <if> <cond>sOver40</cond><cond>I know crazy and I'm not afraid to use it!</cond>  <then>sOver40AndCrazy</then> </if>
+
+        <if> <cond>sUnder15</cond><cond>Run away, screaming.</cond> <then>sUnder15AndRun</then> </if>
+        <if> <cond>sUnder15</cond><cond>I don't really get dared to do stuff.</cond>  <then>sUnder15AndStuff</then> </if>
+        <if> <cond>sUnder15</cond><cond>Go for it! Yolo, right?</cond>  <then>sUnder15AndYolo</then> </if>
+
+        <if> <cond>s15_40</cond><cond>Run away, screaming.</cond> <then>s15_40AndRun</then> </if>
+        <if> <cond>s15_40</cond><cond>I don't really get dared to do stuff.</cond>  <then>s15_40AndStuff</then> </if>
+        <if> <cond>s15_40</cond><cond>Go for it! Yolo, right?</cond>  <then>s15_40AndYolo</then> </if>
+
+        <if> <cond>sOver40</cond><cond>Run away, screaming.</cond> <then>sOver40AndRun</then> </if>
+        <if> <cond>sOver40</cond><cond>I don't really get dared to do stuff.</cond>  <then>sOver40AndStuff</then> </if>
+        <if> <cond>sOver40</cond><cond>Go for it! Yolo, right?</cond>  <then>sOver40AndYolo</then> </if>
+    </Rules>
+</ExpertSystem>
